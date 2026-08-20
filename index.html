@@ -1,1 +1,72 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PE Digital Learning Center</title><style>:root{--navy:#06183f;--blue:#0b63ce;--gold:#ffd21f;--soft:#f5f8ff}*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--soft);color:#08244f}nav{background:#06183f;color:white;padding:15px 7%;display:flex;justify-content:space-between}.hero{padding:70px 7%;color:white;text-align:center;background:linear-gradient(120deg,#031331,#08458e 55%,#11a3ff)}h1{font-size:clamp(42px,6vw,78px);margin:5px}h1 span{color:var(--gold)}.btn{display:inline-block;background:var(--gold);color:var(--navy);text-decoration:none;padding:14px 22px;border-radius:16px;font-weight:bold;margin:8px}section{padding:55px 7%}.title{text-align:center}.title h2{font-size:40px}.courses{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.course{border-radius:24px;padding:26px;color:white;min-height:260px}.course h3{font-size:30px}.course a{display:inline-block;background:#ffffff35;color:white;padding:11px 15px;border-radius:12px;font-weight:bold}.share{background:#1670d2}.ath{background:linear-gradient(135deg,#c62828,#ff7043)}.tak{background:#16854c}.hand{background:#6637a8}.note{background:white;border-radius:22px;padding:28px;box-shadow:0 12px 30px #0001;text-align:center}.footer{background:#06183f;color:white;text-align:center;padding:30px}@media(max-width:900px){.courses{grid-template-columns:1fr 1fr}}@media(max-width:520px){.courses{grid-template-columns:1fr}}</style></head><body><nav><b>PE Digital Learning Center</b><span>โรงเรียนชะอำคุณหญิงเนื่องบุรี</span></nav><header class="hero"><p>เว็บไซต์การเรียนรู้พลศึกษาออนไลน์</p><h1>PE DIGITAL <span>LEARNING CENTER</span></h1><h2>เรียนรู้ได้ทุกที่ ทุกเวลา</h2><p>ใบความรู้ สื่อสาธิต วิดีโอ ใบงาน และแบบทดสอบสำหรับนักเรียน</p><a class="btn" href="#courses">เข้าสู่บทเรียน</a></header><section id="courses"><div class="title"><h2>รายวิชาพลศึกษา</h2><p>เลือกบทเรียนที่ต้องการศึกษา</p></div><div class="courses"><div class="course share"><h3>🏀 แชร์บอล</h3><b>พ21103</b><p>บทเรียนอยู่ระหว่างจัดเตรียม</p></div><div class="course ath"><h3>🏃 กรีฑา</h3><b>พ22103</b><p>กีฬาประเภทลาน: การกระโดดสูงและการกระโดดไกล</p><a href="athletics-m2.html">เข้าสู่บทเรียนกรีฑา →</a></div><div class="course tak"><h3>⚽ เซปักตะกร้อ</h3><b>พ23103</b><p>บทเรียนอยู่ระหว่างจัดเตรียม</p></div><div class="course hand"><h3>🤾 แฮนด์บอล</h3><b>พ23203</b><p>บทเรียนอยู่ระหว่างจัดเตรียม</p></div></div></section><section><div class="note"><h2>บทเรียนที่เปิดใช้งานแล้ว</h2><p><b>กรีฑา พ22103</b> — นักเรียนสามารถศึกษาเรื่องกระโดดสูงและกระโดดไกล ดูสื่อ และทำแบบทดสอบออนไลน์พร้อมตรวจคะแนนอัตโนมัติ</p><a class="btn" href="athletics-m2.html">เปิดบทเรียนกรีฑา</a></div></section><div class="footer">จัดทำโดย ครูประดับเพชร ภูเงิน | โรงเรียนชะอำคุณหญิงเนื่องบุรี</div></body></html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PE Digital Learning Center | ครูประดับเพชร ภูเงิน</title>
+<style>
+:root{--navy:#06183f;--blue:#0b63ce;--gold:#ffd21f;--soft:#f5f8ff;--green:#18a957;--orange:#f05a37;--purple:#6d3bc0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--soft);color:#102b52}
+nav{position:sticky;top:0;z-index:20;background:#06183f;color:white;padding:14px 6%;display:flex;align-items:center;justify-content:space-between;box-shadow:0 5px 18px #0002}
+.brand{font-weight:900}.brand small{display:block;color:var(--gold);font-weight:700}.menu a{color:white;text-decoration:none;margin-left:18px;font-weight:700}.menu .cta{background:var(--gold);color:var(--navy);padding:9px 14px;border-radius:20px}
+.hero{padding:72px 7%;color:white;background:radial-gradient(circle at 82% 20%,#ffd21f55,transparent 22%),linear-gradient(120deg,#06183f,#0b63ce 62%,#19a5ff)}
+.hero-wrap{max-width:1280px;margin:auto;display:grid;grid-template-columns:1.3fr .7fr;gap:36px;align-items:center}.eyebrow{display:inline-block;padding:8px 14px;border-radius:999px;background:#ffffff20;border:1px solid #ffffff40;font-weight:700}.hero h1{font-size:clamp(46px,6.2vw,88px);line-height:.95;margin:18px 0 14px}.hero h1 span{color:var(--gold)}.hero h2{font-size:clamp(24px,3vw,40px);margin:0 0 16px}.hero p{font-size:20px;line-height:1.7;max-width:800px}.btn{display:inline-block;text-decoration:none;font-weight:900;padding:14px 20px;border-radius:16px;margin:6px 8px 6px 0}.btn.gold{background:var(--gold);color:var(--navy)}.btn.white{background:white;color:var(--blue)}
+.teacher{background:#ffffff18;border:1px solid #ffffff33;padding:28px;border-radius:28px;text-align:center;backdrop-filter:blur(4px)}.teacher .avatar{width:125px;height:125px;border-radius:50%;background:linear-gradient(135deg,#fff,#ffd21f);display:grid;place-items:center;margin:auto;color:var(--navy);font-size:38px;font-weight:900;border:6px solid #fff}.teacher h3{font-size:27px;margin:15px 0 4px}.teacher p{font-size:16px;margin:5px 0}.credit{margin-top:14px;padding:10px;border-radius:14px;background:#ffffff14;color:#fff}
+section{padding:58px 6%}.section-title{text-align:center;margin-bottom:32px}.section-title h2{font-size:42px;margin:0;color:var(--navy)}.section-title p{font-size:18px;color:#64748b}
+.courses{max-width:1400px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.course{color:white;border-radius:28px;padding:27px;min-height:315px;box-shadow:0 16px 36px #16325c22;position:relative}.course h3{font-size:31px;margin:12px 0 4px}.course p{font-size:17px;line-height:1.55}.code{display:inline-block;background:white;color:#102b52;padding:7px 13px;border-radius:999px;font-weight:900}.status{position:absolute;right:18px;top:18px;background:#ffffffd9;color:#16325c;border-radius:999px;padding:6px 10px;font-size:13px;font-weight:900}.status.live{background:#d8ffe6;color:#0b6d38}.course a{display:inline-block;color:white;text-decoration:none;background:#ffffff28;padding:12px 16px;border-radius:14px;font-weight:900;margin-top:8px}.course.ath a{background:var(--gold);color:var(--navy)}.share{background:linear-gradient(135deg,#1169ca,#45a2ff)}.ath{background:linear-gradient(135deg,#bf2d24,#ff7043)}.tak{background:linear-gradient(135deg,#118346,#32c773)}.hand{background:linear-gradient(135deg,#5c2e9e,#8c54e8)}
+.highlight{background:#071d46;color:white}.highlight-wrap{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}.box{background:#ffffff12;border:1px solid #ffffff20;border-radius:24px;padding:26px}.box h3{color:var(--gold);font-size:26px}.box p{font-size:17px;line-height:1.7}.box a{display:inline-block;background:var(--gold);color:var(--navy);text-decoration:none;padding:12px 16px;border-radius:13px;font-weight:900}
+.about{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:22px}.about-card{background:white;border-radius:24px;padding:28px;box-shadow:0 12px 28px #0d255217}.about-card h3{font-size:27px;color:var(--navy);margin-top:0}.about-card p{font-size:17px;line-height:1.75;color:#46566c}
+footer{background:#06183f;color:white;text-align:center;padding:30px 6%}footer b{color:var(--gold)}
+@media(max-width:1000px){.hero-wrap{grid-template-columns:1fr}.courses{grid-template-columns:1fr 1fr}.highlight-wrap,.about{grid-template-columns:1fr}.menu{display:none}}
+@media(max-width:600px){.courses{grid-template-columns:1fr}.hero{padding:52px 5%}section{padding:46px 5%}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand">PE Digital Learning Center<small>โรงเรียนชะอำคุณหญิงเนื่องบุรี</small></div>
+  <div class="menu"><a href="#home">หน้าแรก</a><a href="#courses">รายวิชา</a><a href="#active">บทเรียนที่เปิดใช้</a><a href="#about">เกี่ยวกับเว็บไซต์</a><a class="cta" href="athletics.html">เข้ากรีฑา</a></div>
+</nav>
+<header class="hero" id="home">
+  <div class="hero-wrap">
+    <div>
+      <span class="eyebrow">เว็บไซต์การเรียนรู้พลศึกษาออนไลน์สำหรับนักเรียน</span>
+      <h1>PE DIGITAL<br><span>LEARNING CENTER</span></h1>
+      <h2>เรียนรู้ได้ทุกที่ • ทบทวนได้ทุกเวลา • ลงมือทำได้จริง</h2>
+      <p>ศูนย์รวมบทเรียน ใบความรู้ ภาพสื่อ วิดีโอ ใบงาน และแบบทดสอบ เพื่อสนับสนุนการจัดการเรียนรู้วิชาพลศึกษาและให้นักเรียนสามารถเรียนรู้ด้วยตนเองทั้งในและนอกห้องเรียน</p>
+      <a class="btn gold" href="#courses">ดูรายวิชาทั้งหมด</a><a class="btn white" href="athletics.html">เปิดบทเรียนกรีฑาที่ใช้งานจริง</a>
+    </div>
+    <div class="teacher">
+      <div class="avatar">PE</div>
+      <h3>ครูประดับเพชร ภูเงิน</h3>
+      <p>ครูผู้สอนวิชาพลศึกษา</p>
+      <p>โรงเรียนชะอำคุณหญิงเนื่องบุรี</p>
+      <div class="credit">ผู้พัฒนาและจัดทำ <b>PE Digital Learning Center</b></div>
+    </div>
+  </div>
+</header>
+<section id="courses">
+  <div class="section-title"><h2>รายวิชาพลศึกษา</h2><p>โครงสร้างเว็บไซต์รองรับ 4 รายวิชา โดยพัฒนาบทเรียนจริงทีละรายวิชา</p></div>
+  <div class="courses">
+    <article class="course share"><span class="status">กำลังพัฒนา</span><div style="font-size:42px">🏀</div><h3>แชร์บอล</h3><span class="code">พ21103</span><p>ทักษะพื้นฐาน กติกา การเล่นเป็นทีม และกิจกรรมฝึกปฏิบัติ</p></article>
+    <article class="course ath"><span class="status live">เปิดใช้งานแล้ว</span><div style="font-size:42px">🏃</div><h3>กรีฑา</h3><span class="code">พ22103</span><p><b>กีฬาประเภทลาน:</b> การกระโดดสูงและการกระโดดไกล พร้อมบทเรียน วิดีโอ และแบบทดสอบออนไลน์</p><a href="athletics.html">เข้าสู่บทเรียนกรีฑา →</a></article>
+    <article class="course tak"><span class="status">กำลังพัฒนา</span><div style="font-size:42px">⚽</div><h3>เซปักตะกร้อ</h3><span class="code">พ23103</span><p>ทักษะการเดาะ การเตะ การเสิร์ฟ และการเล่นเป็นทีม</p></article>
+    <article class="course hand"><span class="status">กำลังพัฒนา</span><div style="font-size:42px">🤾</div><h3>แฮนด์บอล</h3><span class="code">พ23203</span><p>การส่ง รับ เลี้ยง ยิง ป้องกัน กติกา และการเล่นเป็นทีม</p></article>
+  </div>
+</section>
+<section class="highlight" id="active">
+  <div class="section-title"><h2 style="color:white">บทเรียนที่เปิดใช้งานจริง</h2><p style="color:#cfe0ff">ตัวอย่างการนำเว็บไซต์ไปใช้กับนักเรียน</p></div>
+  <div class="highlight-wrap">
+    <div class="box"><h3>กรีฑา พ22103 — ม.2</h3><p>บทเรียนเรื่อง <b>การกระโดดสูงและการกระโดดไกล</b> นักเรียนสามารถศึกษาความรู้ ทบทวนเทคนิค ดูวิดีโอ และทำแบบทดสอบด้วยตนเองได้</p><a href="athletics.html">เปิดบทเรียนสำหรับนักเรียน</a></div>
+    <div class="box"><h3>รูปแบบการเรียนรู้</h3><p>ก่อนเรียน → ศึกษาความรู้ → ดูสื่อสาธิต → ลงมือปฏิบัติ → ทบทวน → ทำแบบทดสอบ โดยเว็บไซต์เป็นแหล่งเรียนรู้ที่นักเรียนกลับมาเปิดดูซ้ำได้ตลอดเวลา</p></div>
+  </div>
+</section>
+<section id="about">
+  <div class="section-title"><h2>เกี่ยวกับ PE Digital Learning Center</h2><p>เว็บไซต์การเรียนรู้ที่ออกแบบเพื่อใช้ประกอบการจัดการเรียนการสอนจริง</p></div>
+  <div class="about">
+    <div class="about-card"><h3>เป้าหมาย</h3><p>ให้นักเรียนเข้าถึงเนื้อหาพลศึกษาได้สะดวก มีทั้งความรู้ ภาพสาธิต วิดีโอ กิจกรรม และแบบทดสอบ เพื่อเชื่อมการเรียนรู้จากหน้าจอสู่การฝึกปฏิบัติจริง</p></div>
+    <div class="about-card"><h3>แนวทางพัฒนา</h3><p>เริ่มจากกรีฑาเป็นรายวิชาต้นแบบ และทยอยพัฒนาบทเรียนของแชร์บอล เซปักตะกร้อ และแฮนด์บอลให้เป็นระบบเดียวกันในอนาคต</p></div>
+  </div>
+</section>
+<footer>จัดทำและพัฒนาโดย <b>ครูประดับเพชร ภูเงิน</b> | โรงเรียนชะอำคุณหญิงเนื่องบุรี<br>PE Digital Learning Center</footer>
+</body>
+</html>
