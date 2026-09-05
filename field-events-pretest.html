@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>แบบทดสอบก่อนเรียน | พ22103</title>
+  <style>
+    *{box-sizing:border-box}body{font-family:Tahoma,Arial,sans-serif;margin:0;background:#f5f8ff;color:#15345d}header{background:linear-gradient(120deg,#071d46,#0c64c7);color:#fff;text-align:center;padding:34px 16px}main{max-width:960px;margin:auto;padding:20px}.student,.card{background:#fff;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 8px 24px #0d255218}.student{display:grid;grid-template-columns:2fr 1fr;gap:12px}.student input,.student select{padding:12px;border:1px solid #bfd0e6;border-radius:10px;font-size:16px;background:#fff;color:#15345d}.opt{display:block;padding:10px;margin:6px 0;border-radius:9px}.btn{border:0;border-radius:12px;padding:13px 18px;font-size:16px;font-weight:bold;cursor:pointer;background:#ffd21f;color:#071d46}.result{font-size:20px;font-weight:bold;text-align:center;padding:16px}.save{margin:8px auto;padding:12px;border-radius:12px;text-align:center;background:#eef6ff;display:none}.home{display:inline-block;text-decoration:none;background:#071d46;color:#fff;padding:12px 16px;border-radius:12px}.notice{background:#fff8d7;border-left:6px solid #ffd21f;padding:14px 16px;border-radius:12px;margin:14px 0}@media(max-width:650px){.student{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header><h1 id="heading">แบบทดสอบก่อนเรียน</h1><p>ม.2/2 • พ22103 • จำนวน 10 ข้อ</p></header>
+  <main>
+    <div class="notice"><b>คำชี้แจง:</b> ตอบจากความรู้เดิมของนักเรียน ระบบจะแสดงเฉพาะคะแนนและไม่เปิดเฉลย</div>
+    <div class="student">
+      <input id="name" placeholder="ชื่อ-สกุลนักเรียน ม.2/2" autocomplete="name">
+      <select id="classno" required><option value="" selected disabled>เลือกเลขที่ (ม.2/2)</option></select>
+    </div>
+    <div id="quiz"></div>
+    <div class="result" id="result"></div>
+    <div class="save" id="save"></div>
+    <div style="text-align:center"><button class="btn" id="submit" onclick="checkAll()">ส่งแบบทดสอบก่อนเรียน</button> <a class="home" href="athletics-m2.html">กลับหน้าบทเรียน</a></div>
+  </main>
+  <script src="field-events-bank.js"></script>
+  <script>
+    const API='https://script.google.com/macros/s/AKfycbyXDIT6ZKqA1zyEIoa_NNYDO9uG4-6b6tUNYoOoC0hqMgvZDCKNR97bmQHt4TXIgn7yYg/exec';
+    const allowed=['กระโดดสูง','กระโดดไกล','ขว้างจักร','ทุ่มน้ำหนัก'];
+    const topic=new URLSearchParams(location.search).get('topic');
+    if(!allowed.includes(topic)){document.body.innerHTML='<main><div class="card"><h1>ไม่พบหัวข้อแบบทดสอบ</h1><a class="home" href="athletics-m2.html">กลับหน้าบทเรียน</a></div></main>';throw new Error('Invalid topic');}
+    document.title=`แบบทดสอบก่อนเรียน${topic} ม.2/2`;
+    document.getElementById('heading').textContent=`แบบทดสอบก่อนเรียน : ${topic}`;
+    const classno=document.getElementById('classno');
+    for(let i=1;i<=40;i++){const o=document.createElement('option');o.value=`ม.2/2 เลขที่ ${i}`;o.textContent=`ม.2/2 เลขที่ ${i}`;classno.appendChild(o);}
+    const questions=window.FIELD_EVENTS_BANK[topic];
+    const quiz=document.getElementById('quiz');
+    questions.forEach((q,i)=>{const opts=q[1].map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"> ${'กขคง'[j]}. ${o}</label>`).join('');quiz.insertAdjacentHTML('beforeend',`<div class="card" id="c${i}"><b>${i+1}. ${q[0]}</b>${opts}</div>`);});
+    async function checkAll(){
+      const name=document.getElementById('name').value.trim();
+      const studentNo=classno.value;
+      if(!name||!studentNo){alert('กรุณากรอกชื่อ-สกุล และเลือกเลขที่ก่อนส่ง');return;}
+      let score=0,missing=[],answers=[];
+      questions.forEach((q,i)=>{const x=document.querySelector(`input[name=q${i}]:checked`);if(!x){missing.push(i+1);return;}const v=Number(x.value);answers.push(`${i+1}:${'กขคง'[v]}`);if(v===q[2])score++;});
+      if(missing.length){document.getElementById('result').textContent='กรุณาตอบให้ครบ: ข้อ '+missing.join(', ');return;}
+      const result=document.getElementById('result'),save=document.getElementById('save'),submit=document.getElementById('submit');
+      result.textContent=`คะแนนก่อนเรียน ${score}/10`;
+      save.style.display='block';save.textContent='กำลังบันทึกคะแนนก่อนเรียน...';submit.disabled=true;
+      document.querySelectorAll('input,select').forEach(el=>el.disabled=true);
+      try{
+        await fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({recordType:'assessment',stage:'ก่อนเรียน',testType:'pretest',topic,name,classno:studentNo,score,total:10,answers:answers.join(', '),question:`[${topic}] คะแนนก่อนเรียน 10 ข้อ`,answer:`${score}/10 | คำตอบ ${answers.join(', ')}`})});
+        save.textContent='✅ ส่งคะแนนก่อนเรียนไปยัง Google Sheet แล้ว';
+      }catch(e){save.textContent='⚠️ ส่งข้อมูลไม่สำเร็จ กรุณาแจ้งครู';submit.disabled=false;}
+    }
+  </script>
+</body>
+</html>
