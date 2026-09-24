@@ -9,12 +9,13 @@
   </style>
 </head>
 <body>
-  <header><h1 id="heading">แบบทดสอบก่อนเรียน</h1><p>ม.2/2 • พ22103 • จำนวน 10 ข้อ</p></header>
+  <header><h1 id="heading">แบบทดสอบก่อนเรียน</h1><p>ม.2/1–ม.2/7 • พ22103 • จำนวน 10 ข้อ</p></header>
   <main>
     <div class="notice"><b>คำชี้แจง:</b> ตอบจากความรู้เดิมของนักเรียน ระบบจะแสดงเฉพาะคะแนนและไม่เปิดเฉลย</div>
     <div class="student">
-      <input id="name" placeholder="ชื่อ-สกุลนักเรียน ม.2/2" autocomplete="name">
-      <select id="classno" required><option value="" selected disabled>เลือกเลขที่ (ม.2/2)</option></select>
+      <select id="room" required><option value="" selected disabled>เลือกห้อง</option><option value="ม.2/1">ม.2/1</option><option value="ม.2/2">ม.2/2</option><option value="ม.2/3">ม.2/3</option><option value="ม.2/4">ม.2/4</option><option value="ม.2/5">ม.2/5</option><option value="ม.2/6">ม.2/6</option><option value="ม.2/7">ม.2/7</option></select>
+      <select id="number" required><option value="" selected disabled>เลือกเลขที่</option><option value="01">เลขที่ 1</option><option value="02">เลขที่ 2</option><option value="03">เลขที่ 3</option><option value="04">เลขที่ 4</option><option value="05">เลขที่ 5</option><option value="06">เลขที่ 6</option><option value="07">เลขที่ 7</option><option value="08">เลขที่ 8</option><option value="09">เลขที่ 9</option><option value="10">เลขที่ 10</option><option value="11">เลขที่ 11</option><option value="12">เลขที่ 12</option><option value="13">เลขที่ 13</option><option value="14">เลขที่ 14</option><option value="15">เลขที่ 15</option><option value="16">เลขที่ 16</option><option value="17">เลขที่ 17</option><option value="18">เลขที่ 18</option><option value="19">เลขที่ 19</option><option value="20">เลขที่ 20</option><option value="21">เลขที่ 21</option><option value="22">เลขที่ 22</option><option value="23">เลขที่ 23</option><option value="24">เลขที่ 24</option><option value="25">เลขที่ 25</option><option value="26">เลขที่ 26</option><option value="27">เลขที่ 27</option><option value="28">เลขที่ 28</option><option value="29">เลขที่ 29</option><option value="30">เลขที่ 30</option><option value="31">เลขที่ 31</option><option value="32">เลขที่ 32</option><option value="33">เลขที่ 33</option><option value="34">เลขที่ 34</option><option value="35">เลขที่ 35</option><option value="36">เลขที่ 36</option><option value="37">เลขที่ 37</option><option value="38">เลขที่ 38</option><option value="39">เลขที่ 39</option><option value="40">เลขที่ 40</option><option value="41">เลขที่ 41</option><option value="42">เลขที่ 42</option><option value="43">เลขที่ 43</option><option value="44">เลขที่ 44</option><option value="45">เลขที่ 45</option><option value="46">เลขที่ 46</option><option value="47">เลขที่ 47</option><option value="48">เลขที่ 48</option><option value="49">เลขที่ 49</option><option value="50">เลขที่ 50</option></select>
+      <input type="hidden" id="classno">
     </div>
     <div id="quiz"></div>
     <div class="result" id="result"></div>
@@ -27,17 +28,18 @@
     const allowed=['กระโดดสูง','กระโดดไกล','ขว้างจักร','ทุ่มน้ำหนัก'];
     const topic=new URLSearchParams(location.search).get('topic');
     if(!allowed.includes(topic)){document.body.innerHTML='<main><div class="card"><h1>ไม่พบหัวข้อแบบทดสอบ</h1><a class="home" href="athletics-m2.html">กลับหน้าบทเรียน</a></div></main>';throw new Error('Invalid topic');}
-    document.title=`แบบทดสอบก่อนเรียน${topic} ม.2/2`;
+    document.title=`แบบทดสอบก่อนเรียน${topic} ม.2`;
     document.getElementById('heading').textContent=`แบบทดสอบก่อนเรียน : ${topic}`;
-    const classno=document.getElementById('classno');
-    for(let i=1;i<=40;i++){const o=document.createElement('option');o.value=`ม.2/2 เลขที่ ${i}`;o.textContent=`ม.2/2 เลขที่ ${i}`;classno.appendChild(o);}
+    const room=document.getElementById('room'),number=document.getElementById('number'),classno=document.getElementById('classno');
     const questions=window.FIELD_EVENTS_BANK[topic];
     const quiz=document.getElementById('quiz');
     questions.forEach((q,i)=>{const opts=q[1].map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"> ${'กขคง'[j]}. ${o}</label>`).join('');quiz.insertAdjacentHTML('beforeend',`<div class="card" id="c${i}"><b>${i+1}. ${q[0]}</b>${opts}</div>`);});
     async function checkAll(){
-      const name=document.getElementById('name').value.trim();
-      const studentNo=classno.value;
-      if(!name||!studentNo){alert('กรุณากรอกชื่อ-สกุล และเลือกเลขที่ก่อนส่ง');return;}
+      const roomValue=room.value;
+      const numberValue=number.value;
+      const studentNo=roomValue && numberValue ? roomValue+' เลขที่ '+numberValue : '';
+      const student_id=roomValue && numberValue ? 'M2-'+roomValue.split('/')[1]+'-'+numberValue : '';
+      if(!roomValue||!numberValue){alert('กรุณาเลือกห้องและเลขที่ก่อนส่ง');return;}
       let score=0,missing=[],answers=[];
       questions.forEach((q,i)=>{const x=document.querySelector(`input[name=q${i}]:checked`);if(!x){missing.push(i+1);return;}const v=Number(x.value);answers.push(`${i+1}:${'กขคง'[v]}`);if(v===q[2])score++;});
       if(missing.length){document.getElementById('result').textContent='กรุณาตอบให้ครบ: ข้อ '+missing.join(', ');return;}
@@ -46,7 +48,7 @@
       save.style.display='block';save.textContent='กำลังบันทึกคะแนนก่อนเรียน...';submit.disabled=true;
       document.querySelectorAll('input,select').forEach(el=>el.disabled=true);
       try{
-        await fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({recordType:'assessment',stage:'ก่อนเรียน',testType:'pretest',topic,name,classno:studentNo,score,total:10,answers:answers.join(', '),question:`[${topic}] คะแนนก่อนเรียน 10 ข้อ`,answer:`${score}/10 | คำตอบ ${answers.join(', ')}`})});
+        await fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({recordType:'assessment',stage:'ก่อนเรียน',testType:'pretest',topic,student_id,room:roomValue,number:numberValue,classno:studentNo,score,total:10,answers:answers.join(', '),question:`[${topic}] คะแนนก่อนเรียน 10 ข้อ`,answer:`${score}/10 | คำตอบ ${answers.join(', ')}`})});
         save.textContent='✅ ส่งคะแนนก่อนเรียนไปยัง Google Sheet แล้ว';
       }catch(e){save.textContent='⚠️ ส่งข้อมูลไม่สำเร็จ กรุณาแจ้งครู';submit.disabled=false;}
     }
