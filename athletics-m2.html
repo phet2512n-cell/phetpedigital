@@ -68,6 +68,41 @@
         gap: 16px;
         margin-top: 28px;
       }
+      .video-section {
+        margin: 34px 0;
+        background: #fff;
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 10px 28px #1232;
+        text-align: center;
+      }
+      .video-section h2 {
+        margin: 0 0 8px;
+        color: #0757a8;
+        font-size: clamp(28px, 4vw, 40px);
+      }
+      .video-section p {
+        margin: 8px 0 18px;
+      }
+      .video-frame {
+        position: relative;
+        width: min(100%, 900px);
+        aspect-ratio: 16 / 9;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 16px;
+        background: #071d46;
+      }
+      .video-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .video-note {
+        font-size: 14px;
+        color: #58708f;
+        margin-bottom: 0 !important;
+      }
       .card {
         background: #fff;
         border-radius: 20px;
@@ -136,6 +171,21 @@
           ประเมินผล
         </p>
       </div>
+      <section class="video-section" aria-labelledby="student-video-title">
+        <h2 id="student-video-title">🎥 กิจกรรมการเรียนรู้ของนักเรียน</h2>
+        <p>ชมการเรียนรู้จริง เรื่องกระโดดสูงแบบกรรไกรและกระโดดไกล</p>
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/eCZJKGb-BmU"
+            title="กิจกรรมการเรียนรู้กรีฑา : กระโดดสูงแบบกรรไกรและกระโดดไกล"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="video-note">วิดีโอกิจกรรมการเรียนรู้ของนักเรียน ใช้ประกอบการเรียนรู้และสะท้อนผลการจัดกิจกรรม</p>
+      </section>
       <div class="grid">
         <section class="card">
           <h3>1. กระโดดสูง</h3>
