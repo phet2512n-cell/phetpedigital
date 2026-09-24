@@ -24,7 +24,7 @@
   </main>
   <script src="field-events-bank.js"></script>
   <script>
-    const API='https://script.google.com/macros/s/AKfycbyXDIT6ZKqA1zyEIoa_NNYDO9uG4-6b6tUNYoOoC0hqMgvZDCKNR97bmQHt4TXIgn7yYg/exec';
+    const API='https://script.google.com/macros/s/AKfycbzstmnbKLGTS2oSdA0RTEw6CVQXwZdCPOqLY_qnAvxhHONFb_Omp_y968QfDtRMhk8f/exec';
     const allowed=['กระโดดสูง','กระโดดไกล','ขว้างจักร','ทุ่มน้ำหนัก'];
     const topic=new URLSearchParams(location.search).get('topic');
     if(!allowed.includes(topic)){document.body.innerHTML='<main><div class="card"><h1>ไม่พบหัวข้อแบบทดสอบ</h1><a class="home" href="athletics-m2.html">กลับหน้าบทเรียน</a></div></main>';throw new Error('Invalid topic');}
@@ -48,7 +48,7 @@
       save.style.display='block';save.textContent='กำลังบันทึกคะแนนก่อนเรียน...';submit.disabled=true;
       document.querySelectorAll('input,select').forEach(el=>el.disabled=true);
       try{
-        await fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({recordType:'assessment',stage:'ก่อนเรียน',testType:'pretest',topic,student_id,room:roomValue,number:numberValue,classno:studentNo,score,total:10,answers:answers.join(', '),question:`[${topic}] คะแนนก่อนเรียน 10 ข้อ`,answer:`${score}/10 | คำตอบ ${answers.join(', ')}`})});
+        await fetch(API,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({student_id,room:roomValue,number:normalizedNumber,period:'before',topic,score,full_score:10,source:'เว็บไซต์ PE Digital Learning Center'})});
         save.textContent='✅ ส่งคะแนนก่อนเรียนไปยัง Google Sheet แล้ว';
       }catch(e){save.textContent='⚠️ ส่งข้อมูลไม่สำเร็จ กรุณาแจ้งครู';submit.disabled=false;}
     }
