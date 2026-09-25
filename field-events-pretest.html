@@ -24,7 +24,7 @@
   </main>
   <script src="field-events-bank.js"></script>
   <script>
-    const API='https://script.google.com/macros/s/AKfycbzstmnbKLGTS2oSdA0RTEw6CVQXwZdCPOqLY_qnAvxhHONFb_Omp_y968QfDtRMhk8f/exec';
+    const API='https://script.google.com/macros/s/AKfycbzKKineGS6pxRYU5XNidgYjeWEHdI65Jmor2NQGXJsXjmViWy-LvOUi8n4ZZiJLito/exec';
     const allowed=['กระโดดสูง','กระโดดไกล','ขว้างจักร','ทุ่มน้ำหนัก'];
     const topic=new URLSearchParams(location.search).get('topic');
     if(!allowed.includes(topic)){document.body.innerHTML='<main><div class="card"><h1>ไม่พบหัวข้อแบบทดสอบ</h1><a class="home" href="athletics-m2.html">กลับหน้าบทเรียน</a></div></main>';throw new Error('Invalid topic');}
