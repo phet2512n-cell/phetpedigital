@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>แบบฝึกออนไลน์ การเซตบอล | พ23104</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#eef7ff;color:#102a43}
+header{background:linear-gradient(135deg,#0757a6,#13aee8);color:#fff;padding:28px 18px;text-align:center}
+header h1{margin:5px 0;font-size:34px}header p{margin:6px 0}
+.wrap{max-width:980px;margin:28px auto;padding:0 16px}
+.info,.card,.result{background:#fff;border-radius:22px;box-shadow:0 8px 25px #0b3b6618}
+.info{padding:18px 22px;margin-bottom:18px}
+.progress{height:12px;background:#dcecff;border-radius:99px;overflow:hidden;margin-top:12px}
+.bar{height:100%;width:0;background:#0b76d1;transition:.25s}
+.card{padding:28px;margin-bottom:18px}
+.qnum{display:inline-block;background:#0757a6;color:#fff;border-radius:999px;padding:6px 13px;font-weight:700}
+h2{font-size:24px;margin:14px 0 20px}
+.option{display:block;border:2px solid #d8e7f5;border-radius:14px;padding:13px 15px;margin:10px 0;cursor:pointer;background:#fbfdff}
+.option:hover{border-color:#42a5e8;background:#f2faff}
+.option input{margin-right:9px}
+.feedback{display:none;margin-top:15px;padding:12px 15px;border-radius:12px;background:#edf8ff}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+button{border:0;border-radius:14px;padding:13px 20px;font-size:16px;font-weight:700;cursor:pointer}
+.next{background:#0757a6;color:#fff}.reset{background:#e9f1f8;color:#102a43}
+.result{display:none;padding:28px;text-align:center;margin-bottom:28px}
+.score{font-size:42px;font-weight:900;color:#0757a6}
+.small{color:#52677b}
+@media(max-width:600px){header h1{font-size:27px}h2{font-size:20px}}
+</style>
+</head>
+<body>
+<header>
+<div>PE Digital Learning Center</div>
+<h1>💻 แบบฝึกออนไลน์ เรื่อง การเซตบอล</h1>
+<p>รายวิชา พ23104 • ชั้นมัธยมศึกษาปีที่ 3</p>
+</header>
+<div class="wrap">
+<section class="info">
+<strong>คำชี้แจง</strong> เลือกคำตอบที่คิดว่าถูกที่สุด แล้วกด “ตรวจคำตอบ” ในแต่ละข้อ
+<div class="progress"><div class="bar" id="bar"></div></div>
+<p class="small" id="progressText">ทำแล้ว 0 จาก 10 ข้อ</p>
+</section>
+<div id="quiz"></div>
+<section class="result" id="result">
+<div>ผลการทำแบบฝึกออนไลน์</div>
+<div class="score" id="score"></div>
+<p id="message"></p>
+<button class="reset" onclick="location.reload()">ทำใหม่อีกครั้ง</button>
+</section>
+</div>
+<script>
+const questions=[
+["ข้อ 1","ข้อใดอธิบายการเซตบอลได้เหมาะสมที่สุด",["การใช้มือทั้งสองควบคุมบอลเหนือศีรษะเพื่อส่งไปยังตำแหน่งที่ต้องการ","การใช้แขนท่อนล่างตีบอลให้ข้ามตาข่าย","การใช้เท้าเตะบอลไปให้เพื่อน","การจับบอลไว้แล้วโยนให้เพื่อน"],0],
+["ข้อ 2","ก่อนเซตบอล ผู้เล่นควรเตรียมมืออย่างไร",["กำมือทั้งสองข้าง","วางมือและนิ้วเตรียมรับบอลเหนือบริเวณหน้าผาก","วางมือไว้ด้านหลังลำตัว","กางแขนตรงลงด้านล่าง"],1],
+["ข้อ 3","เมื่อต้องเซตบอลที่เคลื่อนมาด้านข้าง ควรทำอย่างไรเป็นอันดับแรก",["ยืนอยู่กับที่แล้วเอื้อมมือไปรับ","หลับตาเพื่อคาดเดาทิศทาง","เคลื่อนที่เข้าหาบอลและจัดตำแหน่งให้เหมาะสม","กระโดดทันทีโดยไม่ต้องเคลื่อนที่"],2],
+["ข้อ 4","จุดที่เหมาะสมในการสัมผัสบอลขณะเซตคือบริเวณใด",["ปลายแขน","ฝ่ามือเต็ม ๆ","นิ้วมือและปลายนิ้วทั้งสองมือ","ข้อศอก"],2],
+["ข้อ 5","สิ่งใดช่วยให้การเซตบอลไปยังเพื่อนมีความแม่นยำมากขึ้น",["ควบคุมแรงและทิศทางให้สัมพันธ์กับตำแหน่งเพื่อน","ใช้แรงให้มากที่สุดทุกครั้ง","มองพื้นแทนการมองบอล","ยืนนิ่งและไม่ขยับเท้า"],0],
+["ข้อ 6","หากต้องการเซตบอลให้เพื่อนนำไปตบ ผู้เซตควรคำนึงถึงสิ่งใด",["ตำแหน่งและจังหวะของเพื่อนร่วมทีม","จำนวนผู้ชม","สีของลูกบอล","เสียงนกหวีดเท่านั้น"],0],
+["ข้อ 7","ถ้าบอลลอยมาห่างจากตำแหน่งยืน ผู้เล่นควรทำอย่างไร",["เอื้อมตัวอย่างเดียวโดยไม่ขยับเท้า","เคลื่อนที่ไปอยู่ใต้หรือในตำแหน่งที่เหมาะสมกับบอล","ปล่อยให้บอลตก","หันหลังให้บอล"],1],
+["ข้อ 8","ข้อใดเป็นข้อผิดพลาดที่ควรแก้ในการเซตบอล",["เคลื่อนที่เข้าหาบอลก่อนสัมผัส","ควบคุมทิศทางตามเป้าหมาย","วางมือและนิ้วไม่ถูกตำแหน่ง","มองบอลตลอดการเล่น"],2],
+["ข้อ 9","ในการฝึกเป็นคู่ เพื่อนสามารถช่วยพัฒนาทักษะการเซตได้อย่างไร",["ให้ข้อมูลสะท้อนกลับเกี่ยวกับจุดเด่นและจุดที่ควรปรับปรุง","บอกว่าเก่งหรือไม่เก่งอย่างเดียว","ไม่ต้องสังเกตการฝึก","เปลี่ยนกิจกรรมทุกครั้งโดยไม่ทบทวน"],0],
+["ข้อ 10","สถานการณ์ใดแสดงการนำทักษะการเซตไปใช้ในการเล่นจริงได้เหมาะสม",["เซตบอลให้เพื่อนในตำแหน่งที่พร้อมเล่นต่อหรือโจมตี","จับบอลไว้ก่อนส่งทุกครั้ง","ใช้เท้าเตะบอลให้เพื่อน","ยืนอยู่นอกสนามตลอดการเล่น"],0]
+];
+let answered=0,score=0;
+const quiz=document.getElementById("quiz");
+questions.forEach(function(q,i){
+ const card=document.createElement("section"); card.className="card";
+ let opts=q[2].map(function(o,j){return '<label class="option"><input type="radio" name="q'+i+'" value="'+j+'">'+o+'</label>';}).join("");
+ card.innerHTML='<span class="qnum">'+q[0]+'</span><h2>'+q[1]+'</h2>'+opts+'<div class="feedback" id="fb'+i+'"></div><div class="actions"><button class="next" onclick="check('+i+')">ตรวจคำตอบ</button></div>';
+ quiz.appendChild(card);
+});
+function check(i){
+ const selected=document.querySelector('input[name="q'+i+'"]:checked');
+ const fb=document.getElementById("fb"+i);
+ if(!selected){fb.style.display="block";fb.textContent="กรุณาเลือกคำตอบก่อนครับ";return}
+ if(fb.dataset.done==="1")return;
+ const ok=Number(selected.value)===questions[i][3];
+ fb.style.display="block";fb.textContent=ok?"✓ ถูกต้องครับ":"✗ ยังไม่ถูกครับ ลองทบทวนใบความรู้แล้วทำใหม่ได้";
+ fb.style.background=ok?"#ecfbf2":"#fff4f2";
+ if(ok)score++;
+ fb.dataset.done="1";answered++;
+ document.querySelectorAll('input[name="q'+i+'"]').forEach(function(x){x.disabled=true});
+ document.getElementById("progressText").textContent="ทำแล้ว "+answered+" จาก 10 ข้อ";
+ document.getElementById("bar").style.width=(answered*10)+"%";
+ if(answered===10){
+   document.getElementById("result").style.display="block";
+   document.getElementById("score").textContent=score+" / 10 คะแนน";
+   document.getElementById("message").textContent=score>=8?"ผ่านเกณฑ์ 80% — เก่งมากครับ!":"ยังไม่ถึง 80% ลองกลับไปทบทวนใบความรู้ แล้วทำแบบฝึกอีกครั้งนะครับ";
+   document.getElementById("result").scrollIntoView({behavior:"smooth"});
+ }
+}
+</script>
+</body>
+</html>
