@@ -38,7 +38,7 @@
     const room=document.getElementById('room'),number=document.getElementById('number'),classno=document.getElementById('classno'),identity=document.getElementById('identity');
     const studentBox=document.getElementById('studentBox'),visitorMode=document.getElementById('visitorMode'),studentMode=document.getElementById('studentMode');
     let mode='visitor';
-    function setMode(next){mode=next;const isStudent=mode==='student';studentBox.classList.toggle('hidden',!isStudent);visitorMode.classList.toggle('active',!isStudent);studentMode.classList.toggle('active',isStudent);if(isStudent){updateIdentity();}else{identity.textContent='👀 โหมดผู้เยี่ยมชม — คะแนนจะไม่ถูกบันทึกลง Google Sheet';}}
+    function setMode(next){mode=next;const isStudent=mode==='student';studentBox.classList.toggle('hidden',!isStudent);visitorMode.classList.toggle('active',!isStudent);studentMode.classList.toggle('active',isStudent);document.querySelectorAll('input,select').forEach(el=>el.disabled=false);document.getElementById('submit').disabled=false;if(isStudent){updateIdentity();}else{identity.textContent='👀 โหมดผู้เยี่ยมชม — คะแนนจะไม่ถูกบันทึกลง Google Sheet';}}
     visitorMode.addEventListener('click',()=>setMode('visitor'));studentMode.addEventListener('click',()=>setMode('student'));
 function updateIdentity(){const r=room.value,n=number.value;if(r&&n){const nn=String(Number(n));identity.textContent='ข้อมูลที่จะบันทึก: '+r+' • เลขที่ '+nn+' • รหัสนักเรียน M2-'+r.split('/')[1]+'-'+nn;}else{identity.textContent='กรุณาเลือกห้องและเลขที่';}}
 room.addEventListener('change',updateIdentity);number.addEventListener('change',updateIdentity);
