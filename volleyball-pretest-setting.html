@@ -14,7 +14,7 @@ header p{margin:6px 0}
 .info,.card,.result{background:#fff;border-radius:22px;box-shadow:0 8px 25px #0b3b6618}
 .info{padding:22px;margin-bottom:18px}
 .student{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-top:15px}
-input[type=text],input[type=number]{width:100%;padding:12px;border:2px solid #d8e7f5;border-radius:12px;font-size:16px}
+input[type=text],select{width:100%;padding:12px;border:2px solid #d8e7f5;border-radius:12px;font-size:16px;background:#fff}
 .card{padding:28px;margin-bottom:18px}
 .qnum{display:inline-block;background:#0757a6;color:#fff;border-radius:999px;padding:6px 13px;font-weight:700}
 h2{font-size:23px;margin:14px 0 20px}
@@ -43,8 +43,15 @@ button{border:0;border-radius:14px;padding:14px 24px;font-size:17px;font-weight:
 <p class="small">แบบทดสอบนี้ใช้สำหรับสำรวจความรู้ก่อนเรียน <strong>ไม่มีการแสดงเฉลย</strong></p>
 <div class="student">
 <input id="studentName" type="text" placeholder="ชื่อ-นามสกุล" required>
-<input id="studentClass" type="text" placeholder="ชั้น/ห้อง" required>
-<input id="studentNo" type="number" min="1" placeholder="เลขที่" required>
+<select id="studentClass" required>
+<option value="">เลือกห้อง</option>
+<option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option>
+<option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option>
+</select>
+<select id="studentNo" required>
+<option value="">เลือกเลขที่</option>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option>
+</select>
 </div>
 </section>
 <div id="quiz"></div>
@@ -80,7 +87,7 @@ function submitQuiz(){
  const name=document.getElementById("studentName").value.trim();
  const cls=document.getElementById("studentClass").value.trim();
  const no=document.getElementById("studentNo").value.trim();
- if(!name||!cls||!no){alert("กรุณากรอกชื่อ-นามสกุล ชั้น/ห้อง และเลขที่ก่อนส่งครับ");return;}
+ if(!name||!cls||!no){alert("กรุณากรอกชื่อ-นามสกุล เลือกห้อง และเลือกเลขที่ก่อนส่งครับ");return;}
  let score=0;
  for(let i=0;i<questions.length;i++){
    const selected=document.querySelector('input[name="q'+i+'"]:checked');
@@ -91,7 +98,7 @@ function submitQuiz(){
  document.querySelector("button").disabled=true;
  document.getElementById("result").style.display="block";
  document.getElementById("score").textContent=score+" / 10 คะแนน";
- document.getElementById("resultText").textContent="บันทึกผลการทำแบบทดสอบของ "+name+" ชั้น "+cls+" เลขที่ "+no+" แล้ว";
+ document.getElementById("resultText").textContent="บันทึกผลการทำแบบทดสอบของ "+name+" ห้อง "+cls+" เลขที่ "+no+" แล้ว";
  document.getElementById("result").scrollIntoView({behavior:"smooth"});
 }
 </script>
