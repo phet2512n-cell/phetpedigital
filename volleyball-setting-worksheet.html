@@ -83,15 +83,33 @@ button{border:0;border-radius:14px;padding:14px 28px;font-size:18px;font-weight:
 <textarea id="reflection" placeholder="สิ่งที่ฉันได้เรียนรู้จากการทำใบงานการเซตบอล..."></textarea>
 </section>
 
-<div class="actions"><button onclick="submitWork()">📤 ส่งงานให้ครู</button></div>
+<div class="actions"><button id="submitBtn" onclick="submitWork()">📤 ส่งงานให้ครู</button></div>
 <section class="card result" id="result">
 <h2>✅ ส่งงานเรียบร้อยแล้ว</h2>
 <p id="msg"></p>
 <p><strong>สถานะ: 🟡 รอตรวจ</strong></p>
-<p class="small">ขั้นตอนนี้เป็นหน้าใบงานสำหรับนักเรียน ส่วนการบันทึกลง Google Sheets และหน้าตรวจคะแนนจะเชื่อมต่อในขั้นตอนถัดไป</p>
+<p class="small">นักเรียนสามารถดูเฉลยเพื่อทบทวน แล้วกด “✏️ ทำแก้ตัวใหม่” เพื่อปรับคำตอบและส่งอีกครั้งได้</p>
+<div class="actions">
+<button id="answerBtn" onclick="showAnswers()">📖 ดูเฉลย</button>
+<button id="retryBtn" onclick="retryWork()" style="display:none;background:#13aee8">✏️ ทำแก้ตัวใหม่</button>
+</div>
+</section>
+
+<section class="card" id="answers" style="display:none">
+<span class="title">📖 เฉลยและแนวคำตอบ</span>
+<p class="small">เฉลยจะแสดงหลังจากส่งงานครั้งแรกเท่านั้น เพื่อให้นักเรียนได้ลองทำด้วยตนเองก่อน</p>
+<div class="q"><strong>ข้อ 1</strong><p>แนวคำตอบ: การเซตบอล คือการใช้มือและนิ้วสัมผัสและควบคุมลูกบอล เพื่อส่งลูกไปยังตำแหน่งหรือเป้าหมายที่ต้องการ เช่น ส่งให้เพื่อนเล่นต่อหรือโจมตี</p></div>
+<div class="q"><strong>ข้อ 2</strong><p>แนวคำตอบ: ย่อเข่าเล็กน้อย ลำตัวอยู่ในท่าเตรียม มือยกขึ้นด้านหน้าเหนือหน้าผากเล็กน้อย กางนิ้วเป็นรูปพร้อมรับลูก และเตรียมเคลื่อนที่เข้าหาบอล</p></div>
+<div class="q"><strong>ข้อ 3</strong><p>คำตอบที่ถูกต้อง: <b>นิ้วมือและปลายนิ้ว</b></p></div>
+<div class="q"><strong>ข้อ 4</strong><p>แนวคำตอบ: เพื่อให้ร่างกายอยู่ในตำแหน่งที่เหมาะสมกับบอล ควบคุมทิศทางและความแม่นยำของการเซตได้ดีขึ้น</p></div>
+<div class="q"><strong>ข้อ 5</strong><p>แนวคำตอบ: เช่น ใช้ฝ่ามือรับบอลเต็ม ๆ, ยืนตัวตรงไม่ย่อเข่า, ไม่เคลื่อนที่เข้าหาบอล, ใช้แรงจากมืออย่างเดียว, ปล่อยบอลไม่ตรงเป้าหมาย</p></div>
+<hr>
+<p><b>Mind Map</b> — ควรมีสาระสำคัญเกี่ยวกับความหมาย/จุดประสงค์, ท่าเตรียม, การใช้มือและนิ้ว, การเคลื่อนที่เข้าหาบอล, การส่งบอลไปยังเป้าหมาย และข้อควรระวัง</p>
+<p><b>กิจกรรมฝึกปฏิบัติ</b> — ให้นักเรียนสะท้อนสิ่งที่ทำได้ ผลการฝึก ข้อเสนอแนะจากเพื่อน และสิ่งที่ต้องปรับปรุงจากการฝึกจริง</p>
 </section>
 </div>
 <script>
+let attempt=1;
 function submitWork(){
  const name=document.getElementById('name').value.trim();
  const cls=document.getElementById('class').value;
@@ -103,10 +121,28 @@ function submitWork(){
    if(id==='q3' && !document.querySelector('input[name="q3"]:checked')){alert('กรุณาตอบข้อ 3 ก่อนส่งงานครับ');return;}
    if(id!=='q3' && !el.value.trim()){alert('กรุณาทำงานให้ครบทุกช่องก่อนส่งครับ');return;}
  }
- document.querySelectorAll('input,textarea,select,button').forEach(x=>x.disabled=true);
+ document.getElementById('submitBtn').disabled=true;
  document.getElementById('result').style.display='block';
- document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่งใบงานการเซตบอลแล้ว';
+ document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่งใบงานครั้งที่ '+attempt+' แล้ว';
+ document.getElementById('answerBtn').style.display='inline-block';
+ document.getElementById('retryBtn').style.display='inline-block';
  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+function showAnswers(){
+ document.getElementById('answers').style.display='block';
+ document.getElementById('answerBtn').style.display='none';
+ document.getElementById('answers').scrollIntoView({behavior:'smooth'});
+}
+function retryWork(){
+ attempt++;
+ document.querySelectorAll('input,textarea,select').forEach(x=>x.disabled=false);
+ document.getElementById('submitBtn').disabled=false;
+ document.getElementById('result').style.display='none';
+ document.getElementById('answers').style.display='none';
+ document.getElementById('answerBtn').style.display='inline-block';
+ document.getElementById('retryBtn').style.display='none';
+ document.getElementById('submitBtn').textContent='📤 ส่งแก้ตัวครั้งที่ '+attempt;
+ window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 </body>
