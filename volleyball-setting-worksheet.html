@@ -148,7 +148,9 @@ button{border:0;border-radius:14px;padding:14px 28px;font-size:18px;font-weight:
 </div>
 <script>
 let attempt=1;
-function submitWork(){
+const WEB_APP_URL='https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec';
+
+async function submitWork(){
  const name=document.getElementById('name').value.trim();
  const cls=document.getElementById('class').value;
  const no=document.getElementById('no').value;
@@ -156,14 +158,42 @@ function submitWork(){
  const ids=['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','mm1','mm2','mm3','mm4','mm5','mm6','mm7','mm8','mm9'];
  for(const id of ids){
    const el=document.getElementById(id);
-   if(!el.value.trim()){alert('กรุณาตอบคำถามให้ครบทั้ง 10 ข้อก่อนส่งครับ');return;}
+   if(!el.value.trim()){alert('กรุณาตอบคำถามให้ครบทั้ง 10 ข้อและ Mind Map ให้ครบก่อนส่งครับ');return;}
  }
+
+ const payload={
+   name:name,
+   class:cls,
+   no:no,
+   work:'ใบงานการเซตบอล',
+   attempt:attempt
+ };
+ for(let i=1;i<=10;i++) payload['q'+i]=document.getElementById('q'+i).value.trim();
+ for(let i=1;i<=9;i++) payload['mm'+i]=document.getElementById('mm'+i).value.trim();
+
  document.getElementById('submitBtn').disabled=true;
- document.getElementById('result').style.display='block';
- document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่งใบงานครั้งที่ '+attempt+' แล้ว';
- document.getElementById('answerBtn').style.display='inline-block';
- document.getElementById('retryBtn').style.display='inline-block';
- document.getElementById('result').scrollIntoView({behavior:'smooth'});
+ document.getElementById('submitBtn').textContent='⏳ กำลังส่งงาน...';
+
+ try{
+   await fetch(WEB_APP_URL,{
+     method:'POST',
+     mode:'no-cors',
+     headers:{'Content-Type':'text/plain;charset=utf-8'},
+     body:JSON.stringify(payload)
+   });
+
+   document.getElementById('result').style.display='block';
+   document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่งใบงานครั้งที่ '+attempt+' แล้ว';
+   document.getElementById('answerBtn').style.display='inline-block';
+   document.getElementById('retryBtn').style.display='inline-block';
+   document.getElementById('submitBtn').textContent='📤 ส่งงานให้ครู';
+   document.getElementById('result').scrollIntoView({behavior:'smooth'});
+ }catch(err){
+   document.getElementById('submitBtn').disabled=false;
+   document.getElementById('submitBtn').textContent='📤 ส่งงานให้ครู';
+   alert('ไม่สามารถส่งงานได้ กรุณาลองใหม่อีกครั้งครับ');
+   console.error(err);
+ }
 }
 function showAnswers(){
  document.getElementById('answers').style.display='block';
