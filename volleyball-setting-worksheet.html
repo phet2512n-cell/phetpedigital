@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ใบงานการเซตบอล | พ23104</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#eef7ff;color:#102a43;line-height:1.65}
+header{background:linear-gradient(135deg,#0757a6,#13aee8);color:#fff;padding:28px 18px;text-align:center}
+header h1{margin:7px 0;font-size:32px}.wrap{max-width:1000px;margin:24px auto;padding:0 15px}
+.card{background:#fff;border-radius:20px;padding:24px;margin-bottom:18px;box-shadow:0 8px 24px #0b3b6618}
+.title{display:inline-block;background:#0757a6;color:#fff;padding:6px 14px;border-radius:999px;font-weight:bold}
+.student{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px;margin-top:16px}
+.field label{display:block;font-weight:bold;color:#0757a6;margin-bottom:6px}
+input[type=text],select,textarea{width:100%;padding:12px;border:2px solid #d8e7f5;border-radius:12px;font-size:16px;background:#fff}
+textarea{min-height:110px;resize:vertical}
+.select-wrap{position:relative}.select-wrap:after{content:"▼";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#0757a6;pointer-events:none}
+select{appearance:none;padding-right:40px}
+.q{margin-top:20px}.q strong{display:block;margin-bottom:8px}
+.option{display:block;border:2px solid #d8e7f5;border-radius:12px;padding:10px 13px;margin:8px 0;cursor:pointer}
+.activity{background:#f5fbff;border-left:5px solid #13aee8;padding:15px;border-radius:12px;margin:12px 0}
+.mindmap{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mindmap textarea{min-height:80px}
+button{border:0;border-radius:14px;padding:14px 28px;font-size:18px;font-weight:bold;background:#0757a6;color:#fff;cursor:pointer}
+.actions{text-align:center;margin:26px 0}.result{display:none;text-align:center;background:#ecfff4;border:2px solid #55b77a}
+.small{color:#52677b;font-size:14px}
+@media(max-width:650px){.student,.mindmap{grid-template-columns:1fr}header h1{font-size:27px}}
+</style>
+</head>
+<body>
+<header>
+<div>PE Digital Learning Center</div>
+<h1>📘 ใบงาน เรื่อง การเซตบอล</h1>
+<p>รายวิชา พ23104 • ชั้นมัธยมศึกษาปีที่ 3 • ภาคเรียนที่ 2</p>
+</header>
+<div class="wrap">
+<section class="card">
+<span class="title">ข้อมูลนักเรียน</span>
+<div class="student">
+<div class="field"><label>ชื่อ-นามสกุล</label><input id="name" type="text" placeholder="กรอกชื่อ-นามสกุล"></div>
+<div class="field"><label>ชั้น</label><div class="select-wrap"><select id="class"><option value="">▼ เลือกห้อง</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></div></div>
+<div class="field"><label>เลขที่</label><div class="select-wrap"><select id="no"><option value="">▼ เลือกเลขที่</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option></select></div></div>
+</div>
+<p class="small">ให้นักเรียนตอบคำถามและทำกิจกรรมให้ครบ แล้วกด “📤 ส่งงานให้ครู” เมื่อทำเสร็จ</p>
+</section>
+
+<section class="card">
+<span class="title">ตอนที่ 1 ตอบคำถาม</span>
+<div class="q"><strong>ข้อ 1 อธิบายความหมายของการเซตบอลด้วยภาษาของตนเอง</strong><textarea id="q1" placeholder="พิมพ์คำตอบของนักเรียน"></textarea></div>
+<div class="q"><strong>ข้อ 2 ก่อนเซตบอล ผู้เล่นควรเตรียมมือและลำตัวอย่างไร</strong><textarea id="q2" placeholder="พิมพ์คำตอบของนักเรียน"></textarea></div>
+<div class="q"><strong>ข้อ 3 จุดสัมผัสบอลที่เหมาะสมในการเซตบอลคือบริเวณใด</strong>
+<label class="option"><input type="radio" name="q3" value="นิ้วมือและปลายนิ้ว"> นิ้วมือและปลายนิ้ว</label>
+<label class="option"><input type="radio" name="q3" value="ฝ่ามือเต็ม ๆ"> ฝ่ามือเต็ม ๆ</label>
+<label class="option"><input type="radio" name="q3" value="ปลายแขน"> ปลายแขน</label>
+<label class="option"><input type="radio" name="q3" value="ข้อศอก"> ข้อศอก</label></div>
+<div class="q"><strong>ข้อ 4 เพราะเหตุใดจึงต้องเคลื่อนที่เข้าหาบอลก่อนเซต</strong><textarea id="q4" placeholder="พิมพ์คำตอบของนักเรียน"></textarea></div>
+<div class="q"><strong>ข้อ 5 บอกข้อผิดพลาดในการเซตบอลที่ควรหลีกเลี่ยงอย่างน้อย 2 ข้อ</strong><textarea id="q5" placeholder="พิมพ์คำตอบของนักเรียน"></textarea></div>
+</section>
+
+<section class="card">
+<span class="title">ตอนที่ 2 Mind Map</span>
+<p>ให้นักเรียนสรุปความรู้เรื่อง “การเซตบอล” โดยเติมข้อมูลในแต่ละช่อง</p>
+<div class="mindmap">
+<div><label>ความหมาย / จุดประสงค์</label><textarea id="m1" placeholder="เขียนสรุป"></textarea></div>
+<div><label>ท่าเตรียม</label><textarea id="m2" placeholder="เขียนสรุป"></textarea></div>
+<div><label>การใช้มือและนิ้ว</label><textarea id="m3" placeholder="เขียนสรุป"></textarea></div>
+<div><label>การเคลื่อนที่เข้าหาบอล</label><textarea id="m4" placeholder="เขียนสรุป"></textarea></div>
+<div><label>การส่งบอลไปยังเป้าหมาย</label><textarea id="m5" placeholder="เขียนสรุป"></textarea></div>
+<div><label>ข้อควรระวัง / ข้อผิดพลาด</label><textarea id="m6" placeholder="เขียนสรุป"></textarea></div>
+</div>
+</section>
+
+<section class="card">
+<span class="title">ตอนที่ 3 กิจกรรมฝึกปฏิบัติ</span>
+<div class="activity"><strong>กิจกรรมที่ 1</strong> ฝึกท่าเตรียมและการวางมือก่อนเซต แล้วเขียนสิ่งที่สังเกตได้<textarea id="a1" placeholder="บันทึกผลการฝึก"></textarea></div>
+<div class="activity"><strong>กิจกรรมที่ 2</strong> ฝึกเซตบอลกับเพื่อน และรับข้อมูลสะท้อนกลับจากเพื่อน<textarea id="a2" placeholder="เพื่อนแนะนำอะไร และนำไปปรับอย่างไร"></textarea></div>
+<div class="activity"><strong>กิจกรรมที่ 3</strong> ฝึกเคลื่อนที่เข้าหาบอลแล้วเซตไปยังเป้าหมาย<textarea id="a3" placeholder="ผลการฝึก / สิ่งที่ต้องปรับปรุง"></textarea></div>
+<div class="activity"><strong>กิจกรรมที่ 4</strong> สะท้อนผลการเรียนรู้<textarea id="a4" placeholder="วันนี้ฉันทำได้ดีเรื่องอะไร และจะพัฒนาเรื่องใด"></textarea></div>
+</section>
+
+<section class="card">
+<span class="title">สรุปหลังเรียน</span>
+<textarea id="reflection" placeholder="สิ่งที่ฉันได้เรียนรู้จากการทำใบงานการเซตบอล..."></textarea>
+</section>
+
+<div class="actions"><button onclick="submitWork()">📤 ส่งงานให้ครู</button></div>
+<section class="card result" id="result">
+<h2>✅ ส่งงานเรียบร้อยแล้ว</h2>
+<p id="msg"></p>
+<p><strong>สถานะ: 🟡 รอตรวจ</strong></p>
+<p class="small">ขั้นตอนนี้เป็นหน้าใบงานสำหรับนักเรียน ส่วนการบันทึกลง Google Sheets และหน้าตรวจคะแนนจะเชื่อมต่อในขั้นตอนถัดไป</p>
+</section>
+</div>
+<script>
+function submitWork(){
+ const name=document.getElementById('name').value.trim();
+ const cls=document.getElementById('class').value;
+ const no=document.getElementById('no').value;
+ if(!name||!cls||!no){alert('กรุณากรอกชื่อ-นามสกุล เลือกห้อง และเลือกเลขที่ก่อนส่งงานครับ');return;}
+ const ids=['q1','q2','q3','q4','q5','m1','m2','m3','m4','m5','m6','a1','a2','a3','a4','reflection'];
+ for(const id of ids){
+   const el=document.getElementById(id);
+   if(id==='q3' && !document.querySelector('input[name="q3"]:checked')){alert('กรุณาตอบข้อ 3 ก่อนส่งงานครับ');return;}
+   if(id!=='q3' && !el.value.trim()){alert('กรุณาทำงานให้ครบทุกช่องก่อนส่งครับ');return;}
+ }
+ document.querySelectorAll('input,textarea,select,button').forEach(x=>x.disabled=true);
+ document.getElementById('result').style.display='block';
+ document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่งใบงานการเซตบอลแล้ว';
+ document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
