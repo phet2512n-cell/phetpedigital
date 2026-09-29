@@ -35,7 +35,7 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 </section>
 <section class="card" id="checkCard">
 <h2>🔎 ตรวจคำตอบด้วยตนเอง</h2>
-<p>เมื่อทำครบทั้ง 10 ข้อแล้ว กดปุ่มนี้เพื่อเปิดแนวคำตอบสำหรับตรวจและทบทวนด้วยตนเอง <strong>ไม่มีคะแนนและไม่ส่ง Google Sheets</strong></p>
+<p>เมื่อทำครบทั้ง 10 ข้อแล้ว กดปุ่มนี้เพื่อเปิด <strong>เฉลยทั้ง 10 ข้อ</strong> สำหรับตรวจคำตอบด้วยตนเอง <strong>ไม่มีคะแนนและไม่ส่ง Google Sheets</strong></p>
 <p style="text-align:center"><button class="btn" id="checkBtn" onclick="checkAnswers()">🔎 ตรวจคำตอบและดูเฉลย</button></p>
 <div id="answers" style="display:none"></div>
 </section>
@@ -62,8 +62,8 @@ function checkAnswers(){
  if(!name||!cls||!no||qs.some(v=>!v)){alert('กรุณากรอกข้อมูลนักเรียนและตอบให้ครบทั้ง 10 ข้อก่อนตรวจครับ');return}
  const box=document.getElementById('answers');
  box.style.display='block';
- box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> คำตอบของนักเรียนไม่จำเป็นต้องเหมือนเฉลยทุกคำ ให้เปรียบเทียบใจความสำคัญ หากตอบได้ใกล้เคียงถือว่าเข้าใจเนื้อหา</div>'+
- answers.map((a,i)=>'<div style="margin:18px 0;padding:16px;background:#f7fbff;border-radius:12px;border-left:5px solid var(--sky)"><strong>ข้อ '+(i+1)+'</strong><p style="margin:8px 0"><b>คำตอบของฉัน:</b> '+escapeHtml(qs[i])+'</p><p style="margin:8px 0"><b>💡 แนวคำตอบ:</b> '+a+'</p></div>').join('');
+ box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> แบบฝึกนี้เป็นคำถามปลายเปิด ระบบจึงไม่ตัดสินถูก/ผิดอัตโนมัติ ให้เปรียบเทียบคำตอบของตนเองกับ <strong>เฉลย</strong> ด้านล่าง หากมีใจความสำคัญตรงกันถือว่าตอบได้ถูกต้อง</div>'+
+ answers.map((a,i)=>'<div style="margin:18px 0;padding:16px;background:#f7fbff;border-radius:12px;border-left:5px solid var(--sky)"><strong>ข้อ '+(i+1)+'</strong><p style="margin:8px 0"><b>คำตอบของฉัน:</b> '+escapeHtml(qs[i])+'</p><p style="margin:8px 0;background:#ecfff4;padding:12px;border-radius:10px"><b>✅ เฉลย:</b> '+a+'</p></div>').join('');
  document.getElementById('checkBtn').disabled=true;
  document.getElementById('checkBtn').textContent='✅ ตรวจคำตอบแล้ว';
  box.scrollIntoView({behavior:'smooth'});
