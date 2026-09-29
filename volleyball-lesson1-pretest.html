@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>แบบทดสอบก่อนเรียน แผนที่ 1 | วอลเลย์บอล</title>
+<style>
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f4f8fd;color:#092653}header{background:linear-gradient(135deg,#092653,#0066b3,#18aee8);color:#fff;text-align:center;padding:30px 18px}header h1{margin:8px 0}.wrap{max-width:900px;margin:auto;padding:25px 18px 50px}.card{background:#fff;border-radius:20px;padding:24px;margin:16px 0;box-shadow:0 8px 22px #17315a14}.q{padding:18px 0;border-bottom:1px solid #e5edf5}.q:last-child{border:0}.q p{font-weight:800;line-height:1.6}.opt{display:block;background:#f6faff;border:1px solid #d8e7f5;padding:10px 12px;border-radius:10px;margin:8px 0;cursor:pointer}.opt:hover{background:#eaf6ff}button{border:0;background:#0066b3;color:#fff;padding:14px 22px;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer}.result{display:none;background:#eaf8ef;border-left:6px solid #25a65a;padding:18px;border-radius:12px;margin-top:20px}.back{display:inline-block;margin-top:18px;color:#0066b3;font-weight:800}
+</style></head><body>
+<header><div style="font-size:48px">📝</div><h1>แบบทดสอบก่อนเรียน</h1><p>แผนที่ 1 ประวัติและความเป็นมา ประโยชน์และความสำคัญของกีฬาวอลเลย์บอล</p><p>ชั้นมัธยมศึกษาปีที่ 3 | จำนวน 10 ข้อ</p></header>
+<main class="wrap"><div class="card"><p><strong>คำชี้แจง:</strong> เลือกคำตอบที่ถูกต้องที่สุดเพียง 1 ข้อ แบบทดสอบนี้ใช้สำรวจความรู้เดิมก่อนเรียน</p></div>
+<form id="quiz">
+<div id="qs"></div><button type="submit">ตรวจคำตอบ</button><div class="result" id="result"></div>
+</form><a class="back" href="volleyball-lesson1-media.html">← กลับหน้าสื่อและแหล่งเรียนรู้</a></main>
+<script>
+const data=[
+["กีฬาวอลเลย์บอลเริ่มต้นขึ้นในปีใด","ค.ศ. 1895","ค.ศ. 1905","ค.ศ. 1915","ค.ศ. 1925"],
+["ผู้คิดค้นกีฬาวอลเลย์บอลคือใคร","William G. Morgan","James Naismith","Thomas Edison","Pierre de Coubertin"],
+["ชื่อเดิมของกีฬาวอลเลย์บอลคืออะไร","Mintonette","Handball","Basket Ball","Net Ball"],
+["เหตุผลสำคัญประการหนึ่งที่ Morgan คิดค้นกีฬานี้คืออะไร","ต้องการกิจกรรมที่ไม่หนักหรือปะทะมากเกินไป","ต้องการกีฬาที่เล่นในน้ำ","ต้องการกีฬาที่ใช้ผู้เล่นเพียงคนเดียว","ต้องการกีฬาที่ไม่มีตาข่าย"],
+["ข้อใดเป็นประโยชน์ด้านร่างกายของวอลเลย์บอล","ช่วยให้ร่างกายได้เคลื่อนไหวและส่งเสริมสมรรถภาพทางกาย","ทำให้ไม่ต้องออกกำลังกายชนิดอื่น","ทำให้ร่างกายไม่ต้องเคลื่อนไหว","ช่วยให้พักผ่อนได้ตลอดเวลา"],
+["การเล่นวอลเลย์บอลเป็นทีมช่วยพัฒนาทักษะใดเด่นชัด","การร่วมมือและการสื่อสาร","การอยู่คนเดียว","การหลีกเลี่ยงการสื่อสาร","การทำงานโดยไม่ต้องรับผิดชอบ"],
+["การเล่นวอลเลย์บอลเกี่ยวข้องกับการคิดและการตัดสินใจอย่างไร","สังเกตสถานการณ์แล้วเลือกวิธีเล่นให้เหมาะสม","ทำทุกอย่างโดยไม่ต้องสังเกต","เล่นตามใจโดยไม่คำนึงถึงสถานการณ์","ไม่จำเป็นต้องตัดสินใจ"],
+["ข้อใดสะท้อนความรับผิดชอบในการเล่นกีฬา","ปฏิบัติตามกติกา ตรงต่อเวลา และรับผิดชอบหน้าที่ของตน","ไม่สนใจกติกา","มาสายเป็นประจำ","ให้เพื่อนทำหน้าที่แทนทั้งหมด"],
+["ข้อใดเกี่ยวข้องกับคุณธรรมและน้ำใจนักกีฬา","เคารพกติกาและคู่แข่งขัน","โต้เถียงทุกครั้งที่ไม่พอใจ","ไม่ยอมรับผลการแข่งขัน","ตำหนิเพื่อนเมื่อผิดพลาด"],
+["ความรู้เรื่องวอลเลย์บอลสามารถนำไปใช้ในชีวิตประจำวันด้านใด","การทำงานเป็นทีม การสื่อสาร และความรับผิดชอบ","การหลีกเลี่ยงการทำงานร่วมกับผู้อื่น","การไม่ปฏิบัติตามกติกา","การทำงานโดยไม่รับผิดชอบ"]
+];
+const answers=[0,0,0,0,0,0,0,0,0,0];
+const qs=document.getElementById('qs');
+data.forEach((d,i)=>{let h='<div class="q"><p>'+(i+1)+'. '+d[0]+'</p>';for(let j=1;j<5;j++)h+='<label class="opt"><input type="radio" name="q'+i+'" value="'+(j-1)+'" required> '+d[j]+'</label>';h+='</div>';qs.innerHTML+=h});
+document.getElementById('quiz').addEventListener('submit',e=>{e.preventDefault();let score=0;answers.forEach((a,i)=>{if(Number(document.querySelector('input[name=q'+i+']:checked').value)===a)score++});let pct=score*10;let r=document.getElementById('result');r.style.display='block';r.innerHTML='<strong>ผลแบบทดสอบก่อนเรียน: '+score+'/10 คะแนน ('+pct+'%)</strong><br>ผลนี้ใช้เป็นข้อมูลก่อนเรียน ไม่ใช่คะแนนตัดสินผลการเรียน';r.scrollIntoView({behavior:'smooth'})});
+</script></body></html>
