@@ -7,7 +7,7 @@ body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f4f8fd;color:#0926
 <header><div style="font-size:48px">📝</div><h1>แบบทดสอบก่อนเรียน</h1><p>แผนที่ 1 ประวัติและความเป็นมา ประโยชน์และความสำคัญของกีฬาวอลเลย์บอล</p><p>ชั้นมัธยมศึกษาปีที่ 3 | จำนวน 10 ข้อ</p></header>
 <main class="wrap"><div class="card"><p><strong>คำชี้แจง:</strong> เลือกคำตอบที่ถูกต้องที่สุดเพียง 1 ข้อ แบบทดสอบนี้ใช้สำรวจความรู้เดิมก่อนเรียน</p></div>
 <form id="quiz">
-<div id="qs"></div><button type="submit">ตรวจคำตอบ</button><div class="result" id="result"></div>
+<div id="qs"></div><button type="submit">ส่งแบบทดสอบก่อนเรียน</button><div class="result" id="result"></div>
 </form><a class="back" href="volleyball-lesson1-media.html">← กลับหน้าสื่อและแหล่งเรียนรู้</a></main>
 <script>
 const data=[
@@ -25,5 +25,5 @@ const data=[
 const answers=[0,0,0,0,0,0,0,0,0,0];
 const qs=document.getElementById('qs');
 data.forEach((d,i)=>{let h='<div class="q"><p>'+(i+1)+'. '+d[0]+'</p>';for(let j=1;j<5;j++)h+='<label class="opt"><input type="radio" name="q'+i+'" value="'+(j-1)+'" required> '+d[j]+'</label>';h+='</div>';qs.innerHTML+=h});
-document.getElementById('quiz').addEventListener('submit',e=>{e.preventDefault();let score=0;answers.forEach((a,i)=>{if(Number(document.querySelector('input[name=q'+i+']:checked').value)===a)score++});let pct=score*10;let r=document.getElementById('result');r.style.display='block';r.innerHTML='<strong>ผลแบบทดสอบก่อนเรียน: '+score+'/10 คะแนน ('+pct+'%)</strong><br>ผลนี้ใช้เป็นข้อมูลก่อนเรียน ไม่ใช่คะแนนตัดสินผลการเรียน';r.scrollIntoView({behavior:'smooth'})});
+document.getElementById('quiz').addEventListener('submit',e=>{e.preventDefault();let score=0;answers.forEach((a,i)=>{if(Number(document.querySelector('input[name=q'+i+']:checked').value)===a)score++});let pct=score*10;let r=document.getElementById('result');r.style.display='block';r.innerHTML='<strong>ส่งแบบทดสอบก่อนเรียนเรียบร้อยแล้ว</strong><br>ผลแบบทดสอบ: '+score+'/10 คะแนน ('+pct+'%)<br>ผลนี้ใช้เป็นข้อมูลก่อนเรียน ไม่แสดงเฉลย และไม่ใช่คะแนนตัดสินผลการเรียน';r.scrollIntoView({behavior:'smooth'})});
 </script></body></html>
