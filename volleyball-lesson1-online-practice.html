@@ -33,27 +33,40 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 <section class="card"><h2>ตอนที่ 1 : แบบฝึกทบทวนความเข้าใจ</h2>
 <div class="q"><strong>1. กีฬาวอลเลย์บอลเริ่มต้นขึ้นในปี ค.ศ. ใด ที่เมืองใด รัฐและประเทศใด</strong><textarea id="q1" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>2. ใครเป็นผู้คิดค้นกีฬาวอลเลย์บอล และทำงานด้านใด</strong><textarea id="q2" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>3. เพราะเหตุใด William G. Morgan จึงคิดค้นกีฬาวอลเลย์บอลขึ้นในระยะแรก</strong><textarea id="q3" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>4. ชื่อเดิมของวอลเลย์บอลคืออะไร และใน ค.ศ. 1896 มีการเสนอชื่อใหม่ว่าอะไร</strong><textarea id="q4" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>5. บอกประโยชน์ด้านร่างกายของการเล่นวอลเลย์บอลมาอย่างน้อย 2 ประการ</strong><textarea id="q5" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>6. การเล่นวอลเลย์บอลช่วยพัฒนาการประสานงานของร่างกายอย่างไร</strong><textarea id="q6" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>7. การเล่นวอลเลย์บอลช่วยพัฒนาการคิดและการตัดสินใจอย่างไร</strong><textarea id="q7" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>8. การทำงานเป็นทีมและการสื่อสารมีความสำคัญต่อการเล่นวอลเลย์บอลอย่างไร</strong><textarea id="q8" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>9. ระเบียบวินัย ความรับผิดชอบ คุณธรรม และน้ำใจนักกีฬามีความสำคัญอย่างไร</strong><textarea id="q9" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>10. นักเรียนสามารถนำคุณค่าที่ได้จากกีฬาวอลเลย์บอลไปใช้ในชีวิตประจำวันได้อย่างไร</strong><textarea id="q10" placeholder="เขียนคำตอบของตนเอง..."></textarea></div>
 </section>
+<section class="card" id="checkCard">
+<h2>🔎 ตรวจคำตอบด้วยตนเอง</h2>
+<p>เมื่อทำครบทั้ง 10 ข้อแล้ว กดปุ่มนี้เพื่อเปิดแนวคำตอบสำหรับตรวจและทบทวนด้วยตนเอง <strong>ไม่มีคะแนนและไม่ส่ง Google Sheets</strong></p>
+<p style="text-align:center"><button class="btn" id="checkBtn" onclick="checkAnswers()">🔎 ตรวจคำตอบและดูเฉลย</button></p>
+<div id="answers" style="display:none"></div>
+</section>
 <section class="card"><div class="note"><strong>ขั้นตอนต่อไป:</strong> เมื่อทำแบบฝึกออนไลน์เสร็จแล้ว ให้ไปทำ <strong>Mind Map เรื่องที่ 1</strong> ซึ่งแยกเป็นอีกกิจกรรมหนึ่ง</div>
-<p style="text-align:center"><button class="btn" id="sendBtn" onclick="submitPractice()">📤 ส่งแบบฝึกออนไลน์</button></p></section>
-<section class="card result" id="result"><h2>✅ ส่งแบบฝึกเรียบร้อยแล้ว</h2><p id="msg"></p></section>
-</main>
+<p style="text-align:center"><button class="btn" id="sendBtn" onclick="checkAnswers()">🔎 ตรวจคำตอบ</button></p></section>
+
 <footer>จัดทำโดย <strong>ครูประดับเพชร ภูเงิน</strong><br>กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา โรงเรียนชะอำคุณหญิงเนื่องบุรี</footer>
 <script>
-const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyF8YC2k1-WEvmELvNKgzCHkEpoQrYhR8BSUUPozcsiNANAFaxHaUn4e5LUGvr8_zocMQ/exec";
-async function submitPractice(){
+const answers=[
+"ค.ศ. 1895 ที่เมืองโฮลีโอก รัฐแมสซาชูเซตส์ ประเทศสหรัฐอเมริกา",
+"วิลเลียม จี. มอร์แกน (William G. Morgan) เป็นครู/ผู้อำนวยการด้านพลศึกษาของ YMCA",
+"ต้องการกิจกรรมออกกำลังกายสำหรับผู้ใหญ่ที่มีความรุนแรงและการปะทะน้อยกว่ากีฬาบางชนิด",
+"ชื่อเดิมคือ Mintonette และใน ค.ศ. 1896 มีการเสนอชื่อ Volley Ball ซึ่งต่อมาพัฒนาเป็น Volleyball",
+"เช่น ช่วยพัฒนาความแข็งแรง ความคล่องตัว ความอดทน และการเคลื่อนไหวของร่างกาย",
+"ช่วยฝึกการประสานงานระหว่างสายตา มือ และการเคลื่อนไหวของร่างกายให้สัมพันธ์กัน",
+"ผู้เล่นต้องสังเกตสถานการณ์ คาดการณ์ และเลือกวิธีเล่นหรือส่งบอลให้เหมาะสมอย่างรวดเร็ว",
+"ช่วยให้สมาชิกประสานงานกัน รู้หน้าที่ สื่อสารกัน และร่วมมือเพื่อเป้าหมายของทีม",
+"ช่วยปลูกฝังการปฏิบัติตามกติกา ความรับผิดชอบ การเคารพผู้อื่น ความซื่อสัตย์ และน้ำใจนักกีฬา",
+"เช่น นำความมีวินัย ความรับผิดชอบ การทำงานเป็นทีม การสื่อสาร และการเคารพกติกาไปใช้ในชีวิตประจำวัน"
+];
+function checkAnswers(){
  const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
  const qs=[...Array(10)].map((_,i)=>document.getElementById('q'+(i+1)).value.trim());
- const missing=[];if(!name)missing.push('ชื่อ–สกุล');if(!cls)missing.push('ชั้น');if(!no)missing.push('เลขที่');
- qs.forEach((v,i)=>{if(!v)missing.push('ข้อ '+(i+1))});
- if(missing.length){alert('กรุณากรอกให้ครบ: '+missing.join(', '));return}
- const payload={name:name,class:cls,no:no,work:"แบบฝึกออนไลน์ เรื่องที่ 1 วอลเลย์บอล",submissionType:"online_practice",quizType:"แบบฝึกออนไลน์ แผนที่ 1"};
- qs.forEach((v,i)=>payload['q'+(i+1)]=v);
- const btn=document.getElementById('sendBtn'),r=document.getElementById('result');
- btn.disabled=true;btn.textContent='⏳ กำลังส่ง...';r.style.display='block';r.innerHTML='<h2>กำลังส่งข้อมูล...</h2>';
- try{
-  await fetch(WEB_APP_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
-  r.innerHTML='<h2>✅ ส่งแบบฝึกเรียบร้อยแล้ว</h2><p id="msg">คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่งแบบฝึกออนไลน์เรื่องที่ 1 แล้ว</p><p>ขั้นต่อไป ไปทำ <a href="volleyball-lesson1-mindmap.html">🧠 Mind Map เรื่องที่ 1</a> ได้เลยครับ</p>';
- }catch(e){btn.disabled=false;btn.textContent='📤 ส่งแบบฝึกออนไลน์';r.innerHTML='<h2>⚠️ ส่งไม่สำเร็จ</h2><p>กรุณาลองอีกครั้งครับ</p>'}
- r.scrollIntoView({behavior:'smooth'});
+ if(!name||!cls||!no||qs.some(v=>!v)){alert('กรุณากรอกข้อมูลนักเรียนและตอบให้ครบทั้ง 10 ข้อก่อนตรวจครับ');return}
+ const box=document.getElementById('answers');
+ box.style.display='block';
+ box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> คำตอบของนักเรียนไม่จำเป็นต้องเหมือนเฉลยทุกคำ ให้เปรียบเทียบใจความสำคัญ หากตอบได้ใกล้เคียงถือว่าเข้าใจเนื้อหา</div>'+
+ answers.map((a,i)=>'<div style="margin:18px 0;padding:16px;background:#f7fbff;border-radius:12px;border-left:5px solid var(--sky)"><strong>ข้อ '+(i+1)+'</strong><p style="margin:8px 0"><b>คำตอบของฉัน:</b> '+escapeHtml(qs[i])+'</p><p style="margin:8px 0"><b>💡 แนวคำตอบ:</b> '+a+'</p></div>').join('');
+ document.getElementById('checkBtn').disabled=true;
+ document.getElementById('checkBtn').textContent='✅ ตรวจคำตอบแล้ว';
+ box.scrollIntoView({behavior:'smooth'});
 }
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
 </script></body></html>
