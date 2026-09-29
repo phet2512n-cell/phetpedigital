@@ -60,8 +60,9 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 <div><label>10. การนำไปใช้ในชีวิตประจำวัน</label><textarea id="m10"></textarea></div>
 </div></section>
 
-<section class="card"><div class="note"><strong>ก่อนส่งงาน:</strong> ตรวจสอบว่าตอบคำถามครบ 10 ข้อ และ Mind Map ครบ 10 หัวข้อ</div>
-<p style="text-align:center;margin-top:22px"><button class="btn" onclick="check()">ตรวจสอบใบงาน</button> <button class="btn" id="sendBtn" onclick="submitWorksheet()" style="background:#15803d">ส่งใบงานให้ครู</button></p><div id="result"></div></section>
+<section class="card"><div class="note"><strong>ระบบใบงาน:</strong> นักเรียนสามารถส่งใบงานได้ไม่เกิน 2 ครั้ง เมื่อส่งครั้งที่ 2 แล้วจึงจะเปิดปุ่มดูเฉลย</div>
+<p id="attemptInfo" style="text-align:center;font-weight:800">ครั้งที่ทำ: 1 / 2</p>
+<p style="text-align:center;margin-top:22px"><button class="btn" onclick="check()">ตรวจสอบใบงาน</button> <button class="btn" id="sendBtn" onclick="submitWorksheet()" style="background:#15803d">ส่งใบงานครั้งที่ 1</button> <button class="btn" id="retryBtn" onclick="newAttempt()" style="background:#d97706;display:none">ทำใบงานครั้งที่ 2</button> <a id="answerBtn" class="btn" href="volleyball-lesson1-teacher-answer.html" style="background:#7c3aed;display:none">ดูเฉลยใบงาน</a></p><div id="result"></div></section>
 </main>
 <footer><div>จัดทำโดย <strong>ครูประดับเพชร ภูเงิน</strong></div>
 <div>กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา โรงเรียนชะอำคุณหญิงเนื่องบุรี</div></footer>
@@ -78,6 +79,25 @@ function check(){
  window.scrollTo({top:r.offsetTop-100,behavior:'smooth'});
 }
 const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec";
+const ATTEMPT_KEY="volleyball_lesson1_worksheet_attempts";
+let attempts=Number(localStorage.getItem(ATTEMPT_KEY)||0);
+function refreshAttemptUI(){
+ const n=Math.min(attempts+1,2);
+ document.getElementById("attemptInfo").textContent=attempts>=2?"ส่งครบ 2 ครั้งแล้ว":"ครั้งที่ทำ: "+n+" / 2";
+ const btn=document.getElementById("sendBtn"),retry=document.getElementById("retryBtn"),ans=document.getElementById("answerBtn");
+ if(attempts===0){btn.style.display="inline-block";btn.textContent="ส่งใบงานครั้งที่ 1";retry.style.display="none";ans.style.display="none";}
+ else if(attempts===1){btn.style.display="none";retry.style.display="inline-block";ans.style.display="none";}
+ else{btn.style.display="none";retry.style.display="none";ans.style.display="inline-block";}
+}
+function newAttempt(){
+ [...document.querySelectorAll("textarea")].forEach(x=>x.value="");
+ document.getElementById("result").innerHTML='<div class="note">เริ่มทำใบงานครั้งที่ 2 ได้เลยครับ เมื่อส่งครั้งที่ 2 แล้วจึงจะดูเฉลยได้</div>';
+ document.getElementById("sendBtn").style.display="inline-block";
+ document.getElementById("sendBtn").textContent="ส่งใบงานครั้งที่ 2";
+ document.getElementById("retryBtn").style.display="none";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
 async function submitWorksheet(){
  const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
  const qs=[...Array(10)].map((_,i)=>document.getElementById('q'+(i+1)).value.trim());
@@ -92,11 +112,26 @@ async function submitWorksheet(){
  r.innerHTML='<div class="note"><strong>กำลังส่งใบงานไปยังระบบบันทึกคะแนน...</strong></div>';
  try{
    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-   r.innerHTML='<div class="note"><strong>ส่งใบงานเรียบร้อยแล้วครับ ✅</strong><br>ระบบได้ส่งข้อมูลไปยังระบบบันทึกคะแนนแล้ว กรุณาตรวจสอบ Google Sheets ว่ามีข้อมูลรายการนี้ปรากฏหรือไม่</div>';
+   attempts++;
+   localStorage.setItem(ATTEMPT_KEY,String(attempts));
+   r.innerHTML='<div class="note"><strong>ส่งใบงานครั้งที่ '+attempts+' เรียบร้อยแล้วครับ ✅</strong><br>ข้อมูลถูกส่งเข้าสู่ระบบบันทึกคะแนนแล้ว</div>';
+   btn.disabled=false;
+   if(attempts===1){
+     btn.style.display="none";
+     document.getElementById("retryBtn").style.display="inline-block";
+     document.getElementById("answerBtn").style.display="none";
+   }else{
+     btn.style.display="none";
+     document.getElementById("retryBtn").style.display="none";
+     document.getElementById("answerBtn").style.display="inline-block";
+   }
+   document.getElementById("attemptInfo").textContent=attempts>=2?"ส่งครบ 2 ครั้งแล้ว":"ครั้งที่ทำ: 2 / 2";
  }catch(err){
    btn.disabled=false;btn.textContent='ส่งใบงานให้ครู';
    r.innerHTML='<div class="note"><strong>ส่งใบงานไม่สำเร็จ</strong><br>กรุณาลองกดส่งอีกครั้ง</div>';
  }
  r.scrollIntoView({behavior:'smooth'});
+ }
 }
+refreshAttemptUI();
 </script></body></html>
