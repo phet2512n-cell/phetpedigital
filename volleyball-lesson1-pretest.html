@@ -7,9 +7,9 @@ body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f4f8fd;color:#0926
 <header><div style="font-size:48px">📝</div><h1>แบบทดสอบก่อนเรียน</h1><p>แผนที่ 1 ประวัติและความเป็นมา ประโยชน์และความสำคัญของกีฬาวอลเลย์บอล</p><p>ชั้นมัธยมศึกษาปีที่ 3 | จำนวน 10 ข้อ</p></header>
 <main class="wrap"><div class="card"><p><strong>คำชี้แจง:</strong> เลือกคำตอบที่ถูกต้องที่สุดเพียง 1 ข้อ แบบทดสอบนี้ใช้สำรวจความรู้เดิมก่อนเรียน</p></div>
 <div class="card"><h3 style="margin-top:0">ข้อมูลนักเรียน</h3><div class="info-grid"><label>ชื่อ–สกุล<input id="studentName" required placeholder="กรอกชื่อและนามสกุล"></label><label>ห้อง<select id="studentClass" required><option value="">เลือกห้อง</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></label><label>เลขที่<select id="studentNo" required><option value="">เลือกเลขที่</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option></select></label></div></div><form id="quiz">
-<div id="qs"></div><button type="submit">ส่งแบบทดสอบก่อนเรียน</button><div class="result" id="result"></div>
+<div id="qs"></div><button id="submitBtn" type="submit">ส่งแบบทดสอบก่อนเรียน</button><div class="result" id="result"></div>
 </form><a class="back" href="volleyball-lesson1-media.html">← กลับหน้าสื่อและแหล่งเรียนรู้</a></main>
-<script>
+<script>const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec";
 const data=[
 ["กีฬาวอลเลย์บอลเริ่มต้นขึ้นในปีใด","ค.ศ. 1895","ค.ศ. 1905","ค.ศ. 1915","ค.ศ. 1925"],
 ["ผู้คิดค้นกีฬาวอลเลย์บอลคือใคร","William G. Morgan","James Naismith","Thomas Edison","Pierre de Coubertin"],
@@ -23,7 +23,22 @@ const data=[
 ["ความรู้เรื่องวอลเลย์บอลสามารถนำไปใช้ในชีวิตประจำวันด้านใด","การทำงานเป็นทีม การสื่อสาร และความรับผิดชอบ","การหลีกเลี่ยงการทำงานร่วมกับผู้อื่น","การไม่ปฏิบัติตามกติกา","การทำงานโดยไม่รับผิดชอบ"]
 ];
 const answers=[0,0,0,0,0,0,0,0,0,0];
-const qs=document.getElementById('qs');
-data.forEach((d,i)=>{let h='<div class="q"><p>'+(i+1)+'. '+d[0]+'</p>';for(let j=1;j<5;j++)h+='<label class="opt"><input type="radio" name="q'+i+'" value="'+(j-1)+'" required> '+d[j]+'</label>';h+='</div>';qs.innerHTML+=h});
-document.getElementById('quiz').addEventListener('submit',e=>{e.preventDefault();if(!document.getElementById('studentName').value.trim()||!document.getElementById('studentClass').value||!document.getElementById('studentNo').value)return;let score=0;answers.forEach((a,i)=>{if(Number(document.querySelector('input[name=q'+i+']:checked').value)===a)score++});let pct=score*10;let r=document.getElementById('result');r.style.display='block';r.innerHTML='<strong>ส่งแบบทดสอบก่อนเรียนเรียบร้อยแล้ว</strong><br>ผลแบบทดสอบ: '+score+'/10 คะแนน ('+pct+'%)<br>ผลนี้ใช้เป็นข้อมูลก่อนเรียน ไม่แสดงเฉลย และไม่ใช่คะแนนตัดสินผลการเรียน';r.scrollIntoView({behavior:'smooth'})});
-</script></body></html>
+const qs=document.getElementById("qs");
+data.forEach((d,i)=>{let h='<div class="q"><p>'+(i+1)+". "+d[0]+"</p>";for(let j=1;j<5;j++)h+='<label class="opt"><input type="radio" name="q'+i+'" value="'+(j-1)+'" required> '+d[j]+"</label>";h+="</div>";qs.innerHTML+=h});
+document.getElementById("quiz").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const name=document.getElementById("studentName").value.trim(),cls=document.getElementById("studentClass").value,no=document.getElementById("studentNo").value;
+ if(!name||!cls||!no){alert("กรุณากรอกข้อมูลนักเรียนให้ครบ");return}
+ let score=0,payload={name:name,class:cls,no:no,work:"แบบทดสอบก่อนเรียน แผนที่ 1",submissionType:"quiz",quizType:"ก่อนเรียน แผนที่ 1"};
+ answers.forEach((a,i)=>{const v=Number(document.querySelector('input[name="q'+i+'"]:checked').value);payload["q"+(i+1)]=v;if(v===a)score++});
+ const r=document.getElementById("result"),btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="กำลังบันทึกผล...";
+ r.style.display="block";r.innerHTML="<strong>กำลังบันทึกผลการทำแบบทดสอบ...</strong>";
+ try{
+   await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+   r.innerHTML="<strong>ส่งแบบทดสอบก่อนเรียนเรียบร้อยแล้ว</strong><br>คะแนนของนักเรียน: <strong>"+score+"/10 คะแนน ("+(score*10)+"%)</strong><br>ระบบได้ส่งข้อมูลไปยังระบบบันทึกคะแนนแล้ว<br><small>ผลนี้ใช้เป็นข้อมูลก่อนเรียน และไม่มีการแสดงเฉลย</small>";
+ }catch(err){
+   btn.disabled=false;btn.textContent="ส่งแบบทดสอบก่อนเรียน";
+   r.innerHTML="<strong>แสดงคะแนนได้แล้ว: "+score+"/10 คะแนน ("+(score*10)+"%)</strong><br>⚠️ การส่งข้อมูลไปยังระบบบันทึกคะแนนไม่สำเร็จ กรุณากดส่งอีกครั้ง";
+ }
+ r.scrollIntoView({behavior:"smooth"});
+});</script></body></html>
