@@ -24,7 +24,7 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 <section class="card"><h2>ข้อมูลนักเรียน</h2><div class="info">
 <div><label>ชื่อ–สกุล</label><input id="name" placeholder="กรอกชื่อ–สกุล"></div>
 <div><label>ชั้น</label><select id="class"><option value="">เลือกชั้น</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></div>
-<div><label>เลขที่</label><input id="no" type="number" min="1" max="50" placeholder="1–50"></div>
+<div><label>เลขที่</label><select id="no" required><option value="">เลือกเลขที่</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option></select></div>
 </div></section>
 
 <section class="card"><h2>คำชี้แจง</h2>
@@ -61,7 +61,7 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 </div></section>
 
 <section class="card"><div class="note"><strong>ก่อนส่งงาน:</strong> ตรวจสอบว่าตอบคำถามครบ 10 ข้อ และ Mind Map ครบ 10 หัวข้อ</div>
-<p style="text-align:center;margin-top:22px"><button class="btn" onclick="check()">ตรวจสอบใบงาน</button></p><div id="result"></div></section>
+<p style="text-align:center;margin-top:22px"><button class="btn" onclick="check()">ตรวจสอบใบงาน</button> <button class="btn" id="sendBtn" onclick="submitWorksheet()" style="background:#15803d">ส่งใบงานให้ครู</button></p><div id="result"></div></section>
 </main>
 <footer><div>จัดทำโดย <strong>ครูประดับเพชร ภูเงิน</strong></div>
 <div>กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา โรงเรียนชะอำคุณหญิงเนื่องบุรี</div></footer>
@@ -76,5 +76,27 @@ function check(){
  if(missing.length){r.innerHTML='<div class="note">ยังกรอกไม่ครบ: '+missing.join(', ')+'</div>';return}
  r.innerHTML='<div class="note">ตรวจสอบแล้ว: กรอกข้อมูลครบทุกส่วน สามารถส่งใบงานให้ครูตรวจได้ครับ</div>';
  window.scrollTo({top:r.offsetTop-100,behavior:'smooth'});
+}
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec";
+async function submitWorksheet(){
+ const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
+ const qs=[...Array(10)].map((_,i)=>document.getElementById('q'+(i+1)).value.trim());
+ const ms=[...Array(10)].map((_,i)=>document.getElementById('m'+(i+1)).value.trim());
+ const missing=[];if(!name)missing.push('ชื่อ–สกุล');if(!cls)missing.push('ชั้น');if(!no)missing.push('เลขที่');
+ qs.forEach((v,i)=>{if(!v)missing.push('คำถามข้อ '+(i+1))});ms.forEach((v,i)=>{if(!v)missing.push('Mind Map หัวข้อ '+(i+1))});
+ const r=document.getElementById('result'),btn=document.getElementById('sendBtn');
+ if(missing.length){r.innerHTML='<div class="note">ยังกรอกไม่ครบ: '+missing.join(', ')+'</div>';r.scrollIntoView({behavior:'smooth'});return}
+ const payload={name:name,class:cls,no:no,work:"ใบงานที่ 1 วอลเลย์บอล แผนที่ 1",submissionType:"worksheet",quizType:"ใบงานวอลเลย์บอล แผนที่ 1"};
+ qs.forEach((v,i)=>payload['q'+(i+1)]=v);ms.forEach((v,i)=>payload['m'+(i+1)]=v);
+ btn.disabled=true;btn.textContent='กำลังส่งใบงาน...';
+ r.innerHTML='<div class="note"><strong>กำลังส่งใบงานไปยังระบบบันทึกคะแนน...</strong></div>';
+ try{
+   await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+   r.innerHTML='<div class="note"><strong>ส่งใบงานเรียบร้อยแล้วครับ ✅</strong><br>ระบบได้ส่งข้อมูลไปยังระบบบันทึกคะแนนแล้ว กรุณาตรวจสอบ Google Sheets ว่ามีข้อมูลรายการนี้ปรากฏหรือไม่</div>';
+ }catch(err){
+   btn.disabled=false;btn.textContent='ส่งใบงานให้ครู';
+   r.innerHTML='<div class="note"><strong>ส่งใบงานไม่สำเร็จ</strong><br>กรุณาลองกดส่งอีกครั้ง</div>';
+ }
+ r.scrollIntoView({behavior:'smooth'});
 }
 </script></body></html>
