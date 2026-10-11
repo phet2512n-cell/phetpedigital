@@ -56,6 +56,7 @@ footer{font-size:.9rem;color:#526b7c;padding:8px 4px 24px}
 <footer>PE Digital Learning Center · แบบฝึกเพื่อการเรียนรู้ด้วยตนเอง</footer>
 </div>
 <script>
+const labels = ["ก","ข","ค","ง"];
 const questions = [
 {q:"การเล่นลูกสองมือล่างหรือการอันเดอร์ หมายถึงข้อใด",a:["ใช้ปลายนิ้วทั้งสองมือผลักลูกเหนือหน้าผาก","ใช้แขนท่อนล่างรับหรือส่งลูกบอลไปยังทิศทางที่ต้องการ","ใช้กำปั้นตีลูกจากเหนือศีรษะ","ใช้ฝ่ามือข้างเดียวตบลูก"],correct:1,why:"การอันเดอร์ใช้แขนท่อนล่างทั้งสองข้างเป็นพื้นผิวสัมผัสเพื่อรับหรือส่งลูกบอล"},
 {q:"ข้อใดเป็นความสำคัญของการอันเดอร์",a:["ใช้เฉพาะตอนเสิร์ฟเท่านั้น","ใช้แทนการตบได้ทุกสถานการณ์","เป็นทักษะพื้นฐานสำหรับรับลูกเสิร์ฟ ลูกตบ และลูกที่อยู่ต่ำ","ใช้ได้เฉพาะผู้เล่นตำแหน่งหลัง"],correct:2,why:"การอันเดอร์เป็นทักษะพื้นฐานสำคัญ โดยเฉพาะการรับลูกเสิร์ฟและลูกที่มาในระดับต่ำ"},
@@ -78,7 +79,7 @@ function render(){
   item.a.forEach((answer,j)=>{
    const label=document.createElement("label");label.className="option";
    const input=document.createElement("input");input.type="radio";input.name="q"+i;input.value=String(j);
-   const span=document.createElement("span");span.textContent=String.fromCharCode( กCode()+j )+". "+answer;
+   const span=document.createElement("span");span.textContent=labels[j]+". "+answer;
    label.append(input,span);options.appendChild(label);
   });
   section.appendChild(options);
@@ -89,13 +90,12 @@ function render(){
    feedback.className="feedback show";
    if(!chosen){feedback.classList.add("neutral");feedback.textContent="กรุณาเลือกคำตอบก่อน แล้วจึงตรวจคำตอบ";return;}
    if(Number(chosen.value)===item.correct){feedback.classList.add("correct");feedback.textContent="ถูกต้องครับ/ค่ะ "+item.why;}
-   else{feedback.classList.add("incorrect");feedback.textContent="ยังไม่ถูก ลองทบทวนอีกครั้ง คำตอบที่ถูกคือ "+String.fromCharCode( กCode()+item.correct )+". "+item.a[item.correct]+". "+item.why;}
+   else{feedback.classList.add("incorrect");feedback.textContent="ยังไม่ถูก ลองทบทวนอีกครั้ง คำตอบที่ถูกคือ "+labels[item.correct]+". "+item.a[item.correct]+". "+item.why;}
    document.getElementById("notice").textContent="ตรวจคำตอบแล้ว สามารถเปลี่ยนคำตอบและตรวจใหม่ได้";
   });
   section.append(button,feedback);quiz.appendChild(section);
  });
 }
-function กCode(){return 3585;}
 document.getElementById("reset").addEventListener("click",()=>{
  render();document.getElementById("notice").textContent="เริ่มทำใหม่แล้ว";
  window.scrollTo({top:0,behavior:"smooth"});
