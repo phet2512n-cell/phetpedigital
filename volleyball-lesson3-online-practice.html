@@ -86,7 +86,7 @@ document.getElementById("startPractice").addEventListener("click", async () => {
    document.getElementById("practiceContent").hidden = false;
    document.getElementById("entryPanel").querySelectorAll("input,select").forEach(x=>x.disabled=true);
    msg.className = "feedback show correct";
-   msg.textContent = "บันทึกการเริ่มทำแบบฝึกแล้วในขั้นตอนส่งคำขอ จากนั้นเริ่มทำคำถามด้านล่างได้เลย หากข้อมูลไม่ปรากฏในตารางครู โปรดแจ้งผู้ดูแลระบบตรวจสอบการเชื่อมต่อ";
+   msg.textContent = "ส่งคำขอบันทึกการเข้าทำแล้ว จากนั้นเริ่มทำคำถามด้านล่างได้เลย เนื่องจากเบราว์เซอร์ไม่สามารถยืนยันการเขียนลงตารางได้โดยตรง ครูควรตรวจสอบว่ารายการปรากฏใน Google Sheets ก่อนใช้งานจริง";
    btn.textContent = "บันทึกการเข้าทำแล้ว";
    document.getElementById("notice").textContent = "เริ่มทำแบบฝึกโดย "+name+" · "+cls+" เลขที่ "+no;
  } catch (e) {
