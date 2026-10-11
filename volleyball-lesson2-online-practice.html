@@ -19,6 +19,7 @@ function checkAnswers(){
  const name=document.getElementById('name').value.trim(), cls=document.getElementById('class').value, no=document.getElementById('no').value;
  if(!name||!cls||!no){alert('กรุณากรอกข้อมูลนักเรียนให้ครบครับ');return}
  for(let i=1;i<=10;i++) if(!document.getElementById('q'+i).value.trim()){alert('กรุณาตอบให้ครบทั้ง 10 ข้อครับ');return}
+ fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name, class:cls, no, work:"แบบฝึกออนไลน์ เรื่องที่ 2 การเซตบอล", submissionType:"visit", quizType:"online-practice-complete", status:"ทำแบบฝึกครบและตรวจคำตอบ", timestamp:new Date().toISOString()})}).catch(()=>{});
  for(let i=1;i<=10;i++) document.getElementById('a'+i).style.display='block';
  document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' สามารถตรวจทานคำตอบจากแนวคำตอบด้านล่างได้เลย';
  document.getElementById('result').style.display='block';
