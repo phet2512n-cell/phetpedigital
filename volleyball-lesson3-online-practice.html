@@ -42,6 +42,19 @@ footer{font-size:.9rem;color:#526b7c;padding:8px 4px 24px}
 <div class="meta"><strong>รายวิชา พ23104 วอลเลย์บอล</strong><br>เรื่องที่ 3 การเล่นลูกสองมือล่าง (Underhand) <br>ครูประดับเพชร ภูเงิน</div>
 <p class="intro">ฝึกทำคำถาม 10 ข้อจากใบความรู้ เลือกคำตอบแล้วกด <strong>ตรวจคำตอบข้อนี้</strong> เพื่อดูผลและคำอธิบายได้ทันที นักเรียนสามารถแก้คำตอบและลองทำใหม่ได้</p>
 </header>
+<section class="panel" id="entryPanel">
+<h2>ลงชื่อก่อนเริ่มทำแบบฝึก</h2>
+<p>ให้นักเรียนกรอกข้อมูลเพื่อบันทึกว่าเข้ามาทำแบบฝึกออนไลน์แล้ว จากนั้นกดปุ่มเริ่มทำแบบฝึก</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+<label>ชื่อ–นามสกุล<input id="studentName" autocomplete="name" style="display:block;width:100%;margin-top:5px" required></label>
+<label>ชั้น/ห้อง<select id="studentClass" style="display:block;width:100%;margin-top:5px" required><option value="">เลือกห้อง</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></label>
+<label>เลขที่<select id="studentNo" style="display:block;width:100%;margin-top:5px" required><option value="">เลือกเลขที่</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option></select></label>
+</div>
+<div class="actions"><button type="button" id="startPractice">เริ่มทำแบบฝึกและบันทึกการเข้าทำ</button></div>
+<div id="entryMessage" class="feedback" aria-live="polite"></div>
+<p><small>ระบบจะบันทึกชื่อ ชั้น/ห้อง เลขที่ และเวลาเริ่มทำแบบฝึกลงตารางของครู หากยังไม่ได้เชื่อมระบบบันทึก จะมีข้อความแจ้งให้ทราบ</small></p>
+</section>
+<div id="practiceContent" hidden>
 <section class="panel">
 <h2>วิธีทำแบบฝึก</h2>
 <ol>
@@ -53,10 +66,36 @@ footer{font-size:.9rem;color:#526b7c;padding:8px 4px 24px}
 <div class="actions"><button type="button" class="secondary" id="reset">เริ่มทำใหม่ทุกข้อ</button><span id="notice" aria-live="polite">ยังไม่ได้ตรวจคำตอบ</span></div>
 </section>
 <div id="quiz"></div>
-<footer>PE Digital Learning Center · แบบฝึกเพื่อการเรียนรู้ด้วยตนเอง</footer>
+</div><footer>PE Digital Learning Center · แบบฝึกเพื่อการเรียนรู้ด้วยตนเอง</footer>
 </div>
 <script>
-const labels = ["ก","ข","ค","ง"];
+const TRACKING_URL = "https://script.google.com/macros/s/AKfcybyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec";
+let studentInfo = null;
+document.getElementById("startPractice").addEventListener("click", async () => {
+ const name = document.getElementById("studentName").value.trim();
+ const cls = document.getElementById("studentClass").value;
+ const no = document.getElementById("studentNo").value;
+ const msg = document.getElementById("entryMessage");
+ msg.className = "feedback show neutral";
+ if (!name || !cls || !no) { msg.textContent = "กรุณากรอกชื่อ เลือกชั้น/ห้อง และเลขที่ให้ครบก่อนเริ่ม"; return; }
+ const btn = document.getElementById("startPractice");
+ btn.disabled = true;
+ studentInfo = {name, "class":cls, no, work:"แบบฝึกออนไลน์ เรื่องที่ 3 การอันเดอร์", submissionType:"visit", quizType:"online-practice-entry", status:"เริ่มทำแบบฝึก"};
+ try {
+   await fetch(TRACKING_URL, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify({...studentInfo, timestamp:new Date().toISOString()})});
+   document.getElementById("practiceContent").hidden = false;
+   document.getElementById("entryPanel").querySelectorAll("input,select").forEach(x=>x.disabled=true);
+   msg.className = "feedback show correct";
+   msg.textContent = "บันทึกการเริ่มทำแบบฝึกแล้วในขั้นตอนส่งคำขอ จากนั้นเริ่มทำคำถามด้านล่างได้เลย หากข้อมูลไม่ปรากฏในตารางครู โปรดแจ้งผู้ดูแลระบบตรวจสอบการเชื่อมต่อ";
+   btn.textContent = "บันทึกการเข้าทำแล้ว";
+   document.getElementById("notice").textContent = "เริ่มทำแบบฝึกโดย "+name+" · "+cls+" เลขที่ "+no;
+ } catch (e) {
+   btn.disabled = false;
+   msg.className = "feedback show incorrect";
+   msg.textContent = "ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง";
+ }
+});
+\nconst labels = ["ก","ข","ค","ง"];
 const questions = [
 {q:"การเล่นลูกสองมือล่างหรือการอันเดอร์ หมายถึงข้อใด",a:["ใช้ปลายนิ้วทั้งสองมือผลักลูกเหนือหน้าผาก","ใช้แขนท่อนล่างรับหรือส่งลูกบอลไปยังทิศทางที่ต้องการ","ใช้กำปั้นตีลูกจากเหนือศีรษะ","ใช้ฝ่ามือข้างเดียวตบลูก"],correct:1,why:"การอันเดอร์ใช้แขนท่อนล่างทั้งสองข้างเป็นพื้นผิวสัมผัสเพื่อรับหรือส่งลูกบอล"},
 {q:"ข้อใดเป็นความสำคัญของการอันเดอร์",a:["ใช้เฉพาะตอนเสิร์ฟเท่านั้น","ใช้แทนการตบได้ทุกสถานการณ์","เป็นทักษะพื้นฐานสำหรับรับลูกเสิร์ฟ ลูกตบ และลูกที่อยู่ต่ำ","ใช้ได้เฉพาะผู้เล่นตำแหน่งหลัง"],correct:2,why:"การอันเดอร์เป็นทักษะพื้นฐานสำคัญ โดยเฉพาะการรับลูกเสิร์ฟและลูกที่มาในระดับต่ำ"},
