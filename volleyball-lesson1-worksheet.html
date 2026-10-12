@@ -107,7 +107,8 @@ async function submitWorksheet(){
  const r=document.getElementById('result'),btn=document.getElementById('sendBtn');
  if(missing.length){r.innerHTML='<div class="note">ยังกรอกไม่ครบ: '+missing.join(', ')+'</div>';r.scrollIntoView({behavior:'smooth'});return}
  const payload={name:name,class:cls,no:no,work:"ใบงานที่ 1 วอลเลย์บอล แผนที่ 1",submissionType:"worksheet",quizType:"ใบงานวอลเลย์บอล แผนที่ 1"};
- qs.forEach((v,i)=>payload['q'+(i+1)]=v);ms.slice(0,9).forEach((v,i)=>payload['mm'+(i+1)]=v);
+ qs.forEach((v,i)=>payload['q'+(i+1)]=v);
+ ms.forEach((v,i)=>{const n=i+1;payload['m'+n]=v;payload['mindmap'+n]=v;payload['mm'+n]=v;});
  btn.disabled=true;btn.textContent='กำลังส่งใบงาน...';
  r.innerHTML='<div class="note"><strong>กำลังส่งใบงานไปยังระบบบันทึกคะแนน...</strong></div>';
  try{
