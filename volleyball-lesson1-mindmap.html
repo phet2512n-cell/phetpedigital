@@ -38,7 +38,7 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 </main>
 <footer>จัดทำโดย <strong>ครูประดับเพชร ภูเงิน</strong><br>กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา โรงเรียนชะอำคุณหญิงเนื่องบุรี</footer>
 <script>
-const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyF8YC2k1-WEvmELvNKgzCHkEpoQrYhR8BSUUPozcsiNANAFaxHaUn4e5LUGvr8_zocMQ/exec";
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec";
 async function submitMindMap(){
  const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
  const ms=[...Array(10)].map((_,i)=>document.getElementById('m'+(i+1)).value.trim());
@@ -46,7 +46,7 @@ async function submitMindMap(){
  ms.forEach((v,i)=>{if(!v)missing.push('หัวข้อ '+(i+1))});
  if(missing.length){alert('กรุณากรอกให้ครบ: '+missing.join(', '));return}
  const payload={name:name,class:cls,no:no,work:"Mind Map เรื่องที่ 1 วอลเลย์บอล",submissionType:"mindmap",quizType:"Mind Map แผนที่ 1"};
- ms.forEach((v,i)=>payload['m'+(i+1)]=v);
+ ms.forEach((v,i)=>payload['q'+(i+1)]=v);\n  ms.slice(0,9).forEach((v,i)=>payload['mm'+(i+1)]=v);
  const btn=document.getElementById('sendBtn'),r=document.getElementById('result');
  btn.disabled=true;btn.textContent='⏳ กำลังส่ง...';r.style.display='block';r.innerHTML='<h2>กำลังส่งข้อมูล...</h2>';
  try{
