@@ -71,10 +71,9 @@ function checkAnswers(){
  if(!name||!cls||!no||qs.some(v=>!v)){alert('กรุณากรอกข้อมูลนักเรียนและตอบให้ครบทั้ง 10 ข้อก่อนตรวจครับ');return}
  const box=document.getElementById('answers');
  box.style.display='block';
- box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> แบบฝึกนี้เป็นคำถามปลายเปิด ระบบจึงไม่ตัดสินถูก/ผิดอัตโนมัติ ให้เปรียบเทียบคำตอบของตนเองกับ <strong>เฉลย</strong> ด้านล่าง หากมีใจความสำคัญตรงกันถือว่าตอบได้ถูกต้อง</div>'+
+ box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> แบบฝึกนี้เป็นคำถามปลายเปิด ระบบจึงไม่ตัดสินถูก/ผิดอัตโนมัติ ให้เปรียบเทียบคำตอบของตนเองกับ <strong>เฉลย</strong> ด้านล่าง หากมีใจความสำคัญตรงกันถือว่าตอบได้ถูกต้อง หากแก้ไขคำตอบแล้วให้กดปุ่มตรวจคำตอบอีกครั้ง</div>'+
  answers.map((a,i)=>'<div style="margin:18px 0;padding:16px;background:#f7fbff;border-radius:12px;border-left:5px solid var(--sky)"><strong>ข้อ '+(i+1)+'</strong><p style="margin:8px 0"><b>คำตอบของฉัน:</b> '+escapeHtml(qs[i])+'</p><p style="margin:8px 0;background:#ecfff4;padding:12px;border-radius:10px"><b>✅ เฉลย:</b> '+a+'</p></div>').join('');
- document.getElementById('checkBtn').disabled=true;
- document.getElementById('checkBtn').textContent='✅ ตรวจคำตอบแล้ว';
+ document.getElementById('checkBtn').textContent='🔎 ตรวจคำตอบอีกครั้ง';
  box.scrollIntoView({behavior:'smooth'});
 }
 function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
