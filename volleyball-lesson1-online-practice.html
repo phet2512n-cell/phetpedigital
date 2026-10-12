@@ -25,7 +25,7 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 <div><label>ชื่อ–สกุล</label><input id="name" placeholder="กรอกชื่อ–สกุล"></div>
 <div><label>ชั้น</label><select id="class"><option value="">เลือกชั้น</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></div>
 <div><label>เลขที่</label><select id="no"><option value="">เลือกเลขที่</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option></select></div>
-</div></section>
+</div><p style="text-align:center;margin-top:16px"><button class="btn" id="startPracticeBtn" onclick="recordPracticeEntry()">เริ่มทำแบบฝึกและบันทึกการเข้าทำ</button></p><p id="entryMessage" class="hint" aria-live="polite">กรอกข้อมูลนักเรียนแล้วกดเริ่มทำแบบฝึก ระบบจะบันทึกเฉพาะการเข้าทำ ไม่มีคะแนน</p></section>
 <section class="card"><h2>คำชี้แจง</h2>
 <p>ให้นักเรียนศึกษาใบความรู้ที่ 1 แล้วตอบคำถามด้วยภาษาของตนเอง แบบฝึกนี้ใช้สำหรับทบทวนความเข้าใจระหว่างเรียน ไม่ใช่แบบทดสอบก่อน–หลังเรียน</p>
 <div class="hint"><strong>แนะนำ:</strong> หากจำไม่ได้ สามารถย้อนกลับไปอ่านใบความรู้ที่ 1 แล้วกลับมาตอบได้ครับ</div>
@@ -35,12 +35,12 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 </section>
 <section class="card" id="checkCard">
 <h2>🔎 ตรวจคำตอบด้วยตนเอง</h2>
-<p>เมื่อทำครบทั้ง 10 ข้อแล้ว กดปุ่มนี้เพื่อเปิด <strong>เฉลยทั้ง 10 ข้อ</strong> สำหรับตรวจคำตอบด้วยตนเอง <strong>ไม่มีคะแนนและไม่ส่ง Google Sheets</strong></p>
+<p>เมื่อทำครบทั้ง 10 ข้อแล้ว กดปุ่มนี้เพื่อเปิด <strong>เฉลยทั้ง 10 ข้อ</strong> สำหรับตรวจคำตอบด้วยตนเอง การตรวจเฉลยไม่ส่งคะแนน</p>
 <p style="text-align:center"><button class="btn" id="checkBtn" onclick="checkAnswers()">🔎 ตรวจคำตอบและดูเฉลย</button></p>
 <div id="answers" style="display:none"></div>
 </section>
 <section class="card"><div class="note"><strong>ขั้นตอนต่อไป:</strong> เมื่อทำแบบฝึกออนไลน์เสร็จแล้ว ให้ไปทำ <a href="volleyball-lesson1-mindmap.html" style="color:#0757a6;font-weight:800;text-decoration:underline">🧠 Mind Map เรื่องที่ 1</a> ซึ่งแยกเป็นอีกกิจกรรมหนึ่ง</div>
-<p style="text-align:center"><button class="btn" id="sendBtn" onclick="checkAnswers()">🔎 ตรวจคำตอบ</button></p></section>
+<p style="text-align:center">ตรวจคำตอบได้จากปุ่มด้านบน โดยระบบไม่บันทึกคะแนน</p></section>
 
 <footer>จัดทำโดย <strong>ครูประดับเพชร ภูเงิน</strong><br>กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา โรงเรียนชะอำคุณหญิงเนื่องบุรี</footer>
 <script>
@@ -56,11 +56,19 @@ const answers=[
 "ช่วยปลูกฝังการปฏิบัติตามกติกา ความรับผิดชอบ การเคารพผู้อื่น ความซื่อสัตย์ และน้ำใจนักกีฬา",
 "เช่น นำความมีวินัย ความรับผิดชอบ การทำงานเป็นทีม การสื่อสาร และการเคารพกติกาไปใช้ในชีวิตประจำวัน"
 ];
+function recordPracticeEntry(){
+ const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
+ const msg=document.getElementById('entryMessage');
+ if(!name||!cls||!no){alert('กรุณากรอกชื่อ ชั้น และเลขที่ให้ครบก่อนเริ่มครับ');return;}
+ const btn=document.getElementById('startPracticeBtn');btn.disabled=true;
+ fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name, class:cls, no, work:"แบบฝึกออนไลน์ เรื่องที่ 1 ประวัติ ความเป็นมา ประโยชน์ และความสำคัญของกีฬาวอลเลย์บอล", submissionType:"visit", quizType:"online-practice-entry", status:"เริ่มทำแบบฝึก", timestamp:new Date().toISOString()})}).catch(()=>{});
+ msg.textContent="ส่งคำขอบันทึกการเข้าทำแล้ว ระบบไม่ได้ส่งคำตอบหรือคะแนนไปยัง Google Sheets กรุณาตรวจสอบแถวข้อมูลในชีตเพื่อยืนยัน";
+ btn.textContent="บันทึกการเข้าทำแล้ว";
+}
 function checkAnswers(){
  const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
  const qs=[...Array(10)].map((_,i)=>document.getElementById('q'+(i+1)).value.trim());
  if(!name||!cls||!no||qs.some(v=>!v)){alert('กรุณากรอกข้อมูลนักเรียนและตอบให้ครบทั้ง 10 ข้อก่อนตรวจครับ');return}
- fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name, class:cls, no, work:"แบบฝึกออนไลน์ เรื่องที่ 1 ประวัติ ความเป็นมา ประโยชน์ และความสำคัญของกีฬาวอลเลย์บอล", submissionType:"visit", quizType:"online-practice-complete", status:"ทำแบบฝึกครบและตรวจคำตอบ", timestamp:new Date().toISOString()})}).catch(()=>{});
  const box=document.getElementById('answers');
  box.style.display='block';
  box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> แบบฝึกนี้เป็นคำถามปลายเปิด ระบบจึงไม่ตัดสินถูก/ผิดอัตโนมัติ ให้เปรียบเทียบคำตอบของตนเองกับ <strong>เฉลย</strong> ด้านล่าง หากมีใจความสำคัญตรงกันถือว่าตอบได้ถูกต้อง</div>'+
