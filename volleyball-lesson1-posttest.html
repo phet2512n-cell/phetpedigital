@@ -30,7 +30,7 @@ document.getElementById("quiz").addEventListener("submit",async e=>{
  e.preventDefault();
  const name=document.getElementById("studentName").value.trim(),cls=document.getElementById("studentClass").value,no=document.getElementById("studentNo").value;
  if(!name||!cls||!no){alert("กรุณากรอกข้อมูลนักเรียนให้ครบ");return}
- let score=0,payload={name:name,class:cls,no:no,work:"แบบทดสอบหลังเรียน เรื่องที่ 1",submissionType:"quiz",quizType:"หลังเรียน เรื่องที่ 1"};
+ let score=0,payload={name:name,class:cls,no:no,work:"แบบทดสอบหลังเรียน เรื่องที่ 1",submissionType:"quiz",quizType:"หลังเรียน แผนที่ 1"};
  answers.forEach((a,i)=>{const v=Number(document.querySelector('input[name="q'+i+'"]:checked').value);payload["q"+(i+1)]=v;if(v===a)score++});
  const r=document.getElementById("result"),btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="กำลังบันทึกผล...";
  r.style.display="block";r.innerHTML="<strong>กำลังบันทึกผลการทำแบบทดสอบ...</strong>";
