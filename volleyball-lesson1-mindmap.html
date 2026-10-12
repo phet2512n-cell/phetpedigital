@@ -47,7 +47,7 @@ async function submitMindMap(){
  if(missing.length){alert('กรุณากรอกให้ครบ: '+missing.join(', '));return}
  const payload={name:name,class:cls,no:no,work:"Mind Map เรื่องที่ 1 วอลเลย์บอล",submissionType:"mindmap",quizType:"Mind Map แผนที่ 1"};
  ms.forEach((v,i)=>payload['q'+(i+1)]=v);
-  ms.slice(0,9).forEach((v,i)=>payload['mm'+(i+1)]=v);
+  ms.forEach((v,i)=>{const n=i+1;payload['m'+n]=v;payload['mindmap'+n]=v;payload['mm'+n]=v;});
  const btn=document.getElementById('sendBtn'),r=document.getElementById('result');
  btn.disabled=true;btn.textContent='⏳ กำลังส่ง...';r.style.display='block';r.innerHTML='<h2>กำลังส่งข้อมูล...</h2>';
  try{
