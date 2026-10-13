@@ -10,9 +10,8 @@ function refreshAttemptUI(){
 }
 function newAttempt(){
  if(attempts>=2)return;
- for(let i=1;i<=9;i++)document.getElementById('m'+i).value='';
  document.getElementById('result').style.display='none';
- document.getElementById('msg').textContent='แก้ไข Mind Map แล้วส่งครั้งที่ 2 ได้เลยครับ';
+ document.getElementById('msg').textContent='คำตอบเดิมยังอยู่ สามารถแก้ไข Mind Map แล้วส่งครั้งที่ 2 ได้เลยครับ';
  document.getElementById('sendBtn').style.display='inline-block';
  document.getElementById('sendBtn').textContent='📤 ส่ง Mind Map ครั้งที่ 2';
  document.getElementById('retryBtn').style.display='none';
