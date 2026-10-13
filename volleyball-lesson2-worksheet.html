@@ -4,6 +4,7 @@ const WEB_APP_URL="https://script.google.com/macros/s/AKfycbyF8YC2k1-WEvmELvNKgz
 const ATTEMPT_PREFIX="volleyball_lesson2_worksheet_attempts_v2:";
 let attempts=0;
 let activeAttemptKey="";
+let forceSecondAttempt=false;
 function getStudentAttemptKey(){
  const name=document.getElementById("studentName").value.trim().toLocaleLowerCase();
  const cls=document.getElementById("studentClass").value.trim();
@@ -15,6 +16,7 @@ function syncStudentAttempt(){
  const key=getStudentAttemptKey();
  if(key!==activeAttemptKey){
   activeAttemptKey=key;
+  forceSecondAttempt=false;
   attempts=key?Number(localStorage.getItem(key)||0):0;
   document.getElementById("sendStatus").textContent="";
   refreshAttemptUI();
@@ -34,6 +36,10 @@ function newAttempt(){
  syncStudentAttempt();
  if(!activeAttemptKey){alert("กรุณากรอกชื่อ ชั้น และเลขที่ก่อนครับ");return}
  if(attempts>=2)return;
+ // เมื่อกดปุ่มนี้ ให้ล็อกการส่งครั้งถัดไปเป็นครั้งที่ 2 โดยตรง
+ forceSecondAttempt=true;
+ attempts=1;
+ localStorage.setItem(activeAttemptKey,"1");
  document.getElementById("sendStatus").textContent="คำตอบเดิมยังอยู่ แก้ไขคำตอบได้ แล้วกดส่งครั้งที่ 2";
  document.getElementById("sendBtn").style.display="inline-block";
  document.getElementById("sendBtn").textContent="📤 ส่งใบงานครั้งที่ 2";
@@ -47,7 +53,7 @@ async function submitWorksheet(){
  if(!name||!cls||!no){alert("กรุณากรอกชื่อ ชั้น และเลขที่");return}
  if(a.some(x=>!x)){alert("กรุณาตอบคำถามทั้ง 10 ข้อให้ครบก่อนส่ง");return}
  if(attempts>=2){alert("เว็บไซต์บันทึกว่าบัญชีนี้ส่งครบ 2 ครั้งแล้ว");refreshAttemptUI();return}
- const thisAttempt=attempts+1;
+ const thisAttempt=forceSecondAttempt?2:attempts+1;
  const p={name,class:cls,no,work:"ใบงานเรื่องที่ 2 การเซตบอล",attempt:thisAttempt,submissionType:"worksheet",quizType:"ใบงานเรื่องที่ 2"};
  for(let i=0;i<10;i++)p["q"+(i+1)]=a[i];
  const b=document.getElementById("sendBtn"),status=document.getElementById("sendStatus");
@@ -55,6 +61,7 @@ async function submitWorksheet(){
  try{
    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(p)});
    attempts=thisAttempt;localStorage.setItem(activeAttemptKey,String(attempts));
+   forceSecondAttempt=false;
    status.textContent="ส่งคำขอครั้งที่ "+thisAttempt+" แล้วครับ (เว็บไซต์ไม่สามารถยืนยันผลบันทึกได้ทันที) กรุณาตรวจแถวใหม่ใน Google Sheets ก่อนส่งครั้งต่อไป";
    b.disabled=false;refreshAttemptUI();
  }catch(e){
