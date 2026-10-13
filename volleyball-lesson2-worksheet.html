@@ -10,8 +10,7 @@ function refreshAttemptUI(){
 }
 function newAttempt(){
  if(attempts>=2)return;
- document.querySelectorAll("[data-qanswer]").forEach(x=>x.value="");
- document.getElementById("sendStatus").textContent="เริ่มแก้ไขคำตอบสำหรับการส่งครั้งที่ 2 ได้เลยครับ";
+ document.getElementById("sendStatus").textContent="คำตอบเดิมยังอยู่ ครู/นักเรียนสามารถแก้ไขคำตอบแล้วส่งครั้งที่ 2 ได้เลยครับ";
  document.getElementById("sendBtn").style.display="inline-block";
  document.getElementById("sendBtn").textContent="📤 ส่งใบงานครั้งที่ 2";
  document.getElementById("retryBtn").style.display="none";
