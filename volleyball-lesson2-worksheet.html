@@ -60,6 +60,17 @@ function syncStudent(){
  if(activeKey){restoreAnswers();saveStudentIdentity();lockIdentity();}
  refreshAttemptUI();
 }
+function logoutStudent(){
+ if(!confirm("ต้องการออกจากการทำงานเพื่อส่งต่อเครื่องให้เพื่อนหรือไม่?\\nกรุณาตรวจสอบการส่งงานใน Google Sheets ก่อนออก"))return;
+ if(activeKey)saveAnswers();
+ localStorage.removeItem(LAST_STUDENT_KEY);
+ localStorage.removeItem(LEGACY_STUDENT_KEY);
+ ["studentName","studentClass","studentNo"].forEach(id=>{const el=document.getElementById(id);el.disabled=false;el.value="";});
+ document.querySelectorAll("[data-qanswer]").forEach(el=>el.value="");
+ activeKey="";attempts=0;forceSecondAttempt=false;
+ document.getElementById("sendStatus").textContent="ออกจากการทำงานแล้ว เพื่อนคนถัดไปกรอกข้อมูลของตนเองได้";
+ refreshAttemptUI();window.scrollTo({top:0,behavior:"smooth"});
+}
 function newAttempt(){
  syncStudent();
  if(!activeKey){alert("กรุณากรอกชื่อ ชั้น และเลขที่ก่อนครับ");return;}
