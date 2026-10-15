@@ -35,6 +35,9 @@ function checkAnswers(){
  for(let i=1;i<=10;i++){const item=document.createElement('div');item.style.cssText='background:#fffaf0;border-left:5px solid #f0b400;padding:12px 15px;border-radius:10px;margin:10px 0';const heading=document.createElement('strong');heading.textContent='ข้อ '+i;const answer=document.createElement('p');answer.textContent=document.getElementById('a'+i).innerText.replace('แนวคำตอบ:','').trim();answer.style.margin='8px 0 0';item.append(heading,answer);summary.append(item);}
  document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' สามารถอ่านแนวคำตอบด้านล่าง แล้วแก้ไขคำตอบของตนเองได้ หากแก้ไขแล้วให้กด “ตรวจคำตอบอีกครั้ง”';
  document.getElementById('result').style.display='block';
+ const visitData={name:name,class:cls,no:no,work:"แบบฝึกออนไลน์ เรื่องที่ 2 การเซตบอล",submissionType:"visit",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
+ for(let i=1;i<=10;i++) visitData["q"+i]=document.getElementById("q"+i).value.trim();
+ fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(visitData)}).catch(()=>{});
  document.getElementById('checkBtn').textContent='🔍 ตรวจคำตอบอีกครั้ง';
  document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
