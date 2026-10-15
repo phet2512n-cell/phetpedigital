@@ -73,6 +73,9 @@ function checkAnswers(){
  box.style.display='block';
  box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> แบบฝึกนี้เป็นคำถามปลายเปิด ระบบจึงไม่ตัดสินถูก/ผิดอัตโนมัติ ให้เปรียบเทียบคำตอบของตนเองกับ <strong>เฉลย</strong> ด้านล่าง หากมีใจความสำคัญตรงกันถือว่าตอบได้ถูกต้อง หากแก้ไขคำตอบแล้วให้กดปุ่มตรวจคำตอบอีกครั้ง</div>'+
  answers.map((a,i)=>'<div style="margin:18px 0;padding:16px;background:#f7fbff;border-radius:12px;border-left:5px solid var(--sky)"><strong>ข้อ '+(i+1)+'</strong><p style="margin:8px 0"><b>คำตอบของฉัน:</b> '+escapeHtml(qs[i])+'</p><p style="margin:8px 0;background:#ecfff4;padding:12px;border-radius:10px"><b>✅ เฉลย:</b> '+a+'</p></div>').join('');
+ const visitData={name:name,class:cls,no:no,work:"แบบฝึกออนไลน์ เรื่องที่ 1 ประวัติ ความเป็นมา ประโยชน์ และความสำคัญของกีฬาวอลเลย์บอล",submissionType:"visit",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
+ qs.forEach((answer,i)=>{visitData["q"+(i+1)]=answer;});
+ fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(visitData)}).catch(()=>{});
  document.getElementById('checkBtn').textContent='🔎 ตรวจคำตอบอีกครั้ง';
  box.scrollIntoView({behavior:'smooth'});
 }
