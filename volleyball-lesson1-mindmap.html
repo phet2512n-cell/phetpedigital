@@ -34,7 +34,6 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 </section>
 <section class="card"><div class="note">เมื่อทำครบทุกหัวข้อแล้ว กดส่ง Mind Map ให้ครู ข้อมูลจะถูกบันทึกเข้าสู่ระบบของแผนที่ 1</div>
 <p style="text-align:center"><button class="btn" id="sendBtn" onclick="submitMindMap()">📤 ส่ง Mind Map ให้ครู</button> <button class="btn" type="button" onclick="logoutStudent()" style="background:#64748b">ออกจากการทำงาน / ส่งต่อเครื่องให้เพื่อน</button></p></section>
-<section class="card" id="answerSection" style="display:none;text-align:center"><p>ส่ง Mind Map แล้ว สามารถเปิดดูแนวคำตอบเพื่อทบทวนความรู้ได้</p><a class="btn" href="volleyball-lesson1-mindmap-teacher-answer.html" target="_blank" rel="noopener" style="background:#7c3aed">📘 ดูเฉลย Mind Map</a></section>
 <section class="card result" id="result"><h2>✅ ส่ง Mind Map เรียบร้อยแล้ว</h2><p id="msg"></p></section>
 </main>
 <footer>จัดทำโดย <strong>ครูประดับเพชร ภูเงิน</strong><br>กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา โรงเรียนชะอำคุณหญิงเนื่องบุรี</footer>
@@ -43,7 +42,7 @@ const WEB_APP_URL="https://script.google.com/macros/s/AKfycbzT0OiZqZWo0pRv6N1V5P
 const IDENTITY_KEY="volleyball_student_identity_v1",SENT_PREFIX="volleyball_lesson1_mindmap_submitted:";
 function identity(){return {name:document.getElementById("name").value.trim(),cls:document.getElementById("class").value,no:document.getElementById("no").value}}
 function sentKey(){const d=identity();return SENT_PREFIX+[d.name.toLowerCase().replace(/\s+/g," "),d.cls,d.no].join("|")}
-function refresh(){const sent=localStorage.getItem(sentKey())==="1";document.getElementById("sendBtn").disabled=sent;document.getElementById("answerSection").style.display=sent?"block":"none"}
+function refresh(){const sent=localStorage.getItem(sentKey())==="1";document.getElementById("sendBtn").disabled=sent;}
 function restore(){try{const d=JSON.parse(localStorage.getItem(IDENTITY_KEY)||"null");if(!d)return;document.getElementById("name").value=d.name||"";document.getElementById("class").value=d.cls||"";document.getElementById("no").value=d.no||"";["name","class","no"].forEach(id=>document.getElementById(id).disabled=true)}catch(e){}}
 function logoutStudent(){if(!confirm("ส่งงานเรียบร้อยแล้วใช่หรือไม่? ออกจากการทำงานเพื่อให้เพื่อนใช้เครื่องต่อ"))return;localStorage.removeItem(IDENTITY_KEY);localStorage.removeItem("volleyball_lesson2_worksheet_last_student");["name","class","no"].forEach(id=>{let x=document.getElementById(id);x.disabled=false;x.value=""});for(let i=1;i<=10;i++)document.getElementById("m"+i).value="";document.getElementById("result").style.display="none";refresh();window.scrollTo({top:0,behavior:"smooth"})}
 
@@ -62,7 +61,7 @@ async function submitMindMap(){
  try{
   await fetch(WEB_APP_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
   localStorage.setItem(sentKey(),"1");if(!localStorage.getItem(IDENTITY_KEY))localStorage.setItem(IDENTITY_KEY,JSON.stringify(identity()));restore();refresh();
-  r.innerHTML='<h2>📨 ส่งคำขอ Mind Map แล้ว — โปรดตรวจ Google Sheets</h2><p>คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่ง Mind Map เรื่องที่ 1 แล้วครับ</p><p><a class="btn" href="volleyball-lesson1-mindmap-teacher-answer.html" target="_blank" rel="noopener" style="background:#7c3aed">📘 ดูเฉลย Mind Map เรื่องที่ 1</a> <a class="btn" href="volleyball.html">🏐 กลับหน้ารายวิชา</a></p>';
+  r.innerHTML='<h2>📨 ส่งคำขอ Mind Map แล้ว — โปรดตรวจ Google Sheets</h2><p>คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่ง Mind Map เรื่องที่ 1 แล้วครับ</p><p><a class="btn" href="volleyball.html">🏐 กลับหน้ารายวิชา</a></p>';
  }catch(e){btn.disabled=false;btn.textContent='📤 ส่ง Mind Map ให้ครู';r.innerHTML='<h2>⚠️ ส่งไม่สำเร็จ</h2><p>กรุณาลองอีกครั้งครับ</p>'}
  r.scrollIntoView({behavior:'smooth'});
 }
