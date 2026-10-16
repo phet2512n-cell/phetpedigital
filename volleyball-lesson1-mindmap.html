@@ -62,7 +62,7 @@ async function submitMindMap(){
  try{
   await fetch(WEB_APP_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
   localStorage.setItem(sentKey(),"1");if(!localStorage.getItem(IDENTITY_KEY))localStorage.setItem(IDENTITY_KEY,JSON.stringify(identity()));restore();refresh();
-  r.innerHTML='<h2>📨 ส่งคำขอ Mind Map แล้ว — โปรดตรวจ Google Sheets</h2><p>คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่ง Mind Map เรื่องที่ 1 แล้วครับ</p><p><a class="btn" href="volleyball.html">🏐 กลับหน้ารายวิชา</a></p>';
+  r.innerHTML='<h2>📨 ส่งคำขอ Mind Map แล้ว — โปรดตรวจ Google Sheets</h2><p>คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' ส่ง Mind Map เรื่องที่ 1 แล้วครับ</p><p><a class="btn" href="volleyball-lesson1-mindmap-teacher-answer.html" target="_blank" rel="noopener" style="background:#7c3aed">📘 ดูเฉลย Mind Map เรื่องที่ 1</a> <a class="btn" href="volleyball.html">🏐 กลับหน้ารายวิชา</a></p>';
  }catch(e){btn.disabled=false;btn.textContent='📤 ส่ง Mind Map ให้ครู';r.innerHTML='<h2>⚠️ ส่งไม่สำเร็จ</h2><p>กรุณาลองอีกครั้งครับ</p>'}
  r.scrollIntoView({behavior:'smooth'});
 }
