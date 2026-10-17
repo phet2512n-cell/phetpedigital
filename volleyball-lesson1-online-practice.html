@@ -34,9 +34,9 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 <div class="q"><strong>1. กีฬาวอลเลย์บอลเริ่มต้นขึ้นในปี ค.ศ. ใด ที่เมืองใด รัฐและประเทศใด</strong><textarea id="q1" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>2. ใครเป็นผู้คิดค้นกีฬาวอลเลย์บอล และทำงานด้านใด</strong><textarea id="q2" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>3. เพราะเหตุใด William G. Morgan จึงคิดค้นกีฬาวอลเลย์บอลขึ้นในระยะแรก</strong><textarea id="q3" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>4. ชื่อเดิมของวอลเลย์บอลคืออะไร และใน ค.ศ. 1896 มีการเสนอชื่อใหม่ว่าอะไร</strong><textarea id="q4" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>5. บอกประโยชน์ด้านร่างกายของการเล่นวอลเลย์บอลมาอย่างน้อย 2 ประการ</strong><textarea id="q5" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>6. การเล่นวอลเลย์บอลช่วยพัฒนาการประสานงานของร่างกายอย่างไร</strong><textarea id="q6" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>7. การเล่นวอลเลย์บอลช่วยพัฒนาการคิดและการตัดสินใจอย่างไร</strong><textarea id="q7" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>8. การทำงานเป็นทีมและการสื่อสารมีความสำคัญต่อการเล่นวอลเลย์บอลอย่างไร</strong><textarea id="q8" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>9. ระเบียบวินัย ความรับผิดชอบ คุณธรรม และน้ำใจนักกีฬามีความสำคัญอย่างไร</strong><textarea id="q9" placeholder="เขียนคำตอบของตนเอง..."></textarea></div><div class="q"><strong>10. นักเรียนสามารถนำคุณค่าที่ได้จากกีฬาวอลเลย์บอลไปใช้ในชีวิตประจำวันได้อย่างไร</strong><textarea id="q10" placeholder="เขียนคำตอบของตนเอง..."></textarea></div>
 </section>
 <section class="card" id="checkCard">
-<h2>🔎 ตรวจคำตอบด้วยตนเอง</h2>
-<p>เมื่อทำครบทั้ง 10 ข้อแล้ว กดปุ่มนี้เพื่อเปิด <strong>เฉลยทั้ง 10 ข้อ</strong> สำหรับตรวจคำตอบด้วยตนเอง การตรวจเฉลยไม่ส่งคะแนน</p>
-<p style="text-align:center"><button class="btn" id="checkBtn" onclick="checkAnswers()">🔎 ตรวจคำตอบและดูเฉลย</button></p>
+<h2>📤 ส่งแบบฝึกออนไลน์</h2><p>ตอบครบ 10 ข้อแล้วกดส่งแบบฝึกก่อนเปิดเฉลย ระบบไม่คิดคะแนน</p><p style="text-align:center"><button class="btn" id="submitBtn" onclick="submitPractice()">📤 ส่งแบบฝึกออนไลน์</button></p><p id="submitStatus" class="hint" aria-live="polite">ยังไม่ได้ส่งแบบฝึก</p><h2>🔎 ตรวจคำตอบด้วยตนเอง</h2>
+<p>หลังจากกดส่งแบบฝึกแล้ว กดปุ่มนี้เพื่อเปิด <strong>เฉลยทั้ง 10 ข้อ</strong> สำหรับตรวจคำตอบด้วยตนเอง การตรวจเฉลยไม่ส่งคะแนน</p>
+<p style="text-align:center"><button class="btn" id="checkBtn" onclick="checkAnswers()" disabled>🔎 ตรวจคำตอบและดูเฉลย</button></p>
 <div id="answers" style="display:none"></div>
 </section>
 <section class="card"><div class="note"><strong>ขั้นตอนต่อไป:</strong> เมื่อทำแบบฝึกออนไลน์เสร็จแล้ว ให้นักเรียนไปเรียนรู้สื่อและทำกิจกรรม/ฝึกปฏิบัติเรื่องที่ 1 ก่อน จากนั้นจึงกลับไปทำ Mind Map และใบงาน</div><p style="text-align:center"><a class="btn" href="volleyball-lesson1-media.html">🎬 ไปเรียนรู้และทำกิจกรรมเรื่องที่ 1</a></p>
@@ -65,18 +65,32 @@ function recordPracticeEntry(){
  msg.textContent="ส่งคำขอบันทึกการเข้าทำแล้ว ระบบไม่ได้ส่งคำตอบหรือคะแนนไปยัง Google Sheets กรุณาตรวจสอบแถวข้อมูลในชีตเพื่อยืนยัน";
  btn.textContent="บันทึกการเข้าทำแล้ว";
 }
-function checkAnswers(){
+let submitted=false;
+let submittedQs=[];
+async function submitPractice(){
  const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
- const qs=[...Array(10)].map((_,i)=>document.getElementById('q'+(i+1)).value.trim());
- if(!name||!cls||!no||qs.some(v=>!v)){alert('กรุณากรอกข้อมูลนักเรียนและตอบให้ครบทั้ง 10 ข้อก่อนตรวจครับ');return}
+ const qs=Array.from({length:10},(_,i)=>document.getElementById('q'+(i+1)).value.trim());
+ if(!name||!cls||!no||qs.some(v=>!v)){alert('กรุณากรอกข้อมูลและตอบให้ครบทั้ง 10 ข้อก่อนส่ง');return;}
+ if(submitted)return;
+ const btn=document.getElementById('submitBtn'),status=document.getElementById('submitStatus');
+ btn.disabled=true;btn.textContent='กำลังส่ง...';
+ const payload={name,class:cls,no,work:"แบบฝึกออนไลน์ เรื่องที่ 1 ประวัติ ความเป็นมา ประโยชน์ และความสำคัญของกีฬาวอลเลย์บอล",submissionType:"visit",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
+ qs.forEach((v,i)=>payload['q'+(i+1)]=v);
+ try{
+  await fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+  submitted=true;submittedQs=qs;
+  ['name','class','no',...Array.from({length:10},(_,i)=>'q'+(i+1))].forEach(id=>document.getElementById(id).disabled=true);
+  btn.textContent='ส่งคำขอบันทึกแล้ว';
+  status.textContent='ส่งคำขอบันทึกแล้ว กรุณาตรวจสอบข้อมูลใน Google Sheets เพื่อยืนยันการบันทึกจริง เว็บไซต์ไม่สามารถตรวจสอบการตอบกลับของเซิร์ฟเวอร์ได้';
+  document.getElementById('checkBtn').disabled=false;
+ }catch(e){btn.disabled=false;btn.textContent='📤 ลองส่งแบบฝึกอีกครั้ง';status.textContent='ส่งคำขอไม่สำเร็จ กรุณาลองใหม่';}
+}
+function checkAnswers(){
+ if(!submitted){alert('กรุณาส่งแบบฝึกก่อนเปิดเฉลย');return;}
  const box=document.getElementById('answers');
  box.style.display='block';
- box.innerHTML='<div class="note"><strong>📌 วิธีตรวจ:</strong> แบบฝึกนี้เป็นคำถามปลายเปิด ระบบจึงไม่ตัดสินถูก/ผิดอัตโนมัติ ให้เปรียบเทียบคำตอบของตนเองกับ <strong>เฉลย</strong> ด้านล่าง หากมีใจความสำคัญตรงกันถือว่าตอบได้ถูกต้อง หากแก้ไขคำตอบแล้วให้กดปุ่มตรวจคำตอบอีกครั้ง</div>'+
- answers.map((a,i)=>'<div style="margin:18px 0;padding:16px;background:#f7fbff;border-radius:12px;border-left:5px solid var(--sky)"><strong>ข้อ '+(i+1)+'</strong><p style="margin:8px 0"><b>คำตอบของฉัน:</b> '+escapeHtml(qs[i])+'</p><p style="margin:8px 0;background:#ecfff4;padding:12px;border-radius:10px"><b>✅ เฉลย:</b> '+a+'</p></div>').join('');
- const visitData={name:name,class:cls,no:no,work:"แบบฝึกออนไลน์ เรื่องที่ 1 ประวัติ ความเป็นมา ประโยชน์ และความสำคัญของกีฬาวอลเลย์บอล",submissionType:"visit",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
- qs.forEach((answer,i)=>{visitData["q"+(i+1)]=answer;});
- fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(visitData)}).catch(()=>{});
- document.getElementById('checkBtn').textContent='🔎 ตรวจคำตอบอีกครั้ง';
+ box.innerHTML='<div class="note"><strong>วิธีตรวจ:</strong> เปรียบเทียบคำตอบที่ส่งไว้กับเฉลย แบบฝึกนี้ไม่คิดคะแนน และการเปิดเฉลยจะไม่ส่งข้อมูลซ้ำ</div>'+
+ answers.map((a,i)=>'<div style="margin:18px 0;padding:16px;background:#f7fbff;border-radius:12px;border-left:5px solid var(--sky)"><strong>ข้อ '+(i+1)+'</strong><p><b>คำตอบของฉัน:</b> '+escapeHtml(submittedQs[i])+'</p><p style="background:#ecfff4;padding:12px;border-radius:10px"><b>เฉลย:</b> '+a+'</p></div>').join('');
  box.scrollIntoView({behavior:'smooth'});
 }
 function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
