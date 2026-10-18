@@ -11,7 +11,7 @@ h2{color:var(--blue);margin-top:0}.info{display:grid;grid-template-columns:2fr 1
 label{font-weight:700}input,select,textarea{width:100%;padding:11px;border:1px solid #b9c9d8;border-radius:10px;font:inherit}
 textarea{min-height:85px;resize:vertical}.map{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .map .item{background:#f8fbff;border:1px solid #dbeaf5;border-radius:14px;padding:15px}.map textarea{margin-top:7px}
-.btn{display:inline-block;border:0;background:var(--blue);color:#fff;padding:13px 22px;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none}
+.btn:disabled{background:#94a3b8;color:#fff;cursor:not-allowed;opacity:1}.btn{display:inline-block;border:0;background:var(--blue);color:#fff;padding:13px 22px;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none}
 .note{background:#fff8d8;border-left:5px solid var(--yellow);padding:14px;border-radius:10px}.result{display:none;background:#ecfff4;border:2px solid #73c99a}
 footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 @media(max-width:700px){.info,.map{grid-template-columns:1fr}header h1{font-size:25px}}
@@ -43,7 +43,7 @@ footer{text-align:center;background:var(--navy);color:#fff;padding:25px 15px}
 <p id="draftStatus" class="draft-status" aria-live="polite">คำตอบจะถูกบันทึกไว้ในเครื่องนี้ระหว่างพิมพ์</p>
 </section>
 <section class="card"><div class="note">เมื่อทำครบทุกหัวข้อแล้ว กดส่ง Mind Map ให้ครู ข้อมูลจะถูกบันทึกเข้าสู่ระบบของแผนที่ 1</div>
-<p style="text-align:center"><button class="btn" id="sendBtn" onclick="submitMindMap()">📤 ส่ง Mind Map ให้ครู</button> <button class="btn" type="button" onclick="logoutStudent()" style="background:#64748b">ออกจากการทำงาน / ส่งต่อเครื่องให้เพื่อน</button></p></section>
+<div id="sentNotice" class="note" style="display:none;margin-top:12px" role="status"><strong>ข้อมูลนักเรียนนี้เคยส่ง Mind Map แล้ว 1 ครั้ง</strong> จึงไม่สามารถส่งซ้ำได้ หากครูต้องการทดลองระบบใหม่ ให้กด “ออกจากการทำงาน / ส่งต่อเครื่องให้เพื่อน” แล้วใช้ข้อมูลผู้ทดสอบชุดใหม่ โดยไม่ใช้ชื่อและเลขที่ของนักเรียนจริง</div><p style="text-align:center"><button class="btn" id="sendBtn" onclick="submitMindMap()">📤 ส่ง Mind Map ให้ครู</button> <button class="btn" type="button" onclick="logoutStudent()" style="background:#64748b">ออกจากการทำงาน / ส่งต่อเครื่องให้เพื่อน</button></p></section>
 <section class="card result" id="result"><h2>✅ ส่ง Mind Map เรียบร้อยแล้ว</h2><p id="msg"></p></section>
 </main>
 <footer>จัดทำโดย <strong>ครูประดับเพชร ภูเงิน</strong><br>กลุ่มสาระการเรียนรู้สุขศึกษาและพลศึกษา โรงเรียนชะอำคุณหญิงเนื่องบุรี</footer>
@@ -57,7 +57,7 @@ function saveDraft(){const key=draftKey();if(!identity().name||!identity().cls||
 function loadDraft(){if(!identity().name||!identity().cls||!identity().no)return;try{const v=JSON.parse(localStorage.getItem(draftKey())||"[]");for(let i=1;i<=10;i++){const el=document.getElementById("m"+i);el.value=v[i-1]||"";resizeAnswer(el)}}catch(e){}}
 function identity(){return {name:document.getElementById("name").value.trim(),cls:document.getElementById("class").value,no:document.getElementById("no").value}}
 function sentKey(){const d=identity();return SENT_PREFIX+[d.name.toLowerCase().replace(/\s+/g," "),d.cls,d.no].join("|")}
-function refresh(){const sent=localStorage.getItem(sentKey())==="1";document.getElementById("sendBtn").disabled=sent;}
+function refresh(){const d=identity(),sent=!!(d.name&&d.cls&&d.no&&localStorage.getItem(sentKey())==="1");const btn=document.getElementById("sendBtn");btn.disabled=sent;btn.textContent=sent?"✓ ส่ง Mind Map แล้ว (ส่งซ้ำไม่ได้)":"📤 ส่ง Mind Map ให้ครู";btn.title=sent?"ข้อมูลนักเรียนชุดนี้เคยส่งแล้ว 1 ครั้ง":"ส่ง Mind Map เมื่อกรอกครบ 10 กิ่ง";const notice=document.getElementById("sentNotice");notice.style.display=sent?"block":"none";}
 function restore(){try{const d=JSON.parse(localStorage.getItem(IDENTITY_KEY)||"null");if(!d)return;document.getElementById("name").value=d.name||"";document.getElementById("class").value=d.cls||"";document.getElementById("no").value=d.no||"";["name","class","no"].forEach(id=>document.getElementById(id).disabled=true)}catch(e){}}
 function logoutStudent(){if(!confirm("ส่งงานเรียบร้อยแล้วใช่หรือไม่? ออกจากการทำงานเพื่อให้เพื่อนใช้เครื่องต่อ"))return;localStorage.removeItem(IDENTITY_KEY);localStorage.removeItem("volleyball_lesson2_worksheet_last_student");["name","class","no"].forEach(id=>{let x=document.getElementById(id);x.disabled=false;x.value=""});for(let i=1;i<=10;i++)document.getElementById("m"+i).value="";document.getElementById("result").style.display="none";document.getElementById("draftStatus").textContent="คำตอบจะถูกบันทึกไว้ในเครื่องนี้ระหว่างพิมพ์";refresh();window.scrollTo({top:0,behavior:"smooth"})}
 
