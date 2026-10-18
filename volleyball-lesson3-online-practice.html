@@ -1,181 +1,49 @@
 <!doctype html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>แบบฝึกออนไลน์ เรื่องที่ 3 การอันเดอร์</title>
 <style>
-:root{--navy:#123b5d;--blue:#087ca7;--sky:#eaf6fb;--line:#d5e5ee;--green:#176b42;--greenbg:#eaf7ef;--red:#9b2c2c;--redbg:#fff0f0;--gold:#fff6dc}
-*{box-sizing:border-box}
-body{font-family:Arial,"Noto Sans Thai",sans-serif;background:#f2f7fa;color:#20394d;margin:0;line-height:1.7}
-.wrap{max-width:940px;margin:auto;padding:18px}
-header,.panel,.question{background:#fff;border-radius:16px;padding:22px;margin:14px 0;box-shadow:0 4px 16px rgba(18,59,93,.08)}
-header{border-top:7px solid var(--blue)}
-h1{font-size:clamp(1.5rem,4vw,2.15rem);color:var(--navy);margin:0 0 8px}
-h2{font-size:1.2rem;color:var(--blue);margin:0 0 10px}
-.meta{background:var(--sky);border-radius:10px;padding:12px}
-.intro{margin:12px 0 0}
-.question{border:1px solid var(--line);box-shadow:none}
-.qtitle{font-weight:700;color:var(--navy);margin-bottom:12px}
-.options{display:grid;gap:8px}
-.option{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
-.option:hover{background:#f6fbfd}
-.option input{margin-top:7px;accent-color:var(--blue)}
-button{border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:1rem;font-weight:700;padding:11px 18px;cursor:pointer;margin-top:12px}
-button:hover{filter:brightness(.93)}
-#entryPanel input,#entryPanel select{display:block;width:100%;min-width:0;min-height:46px;margin-top:5px;padding:10px 12px;border:1px solid #b8ccd9;border-radius:9px;background:#fff;color:#20394d;font:inherit;box-sizing:border-box}
-#entryPanel label{display:block;font-weight:600;color:#173b55}
-#entryPanel .actions button{min-height:46px}
-[hidden]{display:none!important}
-button.secondary{background:#526b7c}
-.feedback{display:none;margin-top:12px;border-radius:10px;padding:12px}
-.feedback.show{display:block}
-.feedback.correct{background:var(--greenbg);color:var(--green);border:1px solid #b8e2c6}
-.feedback.incorrect{background:var(--redbg);color:var(--red);border:1px solid #f0c4c4}
-.feedback.neutral{background:var(--gold);color:#74540b;border:1px solid #f1df9e}
-.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-#notice{margin:10px 0;color:var(--navy);font-weight:700}
-footer{font-size:.9rem;color:#526b7c;padding:8px 4px 24px}
-@media(max-width:600px){.wrap{padding:10px}.panel,.question,header{padding:16px}.option{padding:10px}}
-</style>
-</head>
-<body>
-<div class="wrap">
-<header>
-<h1>แบบฝึกออนไลน์ เรื่องที่ 3 การอันเดอร์</h1>
-<div class="meta"><strong>รายวิชา พ23104 วอลเลย์บอล</strong><br>เรื่องที่ 3 การเล่นลูกสองมือล่าง (Underhand) <br>ครูประดับเพชร ภูเงิน</div>
-<p class="intro">ฝึกทำคำถาม 10 ข้อจากใบความรู้ เลือกคำตอบแล้วกด <strong>ตรวจคำตอบข้อนี้</strong> เพื่อดูผลและคำอธิบายได้ทันที นักเรียนสามารถแก้คำตอบและลองทำใหม่ได้</p>
-</header>
-<section class="panel" id="entryPanel">
-<h2>ลงชื่อก่อนเริ่มทำแบบฝึก</h2>
-<p>ให้นักเรียนกรอกข้อมูลเพื่อบันทึกว่าเข้ามาทำแบบฝึกออนไลน์แล้ว จากนั้นกดปุ่มเริ่มทำแบบฝึก</p>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
-<label>ชื่อ–นามสกุล<input id="studentName" autocomplete="name" style="display:block;width:100%;margin-top:5px" required></label>
-<label>ชั้น/ห้อง<select id="studentClass" style="display:block;width:100%;margin-top:5px" required><option value="">เลือกห้อง</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></label>
-<label>เลขที่<select id="studentNo" style="display:block;width:100%;margin-top:5px" required><option value="">เลือกเลขที่</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option></select></label>
-</div>
-<div class="actions"><button type="button" id="startPractice">เริ่มทำแบบฝึกและบันทึกการเข้าทำ</button></div>
-<div id="entryMessage" class="feedback" aria-live="polite"></div>
-<p><small>ระบบจะบันทึกชื่อ ชั้น/ห้อง เลขที่ และเวลาเริ่มทำแบบฝึกลงตารางของครู หากยังไม่ได้เชื่อมระบบบันทึก จะมีข้อความแจ้งให้ทราบ</small></p>
-</section>
-<div id="practiceContent">
-<section class="panel">
-<h2>วิธีทำแบบฝึก</h2>
-<ol>
-<li>อ่านคำถามและตัวเลือกให้ครบ</li>
-<li>เลือกคำตอบที่คิดว่าถูกต้อง แล้วกดตรวจคำตอบของข้อนั้น</li>
-<li>อ่านคำอธิบายและกลับไปทบทวนใบความรู้หากยังไม่เข้าใจ</li>
-</ol>
-
-<div class="actions"><button type="button" class="secondary" id="reset">เริ่มทำใหม่ทุกข้อ</button><span id="notice" aria-live="polite">ยังไม่ได้ตรวจคำตอบ</span></div>
-</section>
-<div id="quiz"></div>
-<section class="panel">
-<h2>ส่งคำตอบแบบฝึกออนไลน์</h2>
-<p>เมื่อเลือกคำตอบครบทั้ง 10 ข้อแล้ว กดส่งคำตอบเพื่อบันทึกลง Google Sheets ของครู (แบบฝึกนี้ไม่คิดคะแนน)</p>
-<button type="button" id="submitPractice">📤 ส่งคำตอบทั้ง 10 ข้อ</button>
-<div id="submissionMessage" class="feedback" aria-live="polite"></div>
-</section>
-</div><footer>PE Digital Learning Center · แบบฝึกเพื่อการเรียนรู้ด้วยตนเอง</footer>
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#eef7ff;color:#102a43;line-height:1.7}.wrap{max-width:1000px;margin:auto;padding:28px 16px}.card{background:#fff;border-radius:20px;padding:25px;margin-bottom:18px;box-shadow:0 8px 24px #0b3b6618}.student{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}label{font-weight:bold;color:#0757a6}input,select,textarea{width:100%;box-sizing:border-box;padding:12px;border:2px solid #d8e7f5;border-radius:12px;font-size:16px;margin-top:6px}textarea{min-height:100px}.q{margin:18px 0}.actions{text-align:center}button{border:0;border-radius:14px;padding:14px 25px;background:#0757a6;color:#fff;font-size:17px;font-weight:bold;cursor:pointer}.result{display:none;background:#ecfff4}.answer{display:none;background:#fffaf0;border-left:5px solid #f0b400;padding:15px;border-radius:10px}.back{display:inline-block;margin-top:12px;color:#0757a6;font-weight:bold}@media(max-width:650px){.student{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<section class="card"><h1>📝 แบบฝึกออนไลน์ เรื่องที่ 3</h1><h2>การอันเดอร์ในกีฬาวอลเลย์บอล</h2><p>เขียนตอบคำถาม 10 ข้อจากใบความรู้ ระบบส่งคำตอบให้ครูตรวจโดยไม่คิดคะแนน</p>
+<div class="student"><div><label>ชื่อ-นามสกุล</label><input id="name"></div><div><label>ชั้น</label><select id="class"><option value="">เลือกห้อง</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></div><div><label>เลขที่</label><select id="no"><option value="">เลือกเลขที่</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option></select></div></div><div class="actions" style="margin-top:16px"><button type="button" id="startPracticeBtn" onclick="recordPracticeEntry()">เริ่มทำแบบฝึกและบันทึกการเข้าทำ</button></div><p id="entryMessage" class="hint" aria-live="polite">กรอกข้อมูลนักเรียนแล้วกดเริ่มทำแบบฝึก ระบบจะบันทึกเฉพาะการเข้าทำ ไม่มีคะแนน</p></section>
+<section class="card"><p><strong>คำชี้แจง:</strong> นักเรียนพิมพ์คำตอบตามความรู้ที่เรียนมา เมื่อครบทั้ง 10 ข้อ ให้กด “ตรวจคำตอบ” เพื่อดูแนวคำตอบสำหรับทบทวน</p>
+<div class="q"><label>1. การอันเดอร์คืออะไร</label><textarea id="q1" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a1" class="answer"><strong>แนวคำตอบ:</strong> การใช้แขนท่อนล่างทั้งสองข้างรับหรือส่งลูกบอลไปยังทิศทางที่ต้องการ</div></div><div class="q"><label>2. การอันเดอร์มีความสำคัญต่อการเล่นวอลเลย์บอลอย่างไร</label><textarea id="q2" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a2" class="answer"><strong>แนวคำตอบ:</strong> เป็นทักษะพื้นฐานสำหรับรับลูกเสิร์ฟ รับลูกตบ และรับลูกที่อยู่ในระดับต่ำ</div></div><div class="q"><label>3. ท่าเตรียมพร้อมก่อนอันเดอร์ควรปฏิบัติอย่างไร</label><textarea id="q3" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a3" class="answer"><strong>แนวคำตอบ:</strong> แยกเท้าพอเหมาะ ย่อเข่าเล็กน้อย โน้มตัวไปข้างหน้า มองลูกบอลและพร้อมเคลื่อนที่</div></div><div class="q"><label>4. เหตุใดจึงต้องเคลื่อนที่เข้าหาลูกก่อนอันเดอร์</label><textarea id="q4" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a4" class="answer"><strong>แนวคำตอบ:</strong> เพื่อให้ลูกบอลอยู่ในตำแหน่งที่ควบคุมได้ และจัดแนวแขนให้ส่งบอลไปยังเป้าหมายได้ถูกต้อง</div></div><div class="q"><label>5. การประสานมือเพื่ออันเดอร์ทำได้อย่างไร</label><textarea id="q5" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a5" class="answer"><strong>แนวคำตอบ:</strong> ซ้อนมือ โอบหมัด หรือกำหมัดให้ชิดกัน เหยียดแขนทั้งสองข้างให้มั่นคง</div></div><div class="q"><label>6. ลูกบอลควรสัมผัสส่วนใดของแขนขณะอันเดอร์</label><textarea id="q6" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a6" class="answer"><strong>แนวคำตอบ:</strong> แขนท่อนล่างทั้งสองข้างบริเวณเหนือข้อมือ ไม่ใช่ฝ่ามือหรือข้อศอก</div></div><div class="q"><label>7. ควรใช้แรงจากส่วนใดของร่างกายในการอันเดอร์</label><textarea id="q7" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a7" class="answer"><strong>แนวคำตอบ:</strong> ใช้การย่อและเหยียดขาร่วมกับลำตัวและแขนเพื่อส่งแรงอย่างควบคุม ไม่เหวี่ยงแขนแรงเกินไป</div></div><div class="q"><label>8. การควบคุมทิศทางลูกบอลขณะอันเดอร์ควรทำอย่างไร</label><textarea id="q8" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a8" class="answer"><strong>แนวคำตอบ:</strong> จัดแนวแขนและมุมสัมผัสให้เหมาะสม ควบคุมแรงและส่งลูกบอลไปยังเป้าหมาย</div></div><div class="q"><label>9. อธิบายลำดับขั้นตอนการรับลูกเสิร์ฟด้วยการอันเดอร์</label><textarea id="q9" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a9" class="answer"><strong>แนวคำตอบ:</strong> เตรียมพร้อม มองลูก เคลื่อนที่เข้าตำแหน่ง ประสานมือและจัดแขน สัมผัสบอล แล้วส่งบอลไปยังเป้าหมาย</div></div><div class="q"><label>10. หากอันเดอร์แล้วลูกบอลควบคุมไม่ได้เพราะเหวี่ยงแขนแรงเกินไป ควรแก้ไขอย่างไร</label><textarea id="q10" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a10" class="answer"><strong>แนวคำตอบ:</strong> ลดการเหวี่ยงแขน รักษาแนวแขนให้มั่นคง ใช้ขาและลำตัวช่วยส่งแรง และเคลื่อนที่เข้าหาบอลให้เหมาะสม</div></div></section>
+<div class="actions"><button id="checkBtn" type="button" onclick="checkAnswers()">📤 ส่งแบบฝึกออนไลน์และเปิดเฉลย</button></div><p id="submitStatus" class="hint" aria-live="polite">กรอกข้อมูลและตอบครบ 10 ข้อก่อนส่ง ระบบไม่คิดคะแนน</p>
+<section id="result" class="card result"><h2>✅ ตรวจคำตอบเรียบร้อย</h2><p id="msg"></p><p>คำตอบของนักเรียนอาจใช้ถ้อยคำต่างจากแนวคำตอบได้ หากมีสาระสำคัญถูกต้อง โดยเฉพาะข้อ 10 เป็นคำถามปลายเปิด ให้พิจารณาความเหมาะสม ไม่จำเป็นต้องตรงกับตัวอย่าง</p><h3>เฉลยทั้ง 10 ข้อ</h3><div id="answerSummary"></div></section>
+<section class="card"><h2>ขั้นตอนต่อไป</h2><p>หลังจากตรวจคำตอบแล้ว ให้นักเรียนไปเรียนรู้สื่อและฝึกปฏิบัติการอันเดอร์ก่อน จากนั้นจึงกลับไปทำ Mind Map และใบงาน</p><div class="actions"><a class="back" href="volleyball-lesson3-media.html">🎬 ไปเรียนรู้และฝึกปฏิบัติเรื่องที่ 3</a></div></section>
 </div>
 <script>
-const TRACKING_URL = "https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec";
-let studentInfo = null;
-document.getElementById("startPractice").addEventListener("click", async () => {
- const name = document.getElementById("studentName").value.trim();
- const cls = document.getElementById("studentClass").value;
- const no = document.getElementById("studentNo").value;
- const msg = document.getElementById("entryMessage");
- msg.className = "feedback show neutral";
- if (!name || !cls || !no) { msg.textContent = "กรุณากรอกชื่อ เลือกชั้น/ห้อง และเลขที่ให้ครบก่อนเริ่ม"; return; }
- const btn = document.getElementById("startPractice");
- btn.disabled = true;
- studentInfo = {name, "class":cls, no, work:"แบบฝึกออนไลน์ เรื่องที่ 3 การอันเดอร์", submissionType:"visit", quizType:"online-practice-entry", status:"เริ่มทำแบบฝึก"};
- try {
-   await fetch(TRACKING_URL, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify({...studentInfo, timestamp:new Date().toISOString()})});
-   document.getElementById("practiceContent").hidden = false;
-   document.getElementById("entryPanel").querySelectorAll("input,select").forEach(x=>x.disabled=true);
-   msg.className = "feedback show correct";
-   msg.textContent = "ส่งคำขอบันทึกการเข้าทำแล้ว จากนั้นเริ่มทำคำถามด้านล่างได้เลย เนื่องจากเบราว์เซอร์ไม่สามารถยืนยันการเขียนลงตารางได้โดยตรง ครูควรตรวจสอบว่ารายการปรากฏใน Google Sheets ก่อนใช้งานจริง";
-   btn.textContent = "บันทึกการเข้าทำแล้ว";
-   document.getElementById("notice").textContent = "เริ่มทำแบบฝึกโดย "+name+" · "+cls+" เลขที่ "+no;
- } catch (e) {
-   btn.disabled = false;
-   msg.className = "feedback show incorrect";
-   msg.textContent = "ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง";
- }
-});
-
-let practiceSubmitted=false;
-document.getElementById("submitPractice").addEventListener("click", async () => {
- const msg=document.getElementById("submissionMessage");
- msg.className="feedback show neutral";
- if(!studentInfo){msg.textContent="กรุณาลงชื่อและกดเริ่มทำแบบฝึกก่อนส่งคำตอบ";return;}
- if(practiceSubmitted){msg.textContent="ส่งคำขอบันทึกคำตอบชุดนี้แล้ว กรุณาให้ครูตรวจสอบใน Google Sheets";return;}
- const answers=[];
- for(let i=0;i<10;i++){
-   const chosen=document.querySelector('input[name="q'+i+'"]:checked');
-   if(!chosen){msg.textContent="กรุณาเลือกคำตอบให้ครบทั้ง 10 ข้อ (ยังไม่ได้ตอบข้อ "+(i+1)+")";return;}
-   answers.push(questions[i].a[Number(chosen.value)]);
- }
- const btn=document.getElementById("submitPractice");btn.disabled=true;
- const data={...studentInfo,submissionType:"visit",quizType:"online-practice-entry",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
- answers.forEach((a,i)=>data["q"+(i+1)]=a);
- try{
-   await fetch(TRACKING_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
-   practiceSubmitted=true;
-   btn.textContent="ส่งคำขอบันทึกแล้ว";
-   document.querySelectorAll('#quiz input[type="radio"]').forEach(x=>x.disabled=true);
-   msg.className="feedback show correct";
-   msg.textContent="ส่งคำขอบันทึกคำตอบทั้ง 10 ข้อแล้ว โปรดให้ครูตรวจสอบรายการใน Google Sheets เพื่อยืนยันว่าได้รับข้อมูล (การส่งแบบ no-cors ไม่สามารถยืนยันผลการบันทึกได้จากหน้านี้)";
- }catch(e){btn.disabled=false;msg.className="feedback show incorrect";msg.textContent="ส่งคำขอไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่";}
-});
-const labels = ["ก","ข","ค","ง"];
-const questions = [
-{q:"การเล่นลูกสองมือล่างหรือการอันเดอร์ หมายถึงข้อใด",a:["ใช้ปลายนิ้วทั้งสองมือผลักลูกเหนือหน้าผาก","ใช้แขนท่อนล่างรับหรือส่งลูกบอลไปยังทิศทางที่ต้องการ","ใช้กำปั้นตีลูกจากเหนือศีรษะ","ใช้ฝ่ามือข้างเดียวตบลูก"],correct:1,why:"การอันเดอร์ใช้แขนท่อนล่างทั้งสองข้างเป็นพื้นผิวสัมผัสเพื่อรับหรือส่งลูกบอล"},
-{q:"ข้อใดเป็นความสำคัญของการอันเดอร์",a:["ใช้เฉพาะตอนเสิร์ฟเท่านั้น","ใช้แทนการตบได้ทุกสถานการณ์","เป็นทักษะพื้นฐานสำหรับรับลูกเสิร์ฟ ลูกตบ และลูกที่อยู่ต่ำ","ใช้ได้เฉพาะผู้เล่นตำแหน่งหลัง"],correct:2,why:"การอันเดอร์เป็นทักษะพื้นฐานสำคัญ โดยเฉพาะการรับลูกเสิร์ฟและลูกที่มาในระดับต่ำ"},
-{q:"ข้อใดเป็นลักษณะของท่าเตรียมพร้อมที่เหมาะสม",a:["ยืนตัวตรง เข่าตึง และมองพื้น","แยกเท้า ย่อเข่าเล็กน้อย โน้มตัวไปข้างหน้า และมองลูก","ยืนไขว้ขาและกอดอก","นั่งลงกับพื้นก่อนลูกมาถึง"],correct:1,why:"ท่าเตรียมพร้อมช่วยให้เคลื่อนที่ได้เร็ว ควรแยกเท้า ย่อเข่า โน้มตัวไปข้างหน้า และติดตามลูกบอลด้วยสายตา"},
-{q:"เหตุใดจึงควรเคลื่อนที่เข้าหาลูกก่อนอันเดอร์",a:["เพื่อให้ลูกอยู่ในตำแหน่งที่ควบคุมได้และใกล้กึ่งกลางลำตัว","เพื่อให้กระโดดสูงขึ้นทุกครั้ง","เพื่อหลีกเลี่ยงการใช้แขน","เพื่อให้ลูกสัมผัสมือแทนแขน"],correct:0,why:"การเคลื่อนที่ให้เข้าตำแหน่งช่วยให้ควบคุมแนวแขนและทิศทางของลูกได้ดีขึ้น"},
-{q:"ข้อใดเป็นวิธีประสานมือที่ใช้ในการอันเดอร์",a:["กางนิ้วทั้งสองมือออกจากกัน","ประสานมือไว้เหนือศีรษะ","ซ้อนมือ โอบหมัด หรือกำหมัดทั้งสองข้างชิดกัน","ใช้มือข้างหนึ่งจับข้อมืออีกข้างแล้วปล่อยแขนแยก"],correct:2,why:"สามารถจัดมือได้หลายแบบ จุดสำคัญคือประสานมือให้มั่นคงและทำให้แขนทั้งสองข้างอยู่ชิดกัน"},
-{q:"ควรให้ลูกบอลสัมผัสบริเวณใดในการอันเดอร์",a:["ปลายนิ้วมือ","ฝ่ามือ","ข้อศอก","แขนท่อนล่างบริเวณที่เรียบและมั่นคงเหนือข้อมือ"],correct:3,why:"ควรใช้พื้นผิวแขนท่อนล่างที่เรียบและมั่นคง ไม่ใช้ปลายนิ้วหรือข้อศอกเป็นจุดสัมผัสหลัก"},
-{q:"การส่งแรงในการอันเดอร์ควรทำอย่างไร",a:["เหวี่ยงแขนแรง ๆ เพียงอย่างเดียว","ใช้ขา ลำตัว และแขนทำงานร่วมกันอย่างควบคุม","ยืนนิ่งและใช้ข้อมือสะบัด","หลับตาแล้วดันลูกขึ้น"],correct:1,why:"การย่อและเหยียดขาร่วมกับลำตัวและแนวแขนช่วยควบคุมแรงได้ดีกว่าการเหวี่ยงแขนเพียงอย่างเดียว"},
-{q:"หากต้องการควบคุมทิศทางลูกบอล ควรคำนึงถึงสิ่งใด",a:["หันหน้าไปทางอื่นขณะสัมผัสลูก","งอข้อมือเพื่อเปลี่ยนทิศทางอย่างรวดเร็ว","แนวแขน มุมสัมผัส ทิศทางแรง และเป้าหมาย","ตีลูกให้แรงที่สุดทุกครั้ง"],correct:2,why:"ทิศทางของลูกสัมพันธ์กับแนวแขน มุมสัมผัส และแรงที่ส่งไปยังเป้าหมาย"},
-{q:"ลำดับใดเหมาะสมสำหรับการรับลูกเสิร์ฟด้วยการอันเดอร์",a:["เตรียมพร้อม → มองลูก → เคลื่อนที่เข้าตำแหน่ง → จัดมือและแขน → สัมผัสลูก → ส่งไปยังเป้าหมาย","กระโดด → หันหลัง → เหวี่ยงแขน","ยื่นมือรับ → หยุดมองลูก → เคลื่อนที่หลังลูกผ่านไป","ยืนตัวตรง → ใช้มือข้างเดียวตีลูก"],correct:0,why:"เริ่มจากท่าเตรียมพร้อมและติดตามลูก เคลื่อนที่เข้าตำแหน่ง จัดแขนให้มั่นคง แล้วควบคุมแรงและทิศทาง"},
-{q:"หากผู้เล่นเหวี่ยงแขนมากจนควบคุมลูกไม่ได้ ควรปรับอย่างไร",a:["เหวี่ยงแขนให้แรงขึ้น","หลับตาขณะสัมผัสลูก","ถอยออกจากลูกทุกครั้ง","ลดการเหวี่ยงแขน ใช้การย่อ–เหยียดขาและลำตัวช่วยส่งแรง"],correct:3,why:"ควบคุมแขนให้มั่นคงและใช้ขากับลำตัวช่วยส่งแรง รวมทั้งเคลื่อนที่ให้ลูกอยู่ในตำแหน่งเหมาะสม"}
-];
-const quiz=document.getElementById("quiz");
-function render(){
- quiz.innerHTML="";
- questions.forEach((item,i)=>{
-  const section=document.createElement("section");section.className="question";
-  const title=document.createElement("div");title.className="qtitle";title.textContent=(i+1)+". "+item.q;section.appendChild(title);
-  const options=document.createElement("div");options.className="options";
-  item.a.forEach((answer,j)=>{
-   const label=document.createElement("label");label.className="option";
-   const input=document.createElement("input");input.type="radio";input.name="q"+i;input.value=String(j);
-   const span=document.createElement("span");span.textContent=labels[j]+". "+answer;
-   label.append(input,span);options.appendChild(label);
-  });
-  section.appendChild(options);
-  const button=document.createElement("button");button.type="button";button.textContent="ตรวจคำตอบข้อนี้";
-  const feedback=document.createElement("div");feedback.className="feedback";feedback.setAttribute("aria-live","polite");
-  button.addEventListener("click",()=>{
-   const chosen=section.querySelector('input[name="q'+i+'"]:checked');
-   feedback.className="feedback show";
-   if(!chosen){feedback.classList.add("neutral");feedback.textContent="กรุณาเลือกคำตอบก่อน แล้วจึงตรวจคำตอบ";return;}
-   if(Number(chosen.value)===item.correct){feedback.classList.add("correct");feedback.textContent="ถูกต้องครับ/ค่ะ "+item.why;}
-   else{feedback.classList.add("incorrect");feedback.textContent="ยังไม่ถูก ลองทบทวนอีกครั้ง คำตอบที่ถูกคือ "+labels[item.correct]+". "+item.a[item.correct]+". "+item.why;}
-   document.getElementById("notice").textContent="ตรวจคำตอบแล้ว สามารถเปลี่ยนคำตอบและตรวจใหม่ได้";
-  });
-  section.append(button,feedback);quiz.appendChild(section);
- });
+function recordPracticeEntry(){
+ const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
+ const msg=document.getElementById('entryMessage');
+ if(!name||!cls||!no){alert('กรุณากรอกชื่อ ชั้น และเลขที่ให้ครบก่อนเริ่มครับ');return;}
+ const btn=document.getElementById('startPracticeBtn');btn.disabled=true;
+ fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name, class:cls, no, work:"แบบฝึกออนไลน์ เรื่องที่ 3 การอันเดอร์", submissionType:"visit", quizType:"online-practice-entry", status:"เริ่มทำแบบฝึก", timestamp:new Date().toISOString()})}).catch(()=>{});
+ msg.textContent="ส่งคำขอบันทึกการเข้าทำแล้ว ระบบบันทึกการเข้าทำก่อน จากนั้นนักเรียนต้องกดส่งคำตอบทั้ง 10 ข้ออีกครั้ง กรุณาตรวจสอบแถวข้อมูลในชีตเพื่อยืนยัน";
+ btn.textContent="บันทึกการเข้าทำแล้ว";
 }
-document.getElementById("reset").addEventListener("click",()=>{
- if(practiceSubmitted){alert("ส่งคำตอบแล้ว ไม่สามารถแก้ไขชุดที่ส่งได้");return;}
- render();document.getElementById("notice").textContent="เริ่มทำใหม่แล้ว";
- window.scrollTo({top:0,behavior:"smooth"});
-});
-render();
-</script>
-<section class="next-step" style="max-width:1000px;margin:24px auto;padding:22px;background:#fff;border-radius:18px;box-shadow:0 8px 24px #0b3b6618;text-align:center"><h2>ขั้นตอนต่อไป: เรียนรู้และฝึกปฏิบัติ</h2><p>หลังจากทำแบบฝึกออนไลน์เรื่องที่ 3 เสร็จแล้ว ให้นักเรียนไปเรียนรู้สื่อและฝึกปฏิบัติการอันเดอร์ก่อน จากนั้นจึงกลับมาทำ Mind Map และใบงาน</p><a href="volleyball-lesson3-media.html" style="display:inline-block;background:#0757a6;color:#fff;padding:13px 20px;border-radius:12px;text-decoration:none;font-weight:bold">🎬 ไปเรียนรู้และฝึกปฏิบัติเรื่องที่ 3</a></section>
-</body></html>
+let submittedPractice=false;
+function checkAnswers(){
+ if(submittedPractice){document.getElementById("result").scrollIntoView({behavior:"smooth"});return;}
+ const name=document.getElementById('name').value.trim(), cls=document.getElementById('class').value, no=document.getElementById('no').value;
+ if(!name||!cls||!no){alert('กรุณากรอกข้อมูลนักเรียนให้ครบครับ');return}
+ for(let i=1;i<=10;i++) if(!document.getElementById('q'+i).value.trim()){alert('กรุณาตอบให้ครบทั้ง 10 ข้อครับ');return}
+ for(let i=1;i<=10;i++) document.getElementById('a'+i).style.display='block';
+ const summary=document.getElementById('answerSummary');
+ summary.innerHTML='';
+ for(let i=1;i<=10;i++){const item=document.createElement('div');item.style.cssText='background:#fffaf0;border-left:5px solid #f0b400;padding:12px 15px;border-radius:10px;margin:10px 0';const heading=document.createElement('strong');heading.textContent='ข้อ '+i;const answer=document.createElement('p');answer.textContent=document.getElementById('a'+i).innerText.replace('แนวคำตอบ:','').trim();answer.style.margin='8px 0 0';item.append(heading,answer);summary.append(item);}
+ document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' สามารถอ่านแนวคำตอบด้านล่าง แล้วแก้ไขคำตอบของตนเองได้ หากแก้ไขแล้วให้กด “ตรวจคำตอบอีกครั้ง”';
+ document.getElementById('result').style.display='block';
+ const visitData={name:name,class:cls,no:no,work:"แบบฝึกออนไลน์ เรื่องที่ 3 การอันเดอร์",submissionType:"visit",quizType:"online-practice-entry",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
+ for(let i=1;i<=10;i++) visitData["q"+i]=document.getElementById("q"+i).value.trim();
+ fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(visitData)}).catch(()=>{});
+ submittedPractice=true;
+ document.getElementById("checkBtn").textContent="🔍 ดูเฉลยที่ส่งแล้ว";
+ document.getElementById("submitStatus").textContent="ส่งคำขอบันทึกคำตอบทั้ง 10 ข้อแล้ว โปรดตรวจสอบข้อมูลใน Google Sheets เพื่อยืนยันการรับข้อมูล";
+ for(let i=1;i<=10;i++) document.getElementById("q"+i).readOnly=true;
+ document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+</script></body></html>
