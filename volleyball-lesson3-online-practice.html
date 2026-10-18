@@ -70,6 +70,12 @@ footer{font-size:.9rem;color:#526b7c;padding:8px 4px 24px}
 <div class="actions"><button type="button" class="secondary" id="reset">เริ่มทำใหม่ทุกข้อ</button><span id="notice" aria-live="polite">ยังไม่ได้ตรวจคำตอบ</span></div>
 </section>
 <div id="quiz"></div>
+<section class="panel">
+<h2>ส่งคำตอบแบบฝึกออนไลน์</h2>
+<p>เมื่อเลือกคำตอบครบทั้ง 10 ข้อแล้ว กดส่งคำตอบเพื่อบันทึกลง Google Sheets ของครู (แบบฝึกนี้ไม่คิดคะแนน)</p>
+<button type="button" id="submitPractice">📤 ส่งคำตอบทั้ง 10 ข้อ</button>
+<div id="submissionMessage" class="feedback" aria-live="polite"></div>
+</section>
 </div><footer>PE Digital Learning Center · แบบฝึกเพื่อการเรียนรู้ด้วยตนเอง</footer>
 </div>
 <script>
@@ -100,6 +106,30 @@ document.getElementById("startPractice").addEventListener("click", async () => {
  }
 });
 
+let practiceSubmitted=false;
+document.getElementById("submitPractice").addEventListener("click", async () => {
+ const msg=document.getElementById("submissionMessage");
+ msg.className="feedback show neutral";
+ if(!studentInfo){msg.textContent="กรุณาลงชื่อและกดเริ่มทำแบบฝึกก่อนส่งคำตอบ";return;}
+ if(practiceSubmitted){msg.textContent="ส่งคำขอบันทึกคำตอบชุดนี้แล้ว กรุณาให้ครูตรวจสอบใน Google Sheets";return;}
+ const answers=[];
+ for(let i=0;i<10;i++){
+   const chosen=document.querySelector('input[name="q'+i+'"]:checked');
+   if(!chosen){msg.textContent="กรุณาเลือกคำตอบให้ครบทั้ง 10 ข้อ (ยังไม่ได้ตอบข้อ "+(i+1)+")";return;}
+   answers.push(questions[i].a[Number(chosen.value)]);
+ }
+ const btn=document.getElementById("submitPractice");btn.disabled=true;
+ const data={...studentInfo,submissionType:"visit",quizType:"online-practice-entry",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
+ answers.forEach((a,i)=>data["q"+(i+1)]=a);
+ try{
+   await fetch(TRACKING_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});
+   practiceSubmitted=true;
+   btn.textContent="ส่งคำขอบันทึกแล้ว";
+   document.querySelectorAll('#quiz input[type="radio"]').forEach(x=>x.disabled=true);
+   msg.className="feedback show correct";
+   msg.textContent="ส่งคำขอบันทึกคำตอบทั้ง 10 ข้อแล้ว โปรดให้ครูตรวจสอบรายการใน Google Sheets เพื่อยืนยันว่าได้รับข้อมูล (การส่งแบบ no-cors ไม่สามารถยืนยันผลการบันทึกได้จากหน้านี้)";
+ }catch(e){btn.disabled=false;msg.className="feedback show incorrect";msg.textContent="ส่งคำขอไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่";}
+});
 const labels = ["ก","ข","ค","ง"];
 const questions = [
 {q:"การเล่นลูกสองมือล่างหรือการอันเดอร์ หมายถึงข้อใด",a:["ใช้ปลายนิ้วทั้งสองมือผลักลูกเหนือหน้าผาก","ใช้แขนท่อนล่างรับหรือส่งลูกบอลไปยังทิศทางที่ต้องการ","ใช้กำปั้นตีลูกจากเหนือศีรษะ","ใช้ฝ่ามือข้างเดียวตบลูก"],correct:1,why:"การอันเดอร์ใช้แขนท่อนล่างทั้งสองข้างเป็นพื้นผิวสัมผัสเพื่อรับหรือส่งลูกบอล"},
@@ -141,6 +171,7 @@ function render(){
  });
 }
 document.getElementById("reset").addEventListener("click",()=>{
+ if(practiceSubmitted){alert("ส่งคำตอบแล้ว ไม่สามารถแก้ไขชุดที่ส่งได้");return;}
  render();document.getElementById("notice").textContent="เริ่มทำใหม่แล้ว";
  window.scrollTo({top:0,behavior:"smooth"});
 });
