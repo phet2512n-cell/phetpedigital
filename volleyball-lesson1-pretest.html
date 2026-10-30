@@ -25,7 +25,7 @@ document.getElementById("quiz").addEventListener("submit",async e=>{
  r.style.display="block";r.innerHTML="<strong>กำลังบันทึกผลการทำแบบทดสอบ...</strong>";
  try{
    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-   r.innerHTML="<strong>ส่งแบบทดสอบเรียบร้อยแล้ว</strong><br>คะแนนของนักเรียน: <strong>"+score+"/10 คะแนน ("+(score*10)+"%)</strong><br>ระบบได้ส่งข้อมูลไปยังระบบบันทึกคะแนนแล้ว<br><small>ผลนี้ใช้เป็นข้อมูลก่อนเรียน</small>";
+   r.innerHTML="<strong>ส่งคำขอแล้ว แต่ยังยืนยันการบันทึกคะแนนไม่ได้</strong><br>คะแนนที่คำนวณบนหน้าเว็บ: <strong>"+score+"/10</strong><br>หากเคยส่งแล้ว ระบบจะไม่บันทึกซ้ำ โปรดตรวจสถานะกับครูผู้สอน<br><small>โปรดอย่าส่งซ้ำโดยไม่ตรวจสอบก่อน</small>";
  }catch(err){
    btn.disabled=false;btn.textContent="ส่งแบบทดสอบก่อนเรียน";
    r.innerHTML="<strong>แสดงคะแนนได้แล้ว: "+score+"/10 คะแนน ("+(score*10)+"%)</strong><br>⚠️ การส่งข้อมูลไปยังระบบบันทึกคะแนนไม่สำเร็จ กรุณากดส่งอีกครั้ง";
