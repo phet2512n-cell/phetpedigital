@@ -32,14 +32,15 @@ document.getElementById("quiz").addEventListener("submit",async e=>{
  if(!name||!cls||!no){alert("กรุณากรอกข้อมูลนักเรียนให้ครบ");return}
  let score=0,payload={name:name,class:cls,no:no,work:"แบบทดสอบหลังเรียน เรื่องที่ 1",submissionType:"quiz",quizType:"หลังเรียน แผนที่ 1"};
  answers.forEach((a,i)=>{const v=Number(document.querySelector('input[name="q'+i+'"]:checked').value);payload["q"+(i+1)]=v;if(v===a)score++});
- const r=document.getElementById("result"),btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="กำลังบันทึกผล...";
+ const r=document.getElementById("result"),btn=document.getElementById("submitBtn");
+ try { if (await quizStatus(cls,no,"lesson1-post")) { r.style.display="block"; r.textContent="นักเรียนได้ส่งแบบทดสอบนี้แล้ว ไม่สามารถส่งซ้ำได้ กรุณาติดต่อครูผู้สอน"; r.scrollIntoView({behavior:"smooth"}); return; } } catch(err) { r.style.display="block"; r.textContent="ยังตรวจสอบประวัติการส่งไม่ได้ กรุณาลองใหม่ภายหลังหรือแจ้งครูผู้สอน"; return; }btn.disabled=true;btn.textContent="กำลังบันทึกผล...";
  r.style.display="block";r.innerHTML="<strong>กำลังบันทึกผลการทำแบบทดสอบ...</strong>";
  try{
    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-   r.innerHTML="<strong>ส่งคำขอไปยังระบบแล้ว แต่ยังยืนยันการบันทึกไม่ได้</strong><br>กรุณาติดต่อครูผู้สอนเพื่อตรวจสอบผลใน Google Sheets หากเคยส่งแบบทดสอบนี้แล้ว ระบบจะไม่บันทึกซ้ำ";
+   try { const saved=await quizStatus(cls,no,"lesson1-post"); r.textContent=saved?"ระบบพบรายการแบบทดสอบที่บันทึกแล้ว":"ยังไม่พบรายการบันทึก กรุณาติดต่อครูผู้สอนเพื่อตรวจสอบ"; } catch(err) { r.textContent="ส่งคำขอแล้ว แต่ยังยืนยันการบันทึกไม่ได้ กรุณาติดต่อครูผู้สอน"; }
  }catch(err){
    btn.disabled=false;btn.textContent="ส่งแบบทดสอบหลังเรียน";
    r.innerHTML="<strong>แสดงคะแนนได้แล้ว: "+score+"/10 คะแนน ("+(score*10)+"%)</strong><br>⚠️ การส่งข้อมูลไปยังระบบบันทึกคะแนนไม่สำเร็จ กรุณากดส่งอีกครั้ง";
  }
  r.scrollIntoView({behavior:"smooth"});
-});</script></body></html>
+});</script><script src="quiz-confirmation.js"></script></body></html>
