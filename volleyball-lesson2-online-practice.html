@@ -2,48 +2,18 @@
 <html lang="th">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>แบบฝึกออนไลน์ เรื่องที่ 2 การเซตบอล</title>
+<title>แบบฝึกออนไลน์ เรื่องที่ 2 การเซตบอล | PE Digital Learning Center</title>
 <style>
-body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#eef7ff;color:#102a43;line-height:1.7}.wrap{max-width:1000px;margin:auto;padding:28px 16px}.card{background:#fff;border-radius:20px;padding:25px;margin-bottom:18px;box-shadow:0 8px 24px #0b3b6618}.student{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}label{font-weight:bold;color:#0757a6}input,select,textarea{width:100%;box-sizing:border-box;padding:12px;border:2px solid #d8e7f5;border-radius:12px;font-size:16px;margin-top:6px}textarea{min-height:100px}.q{margin:18px 0}.actions{text-align:center}button{border:0;border-radius:14px;padding:14px 25px;background:#0757a6;color:#fff;font-size:17px;font-weight:bold;cursor:pointer}.result{display:none;background:#ecfff4}.answer{display:none;background:#fffaf0;border-left:5px solid #f0b400;padding:15px;border-radius:10px}.back{display:inline-block;margin-top:12px;color:#0757a6;font-weight:bold}@media(max-width:650px){.student{grid-template-columns:1fr}}
-</style></head>
-<body><div class="wrap">
-<section class="card"><h1>📝 แบบฝึกออนไลน์ เรื่องที่ 2</h1><h2>การเซตบอลในกีฬาวอลเลย์บอล</h2><p>ตอบคำถามจากใบความรู้ แล้วตรวจคำตอบด้วยตนเอง ไม่มีการส่งคะแนนเข้าระบบ</p>
-<div class="student"><div><label>ชื่อ-นามสกุล</label><input id="name"></div><div><label>ชั้น</label><select id="class"><option value="">เลือกห้อง</option><option>ม.3/1</option><option>ม.3/2</option><option>ม.3/3</option><option>ม.3/4</option><option>ม.3/5</option><option>ม.3/6</option></select></div><div><label>เลขที่</label><select id="no"><option value="">เลือกเลขที่</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option><option>47</option><option>48</option><option>49</option><option>50</option></select></div></div><div class="actions" style="margin-top:16px"><button type="button" id="startPracticeBtn" onclick="recordPracticeEntry()">เริ่มทำแบบฝึกและบันทึกการเข้าทำ</button></div><p id="entryMessage" class="hint" aria-live="polite">กรอกข้อมูลนักเรียนแล้วกดเริ่มทำแบบฝึก ระบบจะบันทึกเฉพาะการเข้าทำ ไม่มีคะแนน</p></section>
-<section class="card"><p><strong>คำชี้แจง:</strong> นักเรียนพิมพ์คำตอบตามความรู้ที่เรียนมา เมื่อครบทั้ง 10 ข้อ ให้กด “ตรวจคำตอบ” เพื่อดูแนวคำตอบสำหรับทบทวน</p>
-<div class="q"><label>1. การเซตบอลคืออะไร</label><textarea id="q1" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a1" class="answer"><strong>แนวคำตอบ:</strong> การเล่นลูกบอลด้วยมือบน โดยใช้มือและนิ้วทั้งสองข้างควบคุมและส่งลูกบอล</div></div><div class="q"><label>2. การเซตบอลมีความสำคัญต่อการเล่นเป็นทีมอย่างไร</label><textarea id="q2" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a2" class="answer"><strong>แนวคำตอบ:</strong> เพื่อควบคุมลูกบอล สร้างจังหวะการเล่น และเตรียมบอลให้เพื่อนร่วมทีมเล่นต่อหรือทำเกมรุก</div></div><div class="q"><label>3. ท่าเตรียมก่อนเซตควรเป็นอย่างไร</label><textarea id="q3" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a3" class="answer"><strong>แนวคำตอบ:</strong> ยืนในท่าเตรียมพร้อม ทรงตัวดี และสามารถเคลื่อนที่เข้าหาบอลได้</div></div><div class="q"><label>4. มือและนิ้วควรจัดอย่างไรขณะเซต</label><textarea id="q4" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a4" class="answer"><strong>แนวคำตอบ:</strong> จัดมือทั้งสองข้างเหนือหน้าผาก กางนิ้วอย่างเหมาะสมเพื่อเตรียมสัมผัสบอล</div></div><div class="q"><label>5. บอลควรสัมผัสบริเวณใดของมือ</label><textarea id="q5" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a5" class="answer"><strong>แนวคำตอบ:</strong> ใช้นิ้วมือทั้งสองข้างสัมผัสและควบคุมลูกบอล ไม่ใช้ฝ่ามือตบบอล</div></div><div class="q"><label>6. เหตุใดจึงต้องเคลื่อนที่เข้าหาบอลก่อนเซต</label><textarea id="q6" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a6" class="answer"><strong>แนวคำตอบ:</strong> เพื่อให้เคลื่อนที่เข้าตำแหน่งรับบอลและควบคุมทิศทางการเซตได้ถูกต้อง</div></div><div class="q"><label>7. การเซตให้เพื่อนควรควบคุมอะไรบ้าง</label><textarea id="q7" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a7" class="answer"><strong>แนวคำตอบ:</strong> ควบคุมแรงและทิศทางของบอลให้เหมาะสมกับตำแหน่งเพื่อนร่วมทีม</div></div><div class="q"><label>8. ข้อผิดพลาดที่พบบ่อยในการเซตมีอะไรบ้าง</label><textarea id="q8" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a8" class="answer"><strong>แนวคำตอบ:</strong> ยืนไม่พร้อม เคลื่อนที่ไม่ทัน วางมือผิดตำแหน่ง ใช้แรงไม่เหมาะสม หรือส่งบอลไม่ตรงเป้าหมาย</div></div><div class="q"><label>9. การเซตที่ดีช่วยสร้างโอกาสในการทำคะแนนอย่างไร</label><textarea id="q9" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a9" class="answer"><strong>แนวคำตอบ:</strong> ช่วยสร้างจังหวะการเล่นและเตรียมบอลสำหรับการรุกของทีม</div></div><div class="q"><label>10. นักเรียนจะนำทักษะการเซตไปใช้ในการเล่นจริงอย่างไร</label><textarea id="q10" placeholder="เขียนคำตอบของนักเรียน"></textarea><div id="a10" class="answer"><strong>แนวคำตอบ:</strong> ตัวอย่าง: เคลื่อนที่เข้าหาบอล จัดมือให้ถูกต้อง ควบคุมแรงและทิศทาง แล้วเซตให้เพื่อนเล่นต่อ (ยอมรับคำตอบอื่นที่นำทักษะไปใช้ได้เหมาะสม)</div></div></section>
-<div class="actions"><button id="checkBtn" type="button" onclick="checkAnswers()">📤 ส่งแบบฝึกออนไลน์และเปิดเฉลย</button></div><p id="submitStatus" class="hint" aria-live="polite">กรอกข้อมูลและตอบครบ 10 ข้อก่อนส่ง ระบบไม่คิดคะแนน</p>
-<section id="result" class="card result"><h2>✅ ตรวจคำตอบเรียบร้อย</h2><p id="msg"></p><p>คำตอบของนักเรียนอาจใช้ถ้อยคำต่างจากแนวคำตอบได้ หากมีสาระสำคัญถูกต้อง โดยเฉพาะข้อ 10 เป็นคำถามปลายเปิด ให้พิจารณาความเหมาะสม ไม่จำเป็นต้องตรงกับตัวอย่าง</p><h3>เฉลยทั้ง 10 ข้อ</h3><div id="answerSummary"></div></section>
-<section class="card"><h2>ขั้นตอนต่อไป</h2><p>หลังจากตรวจคำตอบแล้ว ให้นักเรียนไปเรียนรู้สื่อและฝึกปฏิบัติการเซตบอลก่อน จากนั้นจึงกลับไปทำ Mind Map และใบงาน</p><div class="actions"><a class="back" href="volleyball-lesson2-media.html">🎬 ไปเรียนรู้และฝึกปฏิบัติเรื่องที่ 2</a></div></section>
-</div>
-<script>
-function recordPracticeEntry(){
- const name=document.getElementById('name').value.trim(),cls=document.getElementById('class').value,no=document.getElementById('no').value;
- const msg=document.getElementById('entryMessage');
- if(!name||!cls||!no){alert('กรุณากรอกชื่อ ชั้น และเลขที่ให้ครบก่อนเริ่มครับ');return;}
- const btn=document.getElementById('startPracticeBtn');btn.disabled=true;
- fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name, class:cls, no, work:"แบบฝึกออนไลน์ เรื่องที่ 2 การเซตบอล", submissionType:"visit", quizType:"online-practice-entry", status:"เริ่มทำแบบฝึก", timestamp:new Date().toISOString()})}).catch(()=>{});
- msg.textContent="ส่งคำขอบันทึกการเข้าทำแล้ว ระบบไม่ได้ส่งคำตอบหรือคะแนนไปยัง Google Sheets กรุณาตรวจสอบแถวข้อมูลในชีตเพื่อยืนยัน";
- btn.textContent="บันทึกการเข้าทำแล้ว";
-}
-let submittedPractice=false;
-function checkAnswers(){
- if(submittedPractice){document.getElementById("result").scrollIntoView({behavior:"smooth"});return;}
- const name=document.getElementById('name').value.trim(), cls=document.getElementById('class').value, no=document.getElementById('no').value;
- if(!name||!cls||!no){alert('กรุณากรอกข้อมูลนักเรียนให้ครบครับ');return}
- for(let i=1;i<=10;i++) if(!document.getElementById('q'+i).value.trim()){alert('กรุณาตอบให้ครบทั้ง 10 ข้อครับ');return}
- for(let i=1;i<=10;i++) document.getElementById('a'+i).style.display='block';
- const summary=document.getElementById('answerSummary');
- summary.innerHTML='';
- for(let i=1;i<=10;i++){const item=document.createElement('div');item.style.cssText='background:#fffaf0;border-left:5px solid #f0b400;padding:12px 15px;border-radius:10px;margin:10px 0';const heading=document.createElement('strong');heading.textContent='ข้อ '+i;const answer=document.createElement('p');answer.textContent=document.getElementById('a'+i).innerText.replace('แนวคำตอบ:','').trim();answer.style.margin='8px 0 0';item.append(heading,answer);summary.append(item);}
- document.getElementById('msg').textContent='คุณ '+name+' ห้อง '+cls+' เลขที่ '+no+' สามารถอ่านแนวคำตอบด้านล่าง แล้วแก้ไขคำตอบของตนเองได้ หากแก้ไขแล้วให้กด “ตรวจคำตอบอีกครั้ง”';
- document.getElementById('result').style.display='block';
- const visitData={name:name,class:cls,no:no,work:"แบบฝึกออนไลน์ เรื่องที่ 2 การเซตบอล",submissionType:"visit",quizType:"online-practice-entry",status:"ตรวจคำตอบแล้ว",timestamp:new Date().toISOString()};
- for(let i=1;i<=10;i++) visitData["q"+i]=document.getElementById("q"+i).value.trim();
- fetch("https://script.google.com/macros/s/AKfycbyVpEdhavIE0Q8ccAWax7pF8ql6JAZ7IOBVBPplAW18x5QfpZZ8lZTy3CLCP6T0yt5b0g/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(visitData)}).catch(()=>{});
- submittedPractice=true;
- document.getElementById("checkBtn").textContent="🔍 ดูเฉลยที่ส่งแล้ว";
- document.getElementById("submitStatus").textContent="ส่งคำขอบันทึกคำตอบทั้ง 10 ข้อแล้ว โปรดตรวจสอบข้อมูลใน Google Sheets เพื่อยืนยันการรับข้อมูล";
- for(let i=1;i<=10;i++) document.getElementById("q"+i).readOnly=true;
- document.getElementById('result').scrollIntoView({behavior:'smooth'});
-}
-</script></body></html>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#eef7ff;color:#17324d;font-family:Tahoma,Arial,sans-serif;line-height:1.75}.wrap{max-width:790px;margin:42px auto;padding:0 16px}.card{background:#fff;border-radius:20px;padding:30px;box-shadow:0 8px 26px #0b3b6619}h1{font-size:clamp(24px,4vw,32px);color:#0757a6;margin:0 0 8px}h2{font-size:20px;margin:0 0 20px}.notice{border-left:5px solid #d89a18;background:#fff8e8;border-radius:9px;padding:13px 16px;margin:20px 0}.button{display:inline-block;text-decoration:none;background:#0757a6;color:white;font-weight:bold;padding:13px 22px;border-radius:12px}.button:focus-visible,.back:focus-visible{outline:3px solid #f0b400;outline-offset:4px}.back{display:inline-block;margin-top:24px;color:#0757a6}.small{font-size:14px;color:#4d6073}ol{padding-left:28px}@media(max-width:600px){.wrap{margin:16px auto}.card{padding:20px}}
+</style>
+</head>
+<body><main class="wrap"><section class="card">
+<h1>📝 แบบฝึกออนไลน์ เรื่องที่ 2</h1>
+<h2>การเซตบอลในกีฬาวอลเลย์บอล</h2>
+<div class="notice"><strong>สถานะ: อยู่ระหว่างทดสอบระบบ</strong><div>ลิงก์นี้เชื่อมไปยังเว็บแอปทดลองของครู ซึ่งขณะนี้จำกัดสิทธิ์การเข้าถึงและยังไม่เชื่อมคะแนนกลาง 29 รายการ กรุณาอย่าใช้เป็นช่องทางส่งงานจริงของนักเรียนจนกว่าครูจะเปิดใช้งาน</div></div>
+<p><strong>ขั้นตอนของแบบฝึกออนไลน์</strong></p>
+<ol><li>กรอกชื่อ ชั้นเรียน และเลขที่ แล้วตรวจสอบงานเดิม</li><li>ตอบคำถามให้ครบ 10 ข้อ จึงจะกดส่งได้</li><li>เมื่อระบบยืนยันการบันทึกสำเร็จ จึงเปิดดูคำตอบและแนวคำตอบได้</li><li>ผู้ที่ส่งแล้วสามารถกลับมาดูคำตอบเดิมได้ แต่ไม่สามารถส่งใหม่</li></ol>
+<p><a class="button" href="https://script.google.com/macros/s/AKfycbyPQK0WQ7b_0PSN1iSS684d2v4H1rZepGrtd-tsppNrztPjadsLX-XVC-CVxf0u9ksfvg/exec" target="_blank" rel="noopener noreferrer">เปิดแบบฝึกออนไลน์เรื่องที่ 2 (ระบบทดลอง)</a></p>
+<p class="small">หมายเหตุ: หากระบบแจ้งว่าไม่มีสิทธิ์เข้าถึง ให้ใช้บัญชี Google ของเจ้าของโครงการทดลอง การเปลี่ยนสิทธิ์การเข้าถึงต้องได้รับการตรวจสอบก่อนเปิดให้นักเรียนใช้</p>
+<a class="back" href="volleyball.html">← กลับหน้ารายวิชาวอลเลย์บอล</a>
+</section></main></body></html>
