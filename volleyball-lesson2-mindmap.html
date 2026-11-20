@@ -4,18 +4,18 @@ const SUBMITTED_PREFIX='volleyball_lesson2_mindmap_confirmed_v2:';
 const IDENTITY_KEY='volleyball_student_identity_v1';
 function rememberIdentity(){
  const d={name:document.getElementById('name').value.trim(),cls:document.getElementById('class').value,no:document.getElementById('no').value};
- if(d.name&&d.cls&&d.no&&!localStorage.getItem(IDENTITY_KEY))localStorage.setItem(IDENTITY_KEY,JSON.stringify(d));
+ if(d.name&&d.cls&&d.no)localStorage.setItem(IDENTITY_KEY,JSON.stringify(d));
  if(localStorage.getItem(IDENTITY_KEY))restoreIdentity();
 }
 function restoreIdentity(){
  try{const d=JSON.parse(localStorage.getItem(IDENTITY_KEY)||'null');if(!d)return;
  document.getElementById('name').value=d.name||'';document.getElementById('class').value=d.cls||'';document.getElementById('no').value=d.no||'';
- ['name','class','no'].forEach(id=>document.getElementById(id).disabled=true);
+ ['name','class','no'].forEach(id=>document.getElementById(id).disabled=false);
  }catch(e){}
 }
 
 function logoutStudent(){
- if(!confirm("ต้องการออกจากการทำงานเพื่อส่งต่อเครื่องให้เพื่อนหรือไม่? กรุณาตรวจ Google Sheets ก่อนออก"))return;
+ if([...document.querySelectorAll("textarea")].some(el=>el.value.trim())&&!confirm("ต้องการออกจากการทำงานเพื่อส่งต่อเครื่องให้เพื่อนหรือไม่? กรุณาตรวจ Google Sheets ก่อนออก"))return;
  localStorage.removeItem(IDENTITY_KEY);
  localStorage.removeItem("volleyball_lesson2_worksheet_last_student");
  ["name","class","no"].forEach(id=>{const el=document.getElementById(id);el.disabled=false;el.value="";});
@@ -74,7 +74,6 @@ async function send(){
  if(!name||!cls||!no){alert('กรุณากรอกชื่อ ชั้น และเลขที่ให้ครบครับ');return;}
  if(!/^\d+$/.test(studentId)){alert('กรุณากรอกเลขประจำตัวนักเรียน');return;}
  for(let i=1;i<=9;i++)if(!document.getElementById('m'+i).value.trim()){alert('กรุณาทำ Mind Map ให้ครบ 9 ประเด็นครับ');return;}
- rememberIdentity();
  const key=studentKey();
  if(localStorage.getItem(key)==='1'){refreshSendUI();return;}
  const p={name,class:cls,no,studentId,lesson:'2',work:'Mind Map เรื่องที่ 2 การเซตบอล',attempt:1,submissionType:'mindmap'};
@@ -86,6 +85,7 @@ async function send(){
   result.style.display='block';
   if(!response){msg.textContent='ยังไม่ได้รับผลยืนยัน กรุณากดส่งอีกครั้งเพื่อตรวจคำขอเดิม ระบบป้องกันการบันทึกซ้ำ';status.textContent=msg.textContent;return;}
   if(!response.success){msg.textContent=response.message||'ระบบยังไม่รับงาน กรุณาตรวจข้อมูลนักเรียน';status.textContent=msg.textContent;return;}
+  rememberIdentity();
   localStorage.setItem(key,'1');
   result.querySelector('h2').textContent=response.alreadySubmitted?'ระบบมี Mind Map ของนักเรียนแล้ว':'บันทึก Mind Map สำเร็จ';
   msg.textContent='ตรวจคะแนนได้จากลิงก์เดิม ระบบติดตามอัปเดตประมาณทุก 5 นาที';
